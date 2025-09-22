@@ -1,0 +1,389 @@
+/* Footer Styles */
+.footer {
+    background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+    color: white;
+    margin-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="footerPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23footerPattern)"/></svg>');
+    z-index: 1;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 50px 30px;
+    position: relative;
+    z-index: 2;
+}
+
+/* 푸터 상단 */
+.footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #ff4757;
+}
+
+.footer-logo h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #ff4757, #ff6b7a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer-logo p {
+    font-size: 1rem;
+    color: #ddd;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.footer-description p {
+    color: #b2bec3;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+/* 소셜 링크 */
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 71, 87, 0.1);
+    border-radius: 50%;
+    color: #ff4757;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 2px solid transparent;
+}
+
+.social-link:hover {
+    background: #ff4757;
+    color: white;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(255, 71, 87, 0.3);
+}
+
+.social-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* 푸터 링크 */
+.footer-section h4 {
+    font-size: 1.1rem;
+    color: white;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: #ff4757;
+    border-radius: 1px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #b2bec3;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 0;
+}
+
+.footer-links a::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 2px;
+    background: #ff4757;
+    transition: width 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #ff4757;
+    padding-left: 20px;
+}
+
+.footer-links a:hover::before {
+    width: 10px;
+}
+
+/* 구분선 */
+.footer-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 71, 87, 0.5), transparent);
+    margin: 40px 0;
+}
+
+/* 푸터 하단 */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom-left p {
+    margin: 0 0 10px 0;
+    color: #ddd;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.team-info {
+    font-size: 0.85rem;
+    color: #b2bec3;
+}
+
+.separator {
+    margin: 0 10px;
+    color: #74b9ff;
+}
+
+.footer-legal {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.footer-legal a {
+    color: #b2bec3;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.footer-legal a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #ff4757;
+    transition: width 0.3s ease;
+}
+
+.footer-legal a:hover {
+    color: #ff4757;
+}
+
+.footer-legal a:hover::after {
+    width: 100%;
+}
+
+/* 맨 위로 버튼 */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ff4757, #ff6b7a);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(255, 71, 87, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 12px 35px rgba(255, 71, 87, 0.4);
+}
+
+.scroll-to-top svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+    .footer-top {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 40px;
+    }
+    
+    .footer-container {
+        padding: 50px 30px 25px;
+    }
+}
+
+@media (max-width: 968px) {
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .footer-legal {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        padding: 40px 20px 20px;
+    }
+    
+    .footer-top {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        text-align: center;
+    }
+    
+    .footer-section h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .footer-legal {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .scroll-to-top svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        padding: 30px 15px 15px;
+    }
+    
+    .footer-logo h3 {
+        font-size: 1.5rem;
+    }
+    
+    .footer-top {
+        gap: 25px;
+    }
+    
+    .team-info {
+        line-height: 1.5;
+    }
+    
+    .separator {
+        display: block;
+        margin: 5px 0;
+    }
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+    .footer {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    }
+}
+
+/* 접근성 개선 */
+@media (prefers-reduced-motion: reduce) {
+    .social-link,
+    .footer-links a,
+    .scroll-to-top {
+        transition: none;
+    }
+    
+    .scroll-to-top:hover {
+        transform: none;
+    }
+}
+
+/* 프린트 스타일 */
+@media print {
+    .footer {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .social-links,
+    .scroll-to-top {
+        display: none;
+    }
+}
