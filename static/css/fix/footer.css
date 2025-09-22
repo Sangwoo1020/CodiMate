@@ -1,9 +1,7 @@
 /* 간단한 푸터 CSS */
 
 footer.footer {
-    background-color: #f8f9fa;
     border-top: 1px solid #e9ecef;
-    margin-top: 60px;
 }
 
 footer.footer .footer-main-container {
@@ -37,7 +35,7 @@ footer.footer .footer-contact .footer-menu-title {
 }
 
 footer.footer .footer-contact .footer-cs-tel {
-    color: #667eea;
+    color: #6c757d;
     font-weight: 700;
     font-size: 18px;
     line-height: 1.4;
@@ -47,7 +45,7 @@ footer.footer .footer-contact .footer-cs-tel {
 }
 
 footer.footer .footer-contact .footer-cs-tel:hover {
-    color: #764ba2;
+    color: #6c757d;
 }
 
 footer.footer .footer-contact .footer-cs-info {
@@ -72,12 +70,12 @@ footer.footer .footer-contact .footer-cs-info .footer-cs-subitem {
 footer.footer .footer-contact .footer-cs-info .footer-cs-item.email {
     margin-top: 8px;
     display: block;
-    color: #667eea;
+    color: #6c757d;
     text-decoration: none;
 }
 
 footer.footer .footer-contact .footer-cs-info .footer-cs-item.email:hover {
-    color: #764ba2;
+    color: #6c757d;
 }
 
 /* 회사 정보 */
