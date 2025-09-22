@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodiMate - 스마트 코디 추천</title>
+    <link rel="stylesheet" href="/static/css/fix/header.css">
+    <link rel="stylesheet" href="/static/css/mainpage/mainpage.css">
+    <link rel="stylesheet" href="/static/css/fix/footer.css">
+</head>
+<body>
+    <!-- 메인 배너 -->
+    <section class="main-banner">
+        <div class="banner-slider" id="bannerSlider">
+            <div class="banner-slide slide1">
+                <div class="banner-content">
+                    <h2>AI 색상 매칭</h2>
+                    <p>퍼스널 컬러에 맞는 완벽한 색상 조합을 찾아드려요</p>
+                    <button class="cta-button" onclick="startColorMatching()">색상 매칭 시작</button>
+                </div>
+            </div>
+            <div class="banner-slide slide2">
+                <div class="banner-content">
+                    <h2>날씨 기반 추천</h2>
+                    <p>오늘의 날씨에 딱 맞는 스타일링을 제안해드립니다</p>
+                    <button class="cta-button" onclick="getWeatherRecommendation()">날씨 코디 보기</button>
+                </div>
+            </div>
+            <div class="banner-slide slide3">
+                <div class="banner-content">
+                    <h2>나만의 옷장</h2>
+                    <p>보유한 의류를 등록하고 스마트하게 관리하세요</p>
+                    <button class="cta-button" onclick="manageCloset()">옷장 관리하기</button>
+                </div>
+            </div>
+            <div class="banner-slide slide4">
+                <div class="banner-content">
+                    <h2>코디 히스토리</h2>
+                    <p>내가 입었던 코디들을 기록하고 만족도를 평가하세요</p>
+                    <button class="cta-button" onclick="viewHistory()">히스토리 보기</button>
+                </div>
+            </div>
+            <div class="banner-slide slide5">
+                <div class="banner-content">
+                    <h2>상황별 추천</h2>
+                    <p>데이트, 비즈니스, 캐주얼 등 상황에 맞는 코디를 추천</p>
+                    <button class="cta-button" onclick="getSituationCoord()">상황별 코디</button>
+                </div>
+            </div>
+        </div>
+        <button class="slider-nav prev" onclick="previousSlide()">‹</button>
+        <button class="slider-nav next" onclick="nextSlide()">›</button>
+        
+        <!-- 슬라이드 인디케이터 -->
+        <div class="slide-indicators">
+            <span class="indicator active" onclick="goToSlide(0)"></span>
+            <span class="indicator" onclick="goToSlide(1)"></span>
+            <span class="indicator" onclick="goToSlide(2)"></span>
+            <span class="indicator" onclick="goToSlide(3)"></span>
+            <span class="indicator" onclick="goToSlide(4)"></span>
+        </div>
+    </section>
+
+    <!-- 추천 코디 섹션 -->
+    <section class="recommendations">
+        <h2 class="section-title">오늘의 추천 코디</h2>
+        
+        <div class="filter-tabs">
+            <div class="tab active" onclick="filterCoords('all')">전체</div>
+            <div class="tab" onclick="filterCoords('casual')">캐주얼</div>
+            <div class="tab" onclick="filterCoords('business')">비즈니스</div>
+            <div class="tab" onclick="filterCoords('date')">데이트</div>
+            <div class="tab" onclick="filterCoords('formal')">포멀</div>
+        </div>
+
+        <div class="coord-grid" id="coordGrid">
+            <div class="coord-item" data-category="casual">
+                <div class="coord-image" style="background: linear-gradient(45deg, #74b9ff, #0984e3);">
+                    <div class="coord-badge">1</div>
+                    <div class="weather-badge">☀️ 22°C</div>
+                    <div class="coord-overlay">
+                        <button class="view-detail-btn">자세히 보기</button>
+                    </div>
+                </div>
+                <div class="coord-info">
+                    <h3 class="coord-title">봄날 캐주얼 룩</h3>
+                    <p class="coord-desc">화이트 셔츠 + 데님 팬츠 + 스니커즈</p>
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">만족도 4.8</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coord-item" data-category="business">
+                <div class="coord-image" style="background: linear-gradient(45deg, #636e72, #2d3436);">
+                    <div class="coord-badge">2</div>
+                    <div class="weather-badge">🌤️ 18°C</div>
+                    <div class="coord-overlay">
+                        <button class="view-detail-btn">자세히 보기</button>
+                    </div>
+                </div>
+                <div class="coord-info">
+                    <h3 class="coord-title">클래식 오피스 룩</h3>
+                    <p class="coord-desc">네이비 블레이저 + 화이트 셔츠 + 슬랙스</p>
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">만족도 4.5</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coord-item" data-category="date">
+                <div class="coord-image" style="background: linear-gradient(45deg, #fd79a8, #e84393);">
+                    <div class="coord-badge">3</div>
+                    <div class="weather-badge">🌸 20°C</div>
+                    <div class="coord-overlay">
+                        <button class="view-detail-btn">자세히 보기</button>
+                    </div>
+                </div>
+                <div class="coord-info">
+                    <h3 class="coord-title">로맨틱 데이트 룩</h3>
+                    <p class="coord-desc">플라워 원피스 + 가디건 + 플랫슈즈</p>
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">만족도 4.9</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coord-item" data-category="casual">
+                <div class="coord-image" style="background: linear-gradient(45deg, #00b894, #00cec9);">
+                    <div class="coord-badge">4</div>
+                    <div class="weather-badge">☁️ 16°C</div>
+                    <div class="coord-overlay">
+                        <button class="view-detail-btn">자세히 보기</button>
+                    </div>
+                </div>
+                <div class="coord-info">
+                    <h3 class="coord-title">미니멀 스트리트 룩</h3>
+                    <p class="coord-desc">오버사이즈 후드 + 와이드 팬츠 + 운동화</p>
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">만족도 4.3</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coord-item" data-category="formal">
+                <div class="coord-image" style="background: linear-gradient(45deg, #6c5ce7, #a29bfe);">
+                    <div class="coord-badge">5</div>
+                    <div class="weather-badge">🌙 15°C</div>
+                    <div class="coord-overlay">
+                        <button class="view-detail-btn">자세히 보기</button>
+                    </div>
+                </div>
+                <div class="coord-info">
+                    <h3 class="coord-title">엘레간트 포멀</h3>
+                    <p class="coord-desc">블랙 원피스 + 하이힐 + 클러치백</p>
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">만족도 4.7</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coord-item" data-category="business">
+                <div class="coord-image" style="background: linear-gradient(45deg, #fdcb6e, #e17055);">
+                    <div class="coord-badge">6</div>
+                    <div class="weather-badge">🌅 19°C</div>
+                    <div class="coord-overlay">
+                        <button class="view-detail-btn">자세히 보기</button>
+                    </div>
+                </div>
+                <div class="coord-info">
+                    <h3 class="coord-title">모던 비즈니스</h3>
+                    <p class="coord-desc">베이지 트렌치 + 블라우스 + 펌프스</p>
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">만족도 4.4</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coord-item" data-category="casual">
+                <div class="coord-image" style="background: linear-gradient(45deg, #fab1a0, #e17055);">
+                    <div class="coord-badge">7</div>
+                    <div class="weather-badge">🌤️ 23°C</div>
+                    <div class="coord-overlay">
+                        <button class="view-detail-btn">자세히 보기</button>
+                    </div>
+                </div>
+                <div class="coord-info">
+                    <h3 class="coord-title">편안한 주말 룩</h3>
+                    <p class="coord-desc">니트 탑 + 청바지 + 로퍼</p>
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">만족도 4.2</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coord-item" data-category="date">
+                <div class="coord-image" style="background: linear-gradient(45deg, #81ecec, #00cec9);">
+                    <div class="coord-badge">8</div>
+                    <div class="weather-badge">🌊 21°C</div>
+                    <div class="coord-overlay">
+                        <button class="view-detail-btn">자세히 보기</button>
+                    </div>
+                </div>
+                <div class="coord-info">
+                    <h3 class="coord-title">캐주얼 데이트 룩</h3>
+                    <p class="coord-desc">스웨터 + 미니스커트 + 부츠</p>
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">만족도 4.6</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/static/js/fix/header.js"></script>
+    <script src="/static/js/mainpage/mainpage.js"></script>
+    <script src="/static/js/fix/footer.js"></script>
+
+</body>
+</html>
