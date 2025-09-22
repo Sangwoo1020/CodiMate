@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="/static/css/fix/footer.css">
 </head>
 <body>
+    <!-- 헤더 플레이스홀더 -->
+    <div id="header-placeholder" class="loading"></div>
+
     <!-- 메인 배너 -->
     <section class="main-banner">
         <div class="banner-slider" id="bannerSlider">
@@ -48,10 +51,10 @@
                 </div>
             </div>
         </div>
+        
         <button class="slider-nav prev" onclick="previousSlide()">‹</button>
         <button class="slider-nav next" onclick="nextSlide()">›</button>
         
-        <!-- 슬라이드 인디케이터 -->
         <div class="slide-indicators">
             <span class="indicator active" onclick="goToSlide(0)"></span>
             <span class="indicator" onclick="goToSlide(1)"></span>
@@ -220,9 +223,12 @@
         </div>
     </section>
 
+    <!-- 푸터 플레이스홀더 -->
+    <div id="footer-placeholder"></div>
+
+    <!-- 스크립트 로드 순서 중요 -->
     <script src="/static/js/fix/header.js"></script>
     <script src="/static/js/mainpage/mainpage.js"></script>
     <script src="/static/js/fix/footer.js"></script>
-
 </body>
 </html>

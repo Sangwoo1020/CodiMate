@@ -13,14 +13,15 @@ function initializeMainPage() {
     setupFilterTabs();
     setupCoordItems();
     startAutoSlide();
+    addSlideDebugInfo(); // 디버깅용 함수 추가
 }
 
 // 슬라이더 설정
 function setupSlider() {
     updateSlideIndicators();
-    
-    // 터치 이벤트 처리 (모바일)
     setupTouchEvents();
+    // 초기 슬라이드 위치 확인
+    console.log('Initial slide:', currentSlide);
 }
 
 function nextSlide() {
@@ -28,6 +29,7 @@ function nextSlide() {
     updateSlider();
     updateSlideIndicators();
     restartAutoSlide();
+    console.log('Next slide:', currentSlide);
 }
 
 function previousSlide() {
@@ -35,19 +37,33 @@ function previousSlide() {
     updateSlider();
     updateSlideIndicators();
     restartAutoSlide();
+    console.log('Previous slide:', currentSlide);
 }
 
 function goToSlide(slideIndex) {
-    currentSlide = slideIndex;
-    updateSlider();
-    updateSlideIndicators();
-    restartAutoSlide();
+    if (slideIndex >= 0 && slideIndex < totalSlides) {
+        currentSlide = slideIndex;
+        updateSlider();
+        updateSlideIndicators();
+        restartAutoSlide();
+        console.log('Go to slide:', currentSlide);
+    }
 }
 
 function updateSlider() {
     const slider = document.getElementById('bannerSlider');
     if (slider) {
-        slider.style.transform = `translateX(-${currentSlide * 20}%)`;
+        const translateX = -currentSlide * 20; // 각 슬라이드는 20%씩
+        slider.style.transform = `translateX(${translateX}%)`;
+        console.log(`Slider moved to: ${translateX}%`);
+        
+        // 현재 활성 슬라이드에 클래스 추가 (디버깅용)
+        const slides = document.querySelectorAll('.banner-slide');
+        slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === currentSlide);
+        });
+    } else {
+        console.error('Banner slider not found!');
     }
 }
 
@@ -60,12 +76,23 @@ function updateSlideIndicators() {
 
 // 자동 슬라이드
 function startAutoSlide() {
-    slideInterval = setInterval(nextSlide, 6000);
+    // 기존 인터벌 제거
+    if (slideInterval) {
+        clearInterval(slideInterval);
+    }
+    
+    slideInterval = setInterval(() => {
+        nextSlide();
+    }, 4000); // 4초마다 변경 (더 빠르게 확인 가능)
+    
+    console.log('Auto slide started');
 }
 
 function stopAutoSlide() {
     if (slideInterval) {
         clearInterval(slideInterval);
+        slideInterval = null;
+        console.log('Auto slide stopped');
     }
 }
 
@@ -105,6 +132,32 @@ function setupTouchEvents() {
             }
         }
     }
+}
+
+// 디버깅용 함수 (슬라이더 상태 확인)
+function addSlideDebugInfo() {
+    // 개발자 도구 콘솔에서 슬라이더 상태 확인 가능
+    window.getCurrentSlide = () => currentSlide;
+    window.setSlide = (index) => goToSlide(index);
+    window.debugSlider = () => {
+        console.log('Current slide:', currentSlide);
+        console.log('Total slides:', totalSlides);
+        console.log('Slider element:', document.getElementById('bannerSlider'));
+        console.log('Auto slide interval:', slideInterval);
+    };
+    
+    // 슬라이드 변경시 콘솔에 현재 색상 정보 출력
+    const slideColors = [
+        'Purple (AI 색상 매칭)',
+        'Pink (날씨 기반 추천)', 
+        'Blue (나만의 옷장)',
+        'Green (코디 히스토리)',
+        'Orange (상황별 추천)'
+    ];
+    
+    window.showCurrentSlideInfo = () => {
+        console.log(`현재 슬라이드: ${currentSlide + 1}/5 - ${slideColors[currentSlide]}`);
+    };
 }
 
 // 필터 탭 설정
@@ -161,308 +214,44 @@ function filterCoords(category) {
 function setupCoordItems() {
     const coordItems = document.querySelectorAll('.coord-item');
     coordItems.forEach((item, index) => {
-        // 초기 애니메이션
         item.style.animation = `fadeInUp 0.8s ease forwards ${index * 0.1}s`;
         
-        // 클릭 이벤트
         item.addEventListener('click', function() {
             const title = this.querySelector('.coord-title').textContent;
             showCoordDetail(title, index + 1);
         });
-
-        // 자세히 보기 버튼
-        const detailBtn = item.querySelector('.view-detail-btn');
-        if (detailBtn) {
-            detailBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const title = item.querySelector('.coord-title').textContent;
-                showCoordDetail(title, index + 1);
-            });
-        }
     });
 }
 
 function showCoordDetail(title, coordId) {
-    // 모달이나 상세 페이지로 이동
     console.log('코디 상세 보기:', title, coordId);
-    
-    // 임시 알림 (실제로는 모달이나 페이지 이동 구현)
     alert(`"${title}" 코디의 상세 정보를 확인합니다.`);
-    
-    // TODO: 실제 구현시
-    // window.location.href = `coord-detail.html?id=${coordId}`;
-    // 또는 모달 열기
 }
 
 // 배너 버튼 기능들
 function startColorMatching() {
     console.log('색상 매칭 시작');
-    // 색상 매칭 페이지로 이동 또는 모달 열기
-    window.location.href = 'color-matching.html';
+    alert('색상 매칭 기능으로 이동합니다!');
 }
 
 function getWeatherRecommendation() {
     console.log('날씨 기반 추천');
-    // 현재 위치 기반 날씨 코디 추천
-    getCurrentLocationWeather();
+    alert('오늘의 날씨 기반 코디를 확인합니다!');
 }
 
 function manageCloset() {
     console.log('옷장 관리');
-    window.location.href = 'closet.html';
+    alert('옷장 관리 페이지로 이동합니다!');
 }
 
 function viewHistory() {
     console.log('코디 히스토리');
-    window.location.href = 'history.html';
+    alert('코디 히스토리를 확인합니다!');
 }
 
 function getSituationCoord() {
     console.log('상황별 코디');
-    window.location.href = 'situation-coord.html';
-}
-
-// 날씨 API 연동 (예시)
-async function getCurrentLocationWeather() {
-    try {
-        // 사용자 위치 가져오기
-        const position = await getCurrentPosition();
-        const { latitude, longitude } = position.coords;
-        
-        // 날씨 API 호출 (실제 API 키 필요)
-        const weatherData = await fetchWeatherData(latitude, longitude);
-        
-        // 날씨 기반 코디 추천
-        showWeatherBasedCoord(weatherData);
-        
-    } catch (error) {
-        console.error('위치 또는 날씨 정보를 가져올 수 없습니다:', error);
-        // 기본 서울 날씨로 대체
-        showDefaultWeatherCoord();
-    }
-}
-
-function getCurrentPosition() {
-    return new Promise((resolve, reject) => {
-        if (!navigator.geolocation) {
-            reject(new Error('지오로케이션을 지원하지 않는 브라우저입니다.'));
-            return;
-        }
-        
-        navigator.geolocation.getCurrentPosition(resolve, reject, {
-            timeout: 10000,
-            enableHighAccuracy: true
-        });
-    });
-}
-
-async function fetchWeatherData(lat, lon) {
-    // 실제 날씨 API 호출 (OpenWeatherMap 등)
-    // const apiKey = 'YOUR_API_KEY';
-    // const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=kr`);
-    // return await response.json();
-    
-    // 임시 데이터
-    return {
-        main: { temp: 22, humidity: 65 },
-        weather: [{ main: 'Clear', description: '맑음' }],
-        name: '서울'
-    };
-}
-
-function showWeatherBasedCoord(weatherData) {
-    const temp = weatherData.main.temp;
-    const weather = weatherData.weather[0].main;
-    
-    let message = `현재 ${weatherData.name}의 기온은 ${temp}°C입니다.\n`;
-    
-    if (temp >= 25) {
-        message += '더운 날씨에 적합한 시원한 코디를 추천합니다!';
-    } else if (temp >= 20) {
-        message += '쾌적한 날씨에 적합한 가벼운 코디를 추천합니다!';
-    } else if (temp >= 15) {
-        message += '선선한 날씨에 적합한 가디건이나 얇은 재킷을 추천합니다!';
-    } else {
-        message += '추운 날씨에 적합한 따뜻한 코디를 추천합니다!';
-    }
-    
-    alert(message);
-}
-
-function showDefaultWeatherCoord() {
-    alert('현재 서울 기준으로 오늘의 날씨 코디를 추천합니다!');
-}
-
-// 애니메이션 CSS 추가
-const animationCSS = `
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    @keyframes pulse {
-        0%, 100% {
-            transform: scale(1);
-        }
-        50% {
-            transform: scale(1.05);
-        }
-    }
-    
-    @keyframes slideInFromLeft {
-        from {
-            opacity: 0;
-            transform: translateX(-50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    @keyframes slideInFromRight {
-        from {
-            opacity: 0;
-            transform: translateX(50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-`;
-
-// 스타일 태그에 애니메이션 추가
-if (!document.getElementById('mainpage-animations')) {
-    const style = document.createElement('style');
-    style.id = 'mainpage-animations';
-    style.textContent = animationCSS;
-    document.head.appendChild(style);
-}
-
-// 스크롤 애니메이션
-function setupScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-            }
-        });
-    }, observerOptions);
-
-    // 관찰할 요소들
-    const animatedElements = document.querySelectorAll('.coord-item, .section-title, .filter-tabs');
-    animatedElements.forEach(el => observer.observe(el));
-}
-
-// 페이지 로드 완료 후 실행
-window.addEventListener('load', function() {
-    setupScrollAnimations();
-    
-    // 초기 로딩 애니메이션
-    const mainBanner = document.querySelector('.main-banner');
-    if (mainBanner) {
-        mainBanner.style.animation = 'slideInFromLeft 1s ease forwards';
-    }
-    
-    const recommendations = document.querySelector('.recommendations');
-    if (recommendations) {
-        recommendations.style.animation = 'slideInFromRight 1s ease forwards 0.3s';
-        recommendations.style.opacity = '0';
-        setTimeout(() => {
-            recommendations.style.opacity = '1';
-        }, 300);
-    }
-});
-
-// 유틸리티 함수들
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    }
-}
-
-// 로컬 스토리지 활용 (사용자 선호도 저장)
-function saveUserPreference(key, value) {
-    try {
-        localStorage.setItem(`codiMate_${key}`, JSON.stringify(value));
-    } catch (error) {
-        console.warn('로컬 스토리지 저장 실패:', error);
-    }
-}
-
-function getUserPreference(key, defaultValue = null) {
-    try {
-        const stored = localStorage.getItem(`codiMate_${key}`);
-        return stored ? JSON.parse(stored) : defaultValue;
-    } catch (error) {
-        console.warn('로컬 스토리지 읽기 실패:', error);
-        return defaultValue;
-    }
-}
-
-// 사용자 선호 카테고리 저장
-function savePreferredCategory(category) {
-    saveUserPreference('preferredCategory', category);
-}
-
-function loadPreferredCategory() {
-    const preferred = getUserPreference('preferredCategory', 'all');
-    filterCoords(preferred);
-}
-
-// 에러 처리
-window.addEventListener('error', function(e) {
-    console.error('페이지 에러:', e.error);
-    // 에러 로깅 서비스로 전송 (실제 구현시)
-});
-
-// 성능 최적화 - 이미지 지연 로딩
-function setupLazyLoading() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
+    alert('상황별 코디 추천을 확인합니다!');
 }
 
 // 키보드 네비게이션 지원
@@ -480,58 +269,62 @@ document.addEventListener('keydown', function(e) {
                 e.preventDefault();
             }
             break;
-        case 'Escape':
-            // 모달이나 오버레이 닫기
-            closeAllModals();
+        case ' ': // 스페이스바로 자동슬라이드 토글
+            if (e.target.tagName !== 'INPUT') {
+                if (slideInterval) {
+                    stopAutoSlide();
+                    console.log('Auto slide paused');
+                } else {
+                    startAutoSlide();
+                    console.log('Auto slide resumed');
+                }
+                e.preventDefault();
+            }
             break;
     }
 });
 
-function closeAllModals() {
-    // 모든 모달이나 오버레이 닫기
-    const modals = document.querySelectorAll('.modal, .overlay');
-    modals.forEach(modal => {
-        modal.classList.remove('active');
-    });
-}
-
-// 다크 모드 토글 (선택사항)
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    saveUserPreference('darkMode', isDark);
-}
-
-function loadDarkModePreference() {
-    const isDark = getUserPreference('darkMode', false);
-    if (isDark) {
-        document.body.classList.add('dark-mode');
+// 페이지 가시성 변경 처리 (탭 전환 등)
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        stopAutoSlide();
+    } else {
+        startAutoSlide();
     }
-}
+});
 
-// 초기화 함수 확장
-function initializeMainPage() {
-    setupSlider();
-    setupFilterTabs();
-    setupCoordItems();
-    startAutoSlide();
-    setupLazyLoading();
-    loadDarkModePreference();
-    loadPreferredCategory();
-    
-    // 페이지 성능 측정
-    measurePagePerformance();
-}
+// 마우스 호버시 자동 슬라이드 일시정지
+document.addEventListener('DOMContentLoaded', function() {
+    const banner = document.querySelector('.main-banner');
+    if (banner) {
+        banner.addEventListener('mouseenter', stopAutoSlide);
+        banner.addEventListener('mouseleave', startAutoSlide);
+    }
+});
 
-function measurePagePerformance() {
-    window.addEventListener('load', function() {
-        setTimeout(() => {
-            const perfData = performance.timing;
-            const loadTime = perfData.loadEventEnd - perfData.navigationStart;
-            console.log(`페이지 로드 시간: ${loadTime}ms`);
-            
-            // 성능 데이터 서버로 전송 (실제 구현시)
-            // sendPerformanceData(loadTime);
-        }, 0);
-    });
+// 슬라이더 초기화 확인
+window.addEventListener('load', function() {
+    console.log('Page loaded, checking slider...');
+    const slider = document.getElementById('bannerSlider');
+    if (slider) {
+        console.log('Slider found, current transform:', slider.style.transform);
+        // 강제로 첫 번째 슬라이드로 이동
+        updateSlider();
+        console.log('Slider initialized to slide 0');
+    } else {
+        console.error('Slider not found on page load!');
+    }
+});
+
+// 유틸리티 함수들
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
