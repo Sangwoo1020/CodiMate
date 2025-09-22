@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="/static/css/fix/footer.css">
 </head>
 <body>
+    <!-- 헤더 플레이스홀더 -->
+    <div id="header-placeholder" class="loading"></div>
+
     <!-- 메인 배너 -->
     <section class="main-banner">
         <div class="banner-slider" id="bannerSlider">
@@ -48,10 +51,10 @@
                 </div>
             </div>
         </div>
+        
         <button class="slider-nav prev" onclick="previousSlide()">‹</button>
         <button class="slider-nav next" onclick="nextSlide()">›</button>
         
-        <!-- 슬라이드 인디케이터 -->
         <div class="slide-indicators">
             <span class="indicator active" onclick="goToSlide(0)"></span>
             <span class="indicator" onclick="goToSlide(1)"></span>
@@ -74,12 +77,12 @@
         </div>
 
         <div class="coord-grid" id="coordGrid">
+            <!-- 1. 봄날 캐주얼 룩 -->
             <div class="coord-item" data-category="casual">
-                <div class="coord-image" style="background: linear-gradient(45deg, #74b9ff, #0984e3);">
+                <div class="coord-image" style="background-image: url('/static/image/sample1.png'); background-size: cover; background-position: center;">
                     <div class="coord-badge">1</div>
                     <div class="weather-badge">☀️ 22°C</div>
                     <div class="coord-overlay">
-                        <button class="view-detail-btn">자세히 보기</button>
                     </div>
                 </div>
                 <div class="coord-info">
@@ -92,12 +95,12 @@
                 </div>
             </div>
 
+            <!-- 2. 클래식 오피스 룩 -->
             <div class="coord-item" data-category="business">
-                <div class="coord-image" style="background: linear-gradient(45deg, #636e72, #2d3436);">
+                <div class="coord-image" style="background-image: url('/static/image/sample2.png'); background-size: cover; background-position: center;">
                     <div class="coord-badge">2</div>
                     <div class="weather-badge">🌤️ 18°C</div>
                     <div class="coord-overlay">
-                        <button class="view-detail-btn">자세히 보기</button>
                     </div>
                 </div>
                 <div class="coord-info">
@@ -110,12 +113,12 @@
                 </div>
             </div>
 
+            <!-- 3. 로맨틱 데이트 룩 -->
             <div class="coord-item" data-category="date">
-                <div class="coord-image" style="background: linear-gradient(45deg, #fd79a8, #e84393);">
+                <div class="coord-image" style="background-image: url('/static/image/sample3.png'); background-size: cover; background-position: center;">
                     <div class="coord-badge">3</div>
                     <div class="weather-badge">🌸 20°C</div>
                     <div class="coord-overlay">
-                        <button class="view-detail-btn">자세히 보기</button>
                     </div>
                 </div>
                 <div class="coord-info">
@@ -128,12 +131,12 @@
                 </div>
             </div>
 
+            <!-- 4. 미니멀 스트리트 룩 -->
             <div class="coord-item" data-category="casual">
-                <div class="coord-image" style="background: linear-gradient(45deg, #00b894, #00cec9);">
+                <div class="coord-image" style="background-image: url('/static/image/sample4.png'); background-size: cover; background-position: center;">
                     <div class="coord-badge">4</div>
                     <div class="weather-badge">☁️ 16°C</div>
                     <div class="coord-overlay">
-                        <button class="view-detail-btn">자세히 보기</button>
                     </div>
                 </div>
                 <div class="coord-info">
@@ -146,12 +149,12 @@
                 </div>
             </div>
 
+            <!-- 5. 엘레간트 포멀 -->
             <div class="coord-item" data-category="formal">
-                <div class="coord-image" style="background: linear-gradient(45deg, #6c5ce7, #a29bfe);">
+                <div class="coord-image" style="background-image: url('/static/image/sample5.png'); background-size: cover; background-position: center;">
                     <div class="coord-badge">5</div>
                     <div class="weather-badge">🌙 15°C</div>
                     <div class="coord-overlay">
-                        <button class="view-detail-btn">자세히 보기</button>
                     </div>
                 </div>
                 <div class="coord-info">
@@ -164,12 +167,12 @@
                 </div>
             </div>
 
+            <!-- 6. 모던 비즈니스 -->
             <div class="coord-item" data-category="business">
-                <div class="coord-image" style="background: linear-gradient(45deg, #fdcb6e, #e17055);">
+                <div class="coord-image" style="background-image: url('/static/image/sample6.png'); background-size: cover; background-position: center;">
                     <div class="coord-badge">6</div>
                     <div class="weather-badge">🌅 19°C</div>
                     <div class="coord-overlay">
-                        <button class="view-detail-btn">자세히 보기</button>
                     </div>
                 </div>
                 <div class="coord-info">
@@ -182,12 +185,12 @@
                 </div>
             </div>
 
+            <!-- 7. 편안한 주말 룩 -->
             <div class="coord-item" data-category="casual">
-                <div class="coord-image" style="background: linear-gradient(45deg, #fab1a0, #e17055);">
+                <div class="coord-image" style="background-image: url('/static/image/sample7.png'); background-size: cover; background-position: center;">
                     <div class="coord-badge">7</div>
                     <div class="weather-badge">🌤️ 23°C</div>
                     <div class="coord-overlay">
-                        <button class="view-detail-btn">자세히 보기</button>
                     </div>
                 </div>
                 <div class="coord-info">
@@ -200,12 +203,12 @@
                 </div>
             </div>
 
+            <!-- 8. 캐주얼 데이트 룩 -->
             <div class="coord-item" data-category="date">
-                <div class="coord-image" style="background: linear-gradient(45deg, #81ecec, #00cec9);">
+                <div class="coord-image" style="background-image: url('/static/image/sample8.png'); background-size: cover; background-position: center;">
                     <div class="coord-badge">8</div>
                     <div class="weather-badge">🌊 21°C</div>
                     <div class="coord-overlay">
-                        <button class="view-detail-btn">자세히 보기</button>
                     </div>
                 </div>
                 <div class="coord-info">
@@ -220,9 +223,12 @@
         </div>
     </section>
 
+    <!-- 푸터 플레이스홀더 -->
+    <div id="footer-placeholder"></div>
+
+    <!-- 스크립트 로드 순서 중요 -->
     <script src="/static/js/fix/header.js"></script>
     <script src="/static/js/mainpage/mainpage.js"></script>
     <script src="/static/js/fix/footer.js"></script>
-
 </body>
 </html>
