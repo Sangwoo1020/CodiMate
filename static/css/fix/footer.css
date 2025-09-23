@@ -1,0 +1,166 @@
+/* 간단한 푸터 CSS */
+
+footer.footer {
+    border-top: 1px solid #e9ecef;
+}
+
+footer.footer .footer-main-container {
+    padding: 40px 20px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 메인 콘텐츠 레이아웃 */
+footer.footer .footer-main-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* 고객 문의 섹션 */
+footer.footer .footer-contact {
+    min-width: 280px;
+}
+
+footer.footer .footer-contact .footer-menu-title {
+    color: #495057;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+footer.footer .footer-contact .footer-cs-tel {
+    color: #6c757d;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.4;
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+footer.footer .footer-contact .footer-cs-tel:hover {
+    color: #6c757d;
+}
+
+footer.footer .footer-contact .footer-cs-info {
+    margin-top: 8px;
+}
+
+footer.footer .footer-contact .footer-cs-info .footer-cs-item {
+    color: #6c757d;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+footer.footer .footer-contact .footer-cs-info .footer-cs-subitem {
+    color: #adb5bd;
+    margin-left: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 400;
+}
+
+footer.footer .footer-contact .footer-cs-info .footer-cs-item.email {
+    margin-top: 8px;
+    display: block;
+    color: #6c757d;
+    text-decoration: none;
+}
+
+footer.footer .footer-contact .footer-cs-info .footer-cs-item.email:hover {
+    color: #6c757d;
+}
+
+/* 회사 정보 */
+footer.footer .footer-company-info {
+    margin-top: 20px;
+}
+
+footer.footer .footer-company-info .footer-company-info-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+footer.footer .footer-company-info-item {
+    color: #6c757d;
+    font-size: 13px;
+    line-height: 1.5;
+    word-break: keep-all;
+}
+
+footer.footer .footer-company-info .footer-divider {
+    width: 1px;
+    height: 12px;
+    background-color: #dee2e6;
+    flex-shrink: 0;
+}
+
+footer.footer .footer-company-info .footer-company-info-copyright {
+    margin-top: 15px;
+    color: #adb5bd;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* 반응형 디자인 */
+@media screen and (max-width: 768px) {
+    footer.footer .footer-main-container {
+        padding: 30px 15px 15px;
+    }
+
+    footer.footer .footer-main-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    footer.footer .footer-contact {
+        text-align: center;
+        min-width: auto;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    footer.footer .footer-company-info {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    footer.footer .footer-company-info .footer-company-info-list {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    footer.footer .footer-main-container {
+        padding: 25px 10px 10px;
+    }
+
+    footer.footer .footer-contact .footer-cs-tel {
+        font-size: 16px;
+    }
+
+    footer.footer .footer-company-info-item {
+        font-size: 12px;
+    }
+
+    footer.footer .footer-company-info .footer-company-info-list .footer-divider {
+        display: none;
+    }
+
+    footer.footer .footer-company-info .footer-company-info-list {
+        flex-direction: column;
+        gap: 4px;
+    }
+}

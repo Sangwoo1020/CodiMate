@@ -1,0 +1,434 @@
+/* 메인페이지 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+}
+
+/* 헤더 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ff4757;
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #ff4757;
+}
+
+.header-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+/* 메인 배너 슬라이더 - 수정됨 */
+.main-banner {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+}
+
+.banner-slider {
+    display: flex;
+    width: 500%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.banner-slide {
+    width: 20%;
+    height: 100%;
+    position: relative;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-shrink: 0; /* 중요: 슬라이드 크기 고정 */
+}
+
+/* 각 슬라이드별 뚜렷한 배경색 */
+.slide1 { 
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+}
+
+.slide1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    z-index: 1;
+}
+
+.slide2 { 
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    position: relative;
+}
+
+.slide2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(from 45deg, rgba(255,255,255,0.1) 0%, transparent 25%, rgba(255,255,255,0.1) 50%);
+    z-index: 1;
+}
+
+.slide3 { 
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    position: relative;
+}
+
+.slide3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(255,255,255,0.1) 20px,
+        rgba(255,255,255,0.1) 40px
+    );
+    z-index: 1;
+}
+
+.slide4 { 
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    position: relative;
+}
+
+.slide4::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.1) 0%, transparent 40%);
+    z-index: 1;
+}
+
+.slide5 { 
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    position: relative;
+}
+
+.slide5::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
+    background-size: 60px 60px;
+    z-index: 1;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2; /* 배경 패턴 위에 표시 */
+    max-width: 600px;
+    padding: 0 20px;
+}
+
+.banner-content h2 {
+    font-size: 48px;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: slideInUp 0.8s ease-out;
+}
+
+.banner-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+.cta-button {
+    background: rgba(255,255,255,0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 15px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+    animation: slideInUp 0.8s ease-out 0.4s both;
+}
+
+.cta-button:hover {
+    background: white;
+    color: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* 슬라이더 네비게이션 */
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.3);
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 15px 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+    z-index: 3;
+}
+
+.prev { left: 30px; }
+.next { right: 30px; }
+
+.slider-nav:hover {
+    background: rgba(255,255,255,0.5);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* 슬라이드 인디케이터 추가 */
+.slide-indicators {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 3;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.indicator.active {
+    background: white;
+    transform: scale(1.3);
+    border-color: rgba(255,255,255,0.5);
+}
+
+.indicator:hover {
+    background: rgba(255,255,255,0.8);
+    transform: scale(1.1);
+}
+
+/* 애니메이션 */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 추천 섹션 */
+.recommendations {
+    padding: 80px 50px;
+    background-color: #f8f9fa;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    color: #333;
+}
+
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.tab {
+    padding: 12px 24px;
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.tab.active, .tab:hover {
+    background: #ff4757;
+    color: white;
+    border-color: #ff4757;
+}
+
+.coord-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.coord-item {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.coord-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.coord-image {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.coord-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #ff4757;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.weather-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255,255,255,0.9);
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.coord-info {
+    padding: 20px;
+}
+
+.coord-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.coord-desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.stars {
+    color: #ffd700;
+}
+
+.rating-text {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .coord-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .header {
+        padding: 15px 20px;
+    }
+    
+    .nav-menu {
+        display: none;
+    }
+    
+    .banner-content h2 {
+        font-size: 36px;
+    }
+    
+    .banner-content p {
+        font-size: 16px;
+    }
+    
+    .slider-nav {
+        padding: 12px 16px;
+        font-size: 20px;
+    }
+    
+    .prev { left: 20px; }
+    .next { right: 20px; }
+}
