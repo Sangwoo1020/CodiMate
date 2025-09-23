@@ -49,6 +49,7 @@ Merge	브랜치 병합
 4) 꼬리말 (선택)
 Type: #이슈번호 형식
 예: Fixes: #12
+
 💻 Code Convention
 Java
 클래스명: PascalCase (UserService, RoomController)
@@ -61,6 +62,7 @@ Database
 PK 컬럼명: {table명}_id (user_id, room_id)
 공통 컬럼: created_at, updated_at
 파일(이미지)은 DB에 직접 저장하지 않고 URL 또는 UUID로 관리
+
 🚀 Getting Started
 1) Clone
 git clone https://github.com/{your-repo}/Codimate.git
