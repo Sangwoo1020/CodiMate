@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodiMate - 나의 옷장</title>
+    <link rel="stylesheet" href="/static/css/fix/header.css">
+    <link rel="stylesheet" href="/static/css/closet/closet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/fix/footer.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <div class="closet-container">
+        <h1>나의 옷장</h1>
+        
+        <div class="tab-menu">
+            <button class="tab-button active" data-tab="top-tab">상의</button>
+            <button class="tab-button" data-tab="bottom-tab">하의</button>
+            <button class="tab-button" data-tab="preview-tab">미리보기</button>
+        </div>
+
+        <div id="top-tab" class="tab-content active">
+            <button id="addTopBtn" class="add-button">상의 등록하기</button>
+            <div class="item-grid" id="topGrid">
+                </div>
+        </div>
+
+        <div id="bottom-tab" class="tab-content">
+            <button id="addBottomBtn" class="add-button">하의 등록하기</button>
+            <div class="item-grid" id="bottomGrid">
+                </div>
+        </div>
+
+        <div id="preview-tab" class="tab-content">
+            <div class="preview-upload-section">
+                <div class="preview-upload-box" id="topPreviewBox">
+                    <p>상의</p>
+                    <img id="topPreviewImg" src="" alt="상의 미리보기" class="preview-img">
+                </div>
+                <div class="preview-upload-box" id="bottomPreviewBox">
+                    <p>하의</p>
+                    <img id="bottomPreviewImg" src="" alt="하의 미리보기" class="preview-img">
+                </div>
+            </div>
+            <div class="preview-action">
+            <button id="selectTopBtn" class="action-button">상의 선택</button>
+            <button id="selectBottomBtn" class="action-button">하의 선택</button>
+            <button id="combineBtn" class="action-button" style="display: none;">이어 붙이기</button>
+            <button id="resetPreviewBtn" class="action-button">초기화</button>
+            </div>
+            <div class="stacked-outfit-container" style="display: none;">
+                <img id="stackedTopImage" src="" alt="이어 붙인 상의" class="stacked-image">
+                <img id="stackedBottomImage" src="" alt="이어 붙인 하의" class="stacked-image">
+            </div>
+        </div>
+    </div>
+
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modalTitle">상의 등록하기</h2>
+            <form id="itemForm">
+                <div class="form-group">
+                    <label for="itemName">이름</label>
+                    <input type="text" id="itemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemRating">만족도</label>
+                    <div class="rating" id="itemRating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="itemImage">사진</label>
+                    <input type="file" id="itemImage" accept="image/*" required>
+                    <div class="image-preview" id="imagePreview">
+                        <p>이미지 미리보기</p>
+                    </div>
+                </div>
+                <button type="submit" class="submit-button">등록하기</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="selectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="selectModalTitle">상의 선택</h2>
+            <div class="item-selection-grid" id="selectionGrid">
+                </div>
+        </div>
+    </div>
+    
+    <div id="footer-placeholder"></div>
+    
+    <script src="/static/js/fix/header.js"></script>
+    <script src="/static/js/closet/closet.js"></script>
+    <script src="/static/js/fix/footer.js"></script>
+</body>
+</html>

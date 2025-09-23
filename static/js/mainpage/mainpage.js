@@ -245,9 +245,8 @@ function getSituationCoord() {
 }
 
 function manageCloset() {
-    // 옷장 관리 페이지로 이동 (아직 만들어지지 않았다면 준비 중 메시지)
-    alert('옷장 관리 페이지는 준비 중입니다!');
-    // window.location.href = '/closet';
+    // 옷장 관리 페이지로 이동 
+    window.location.href = '/templates/closet/closet.html';
 }
 
 function viewHistory() {

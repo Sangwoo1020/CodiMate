@@ -133,6 +133,90 @@ const sampleRecommendations = [
     }
 ];
 
+// ✅ 계절별 추천 데이터 추가
+const seasonRecommendations = {
+    spring: [
+        {
+            id: 101,
+            title: '봄날의 로맨틱 룩',
+            description: '라벤더 가디건 + 베이지 팬츠 + 로퍼',
+            image: '/static/image/mainpage/sample1.png',
+            colors: ['#e6e6fa', '#d2b48c', '#8b4513'],
+            matchScore: 94,
+            tags: ['spring', 'romantic']
+        },
+        {
+            id: 102,
+            title: '캐주얼 봄 코디',
+            description: '화이트 셔츠 + 데님 재킷 + 스니커즈',
+            image: '/static/image/mainpage/sample2.png',
+            colors: ['#ffffff', '#4682b4', '#000000'],
+            matchScore: 91,
+            tags: ['spring', 'casual']
+        }
+    ],
+    summer: [
+        {
+            id: 201,
+            title: '시원한 여름 룩',
+            description: '린넨 셔츠 + 화이트 쇼츠 + 샌들',
+            image: '/static/image/mainpage/sample3.png',
+            colors: ['#87ceeb', '#ffffff', '#daa520'],
+            matchScore: 96,
+            tags: ['summer', 'cool']
+        },
+        {
+            id: 202,
+            title: '여름 비즈니스 캐주얼',
+            description: '민트 폴로셔츠 + 베이지 치노팬츠 + 로퍼',
+            image: '/static/image/mainpage/sample4.png',
+            colors: ['#98fb98', '#d2b48c', '#8b4513'],
+            matchScore: 88,
+            tags: ['summer', 'business']
+        }
+    ],
+    autumn: [
+        {
+            id: 301,
+            title: '가을 감성 룩',
+            description: '버건디 니트 + 브라운 팬츠 + 부츠',
+            image: '/static/image/mainpage/sample1.png',
+            colors: ['#800020', '#8b4513', '#2f4f4f'],
+            matchScore: 93,
+            tags: ['autumn', 'warm']
+        },
+        {
+            id: 302,
+            title: '레이어드 가을 스타일',
+            description: '체크셔츠 + 카디건 + 데님 + 스니커즈',
+            image: '/static/image/mainpage/sample2.png',
+            colors: ['#daa520', '#556b2f', '#4682b4'],
+            matchScore: 89,
+            tags: ['autumn', 'layered']
+        }
+    ],
+    winter: [
+        {
+            id: 401,
+            title: '겨울 코트 룩',
+            description: '울 코트 + 터틀넥 + 부츠',
+            image: '/static/image/mainpage/sample3.png',
+            colors: ['#2f4f4f', '#000000', '#8b4513'],
+            matchScore: 97,
+            tags: ['winter', 'warm']
+        },
+        {
+            id: 402,
+            title: '캐주얼 겨울 스타일',
+            description: '패딩 + 후드티 + 조거팬츠 + 스니커즈',
+            image: '/static/image/mainpage/sample4.png',
+            colors: ['#000080', '#708090', '#000000'],
+            matchScore: 85,
+            tags: ['winter', 'casual']
+        }
+    ]
+};
+
 // 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
     loadColorCombinations();
@@ -552,7 +636,7 @@ function selectSituation(situation) {
     }, 500);
 }
 
-// 날씨 정보 업데이트
+// ✅ 날씨 정보 업데이트 (중복 제거 및 수정)
 function updateWeatherInfo() {
     // 실제로는 API에서 가져와야 하지만, 샘플 데이터 사용
     const weatherInfo = {
@@ -640,7 +724,7 @@ function selectSeason(season) {
     }, 500);
 }
 
-// 계절별 추천 가져오기
+// ✅ 계절별 추천 가져오기 (수정됨)
 function getSeasonRecommendation() {
     if (!selectedSeason) {
         alert('계절을 먼저 선택해주세요!');
@@ -654,27 +738,6 @@ function getSeasonRecommendation() {
         showRecommendationResults('season');
     }, 2000);
 }
-
-    // 실제로는 API에서 가져와야 하지만, 샘플 데이터 사용
-    const weatherInfo = {
-        location: '서울시',
-        temperature: 22,
-        condition: '맑음',
-        humidity: 65,
-        icon: '🌤️'
-    };
-    
-    const weatherCard = document.querySelector('.weather-card');
-    if (weatherCard) {
-        weatherCard.innerHTML = `
-            <div class="weather-icon">${weatherInfo.icon}</div>
-            <div class="weather-details">
-                <h4>${weatherInfo.location} 현재 날씨</h4>
-                <p class="temperature">${weatherInfo.temperature}°C</p>
-                <p class="weather-desc">${weatherInfo.condition}, 습도 ${weatherInfo.humidity}%</p>
-            </div>
-        `;
-    }
 
 // 색상 매칭 추천
 function getColorRecommendation() {
@@ -692,8 +755,24 @@ function getColorRecommendation() {
     }, 2000);
 }
 
-// 날씨 기반 추천
+// ✅ 날씨 기반 추천 (수정됨)
 function getWeatherRecommendation() {
+    // 현재 온도를 기반으로 자동으로 계절 결정
+    const temperature = 22; // 실제로는 API에서 가져와야 함
+    
+    let autoSeason = '';
+    if (temperature >= 25) {
+        autoSeason = 'summer';
+    } else if (temperature >= 15) {
+        autoSeason = 'spring';
+    } else if (temperature >= 5) {
+        autoSeason = 'autumn';
+    } else {
+        autoSeason = 'winter';
+    }
+    
+    selectedSeason = autoSeason;
+    
     showLoading();
     
     setTimeout(() => {
@@ -717,7 +796,7 @@ function getSituationRecommendation() {
     }, 2000);
 }
 
-// 추천 결과 표시
+// ✅ 추천 결과 표시 (수정됨)
 function showRecommendationResults(type) {
     const resultsSection = document.getElementById('recommendationResults');
     const resultsGrid = document.getElementById('resultsGrid');
@@ -733,8 +812,8 @@ function showRecommendationResults(type) {
         filteredRecommendations = sampleRecommendations.filter(rec => 
             rec.tags.includes(selectedSituation)
         );
-    } else if (type === 'season' && selectedSeason) {
-        // 계절별 추천 데이터 사용
+    } else if ((type === 'season' || type === 'weather') && selectedSeason) {
+        // ✅ 계절별 추천 데이터 사용
         filteredRecommendations = seasonRecommendations[selectedSeason] || sampleRecommendations;
     }
     
@@ -747,9 +826,9 @@ function showRecommendationResults(type) {
         coordItem.className = 'coord-item';
         coordItem.setAttribute('data-category', rec.tags[0] || 'all');
         
-        // 계절별 추천일 때는 해당 계절 아이콘과 온도 범위 표시
+        // 계절별/날씨별 추천일 때는 해당 계절 아이콘과 온도 범위 표시
         let weatherIcon, tempRange;
-        if (type === 'season') {
+        if (type === 'season' || type === 'weather') {
             const seasonData = {
                 spring: { icon: '🌸', temp: '15-25°C' },
                 summer: { icon: '☀️', temp: '25-35°C' },
