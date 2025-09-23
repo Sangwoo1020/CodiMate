@@ -230,28 +230,30 @@ function showCoordDetail(title, coordId) {
 
 // 배너 버튼 기능들
 function startColorMatching() {
-    console.log('색상 매칭 시작');
-    alert('색상 매칭 기능으로 이동합니다!');
+    // 같은 페이지 내에서 색상 매칭 옵션 선택하고 해당 섹션으로 스크롤
+    window.location.href = '/templates/codi-recommend/codi-recommend.html?option=color#recommend-options';
 }
 
 function getWeatherRecommendation() {
-    console.log('날씨 기반 추천');
-    alert('오늘의 날씨 기반 코디를 확인합니다!');
-}
-
-function manageCloset() {
-    console.log('옷장 관리');
-    alert('옷장 관리 페이지로 이동합니다!');
-}
-
-function viewHistory() {
-    console.log('코디 히스토리');
-    alert('코디 히스토리를 확인합니다!');
+    // 같은 페이지 내에서 날씨 기반 옵션 선택하고 해당 섹션으로 스크롤
+    window.location.href = '/templates/codi-recommend/codi-recommend.html?option=weather#recommend-options';
 }
 
 function getSituationCoord() {
-    console.log('상황별 코디');
-    alert('상황별 코디 추천을 확인합니다!');
+    // 같은 페이지 내에서 상황별 옵션 선택하고 해당 섹션으로 스크롤
+    window.location.href = '/templates/codi-recommend/codi-recommend.html?option=situation#recommend-options';
+}
+
+function manageCloset() {
+    // 옷장 관리 페이지로 이동 (아직 만들어지지 않았다면 준비 중 메시지)
+    alert('옷장 관리 페이지는 준비 중입니다!');
+    // window.location.href = '/closet';
+}
+
+function viewHistory() {
+    // 코디 히스토리 페이지로 이동 (아직 만들어지지 않았다면 준비 중 메시지)
+    alert('코디 히스토리 페이지는 준비 중입니다!');
+    // window.location.href = '/history';
 }
 
 // 키보드 네비게이션 지원
