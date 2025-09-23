@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodiMate - 코디 추천</title>
+    <link rel="stylesheet" href="/static/css/fix/header.css">
+    <link rel="stylesheet" href="/static/css/codi-recommend/codi-recommend.css">
+    <link rel="stylesheet" href="/static/css/fix/footer.css">
+</head>
+<body>
+    <!-- 헤더 플레이스홀더 -->
+    <div id="header-placeholder" class="loading"></div>
+
+    <!-- 페이지 헤더 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>스마트 코디 추천</h1>
+            <p>당신만을 위한 완벽한 코디를 찾아드려요</p>
+        </div>
+    </section>
+
+    <!-- 추천 옵션 선택 -->
+    <section class="recommend-options">
+        <div class="container">
+            <h2 class="section-title">어떤 방식으로 추천받으시겠어요?</h2>
+            <div class="option-cards">
+                <div class="option-card active" data-option="color" onclick="selectOption('color')">
+                    <div class="option-icon">🎨</div>
+                    <h3>색상 매칭 추천</h3>
+                    <p>선택한 상의에 어울리는 색상의 하의를 추천해드려요</p>
+                </div>
+                <div class="option-card" data-option="weather" onclick="selectOption('weather')">
+                    <div class="option-icon">🌤️</div>
+                    <h3>날씨 기반 추천</h3>
+                    <p>오늘의 날씨에 맞는 완벽한 코디를 제안해드려요</p>
+                </div>
+                <div class="option-card" data-option="situation" onclick="selectOption('situation')">
+                    <div class="option-icon">👔</div>
+                    <h3>상황별 추천</h3>
+                    <p>데이트, 비즈니스, 캐주얼 등 상황에 맞는 스타일링</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 색상 매칭 추천 폼 -->
+    <section class="recommend-form color-form active" id="colorForm">
+        <div class="container">
+            <!-- 진행 단계 표시 -->
+            <div class="progress-steps">
+                <div class="step active" id="step1">
+                    <span class="step-number">1</span>
+                    <span class="step-text">색상 조합 선택</span>
+                </div>
+                <div class="step" id="step2">
+                    <span class="step-number">2</span>
+                    <span class="step-text">상의 색상 선택</span>
+                </div>
+                <div class="step" id="step3">
+                    <span class="step-number">3</span>
+                    <span class="step-text">하의 색상 선택</span>
+                </div>
+                <div class="step" id="step4">
+                    <span class="step-number">4</span>
+                    <span class="step-text">코디 추천</span>
+                </div>
+            </div>
+
+            <!-- 1단계: 잘 어울리는 색상 조합 보여주기 -->
+            <div class="color-step step1-content active" id="step1Content">
+                <h3>잘 어울리는 색상 조합을 선택하세요</h3>
+                <p class="step-desc">마음에 드는 색상 조합을 클릭하면 해당 색상으로 코디를 추천해드려요!</p>
+                <div class="color-combinations" id="colorCombinations">
+                    <!-- 색상 조합들이 동적으로 추가됩니다 -->
+                </div>
+            </div>
+
+            <!-- 2단계: 상의 색상 선택 -->
+            <div class="color-step step2-content" id="step2Content">
+                <h3>상의 색상을 선택하세요</h3>
+                <p class="step-desc">선택하신 색상 조합에서 상의로 사용할 색상을 골라주세요.</p>
+                <div class="selected-combination" id="selectedCombination">
+                    <!-- 선택된 조합이 표시됩니다 -->
+                </div>
+                <div class="color-options" id="topColorOptions">
+                    <!-- 상의 색상 옵션들이 표시됩니다 -->
+                </div>
+                <div class="step-buttons">
+                    <button class="step-btn prev-btn" onclick="goToPrevStep()">이전</button>
+                </div>
+            </div>
+
+            <!-- 3단계: 하의 색상 선택 -->
+            <div class="color-step step3-content" id="step3Content">
+                <h3>하의 색상을 선택하세요</h3>
+                <p class="step-desc">선택하신 상의 색상에 어울리는 하의 색상을 골라주세요.</p>
+                <div class="selected-colors" id="selectedColors">
+                    <!-- 선택된 상의 색상이 표시됩니다 -->
+                </div>
+                <div class="color-options" id="bottomColorOptions">
+                    <!-- 하의 색상 옵션들이 표시됩니다 -->
+                </div>
+                <div class="step-buttons">
+                    <button class="step-btn prev-btn" onclick="goToPrevStep()">이전</button>
+                </div>
+            </div>
+
+            <!-- 4단계: 최종 코디 추천 -->
+            <div class="color-step step4-content" id="step4Content">
+                <h3>완벽한 코디를 추천해드려요!</h3>
+                <p class="step-desc">선택하신 색상 조합으로 만든 멋진 코디들입니다.</p>
+                <div class="final-selection" id="finalSelection">
+                    <!-- 최종 선택된 색상들이 표시됩니다 -->
+                </div>
+                <div class="step-buttons">
+                    <button class="step-btn prev-btn" onclick="goToPrevStep()">이전</button>
+                    <button class="step-btn recommend-btn" onclick="getColorRecommendation()">코디 추천받기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 날씨 기반 추천 폼 -->
+    <section class="recommend-form weather-form" id="weatherForm">
+        <div class="container">
+            <h3>날씨 기반 추천</h3>
+            <div class="weather-info" id="weatherInfo">
+                <div class="weather-card">
+                    <div class="weather-icon">🌤️</div>
+                    <div class="weather-details">
+                        <h4>서울시 현재 날씨</h4>
+                        <p class="temperature">22°C</p>
+                        <p class="weather-desc">맑음, 습도 65%</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 계절 선택 섹션 -->
+            <div class="season-selection">
+                <h4>계절을 선택하세요</h4>
+                <p class="season-desc">현재 날씨를 참고하여 원하시는 계절 스타일을 선택해주세요!</p>
+                <div class="season-grid">
+                    <div class="season-card" onclick="selectSeason('spring')" data-season="spring">
+                        <div class="season-icon">🌸</div>
+                        <h5>봄</h5>
+                        <p>15°C - 25°C</p>
+                        <span class="season-desc-text">따뜻하고 화사한 봄 코디</span>
+                    </div>
+                    <div class="season-card" onclick="selectSeason('summer')" data-season="summer">
+                        <div class="season-icon">☀️</div>
+                        <h5>여름</h5>
+                        <p>25°C - 35°C</p>
+                        <span class="season-desc-text">시원하고 경쾌한 여름 코디</span>
+                    </div>
+                    <div class="season-card" onclick="selectSeason('autumn')" data-season="autumn">
+                        <div class="season-icon">🍂</div>
+                        <h5>가을</h5>
+                        <p>10°C - 20°C</p>
+                        <span class="season-desc-text">차분하고 따뜻한 가을 코디</span>
+                    </div>
+                    <div class="season-card" onclick="selectSeason('winter')" data-season="winter">
+                        <div class="season-icon">❄️</div>
+                        <h5>겨울</h5>
+                        <p>-5°C - 15°C</p>
+                        <span class="season-desc-text">포근하고 스타일리시한 겨울 코디</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 상황별 추천 폼 -->
+    <section class="recommend-form situation-form" id="situationForm">
+        <div class="container">
+            <h3>상황별 추천</h3>
+            <div class="situation-grid">
+                <div class="situation-card" onclick="selectSituation('casual')" data-situation="casual">
+                    <div class="situation-icon">👕</div>
+                    <h4>캐주얼</h4>
+                    <p>편안하고 자유로운 일상 룩</p>
+                </div>
+                <div class="situation-card" onclick="selectSituation('business')" data-situation="business">
+                    <div class="situation-icon">💼</div>
+                    <h4>비즈니스</h4>
+                    <p>세련되고 전문적인 업무 룩</p>
+                </div>
+                <div class="situation-card" onclick="selectSituation('date')" data-situation="date">
+                    <div class="situation-icon">💕</div>
+                    <h4>데이트</h4>
+                    <p>로맨틱하고 매력적인 데이트 룩</p>
+                </div>
+                <div class="situation-card" onclick="selectSituation('formal')" data-situation="formal">
+                    <div class="situation-icon">🎩</div>
+                    <h4>포멀</h4>
+                    <p>격식 있는 공식적인 자리 룩</p>
+                </div>
+                <div class="situation-card" onclick="selectSituation('exercise')" data-situation="exercise">
+                    <div class="situation-icon">👟</div>
+                    <h4>운동</h4>
+                    <p>활동적이고 기능적인 운동 룩</p>
+                </div>
+                <div class="situation-card" onclick="selectSituation('party')" data-situation="party">
+                    <div class="situation-icon">🎉</div>
+                    <h4>파티</h4>
+                    <p>화려하고 돋보이는 파티 룩</p>
+                </div>
+                <div class="situation-card" onclick="selectSituation('travel')" data-situation="travel">
+                    <div class="situation-icon">🧳</div>
+                    <h4>여행</h4>
+                    <p>편리하고 스타일리시한 여행 룩</p>
+                </div>
+                <div class="situation-card" onclick="selectSituation('school')" data-situation="school">
+                    <div class="situation-icon">🎓</div>
+                    <h4>학교</h4>
+                    <p>깔끔하고 활동적인 캠퍼스 룩</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 추천 결과 섹션 -->
+    <section class="recommendation-results" id="recommendationResults" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">추천 결과</h2>
+            <div class="coord-grid" id="resultsGrid">
+                <!-- 추천 결과가 동적으로 추가됩니다 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 로딩 오버레이 -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>AI가 당신만의 완벽한 코디를 찾고 있어요...</p>
+        </div>
+    </div>
+
+    <!-- 푸터 플레이스홀더 -->
+    <div id="footer-placeholder"></div>
+
+    <!-- 스크립트 로드 -->
+    <script src="/static/js/fix/header.js"></script>
+    <script src="/static/js/codi-recommend/codi-recommend.js"></script>
+    <script src="/static/js/fix/footer.js"></script>
+</body>
+</html>
