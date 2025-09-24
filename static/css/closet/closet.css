@@ -63,6 +63,19 @@ body {
     color: var(--secondary-color);
     margin: 0;
     line-height: 1.5;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: -1;
 }
 
 .container {
@@ -87,7 +100,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: 60px 60px;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
     z-index: 1;
 }
 
@@ -118,6 +132,26 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     margin-top: 60px;
     margin-bottom: 80px;
+    position: relative;
+}
+
+.closet-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 13px;
+    z-index: 1;
+}
+
+/* closet-container 내부 요소들의 z-index 조정 */
+.closet-container > * {
+    position: relative;
+    z-index: 2;
 }
 
 /* closet-container 내부 제목만 적용 */
@@ -146,15 +180,39 @@ body {
     color: #999;
     cursor: pointer;
     transition: color 0.3s, border-bottom 0.3s;
+    position: relative;
+}
+
+.tab-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 8px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 .tab-button:hover {
     color: var(--primary-color);
 }
 
+.tab-button:hover::before {
+    opacity: 1;
+}
+
 .tab-button.active {
     color: var(--primary-color);
     border-bottom: 4px solid var(--primary-color);
+}
+
+.tab-button.active::before {
+    opacity: 1;
 }
 
 /* 콘텐츠 섹션 */
@@ -188,6 +246,19 @@ body {
     flex-direction: column;
 }
 
+.item-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 8px;
+    z-index: 1;
+}
+
 .item-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -198,6 +269,8 @@ body {
     height: 250px;
     object-fit: cover;
     display: block;
+    position: relative;
+    z-index: 2;
 }
 
 .item-info {
@@ -208,6 +281,8 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 .item-name {
@@ -233,11 +308,33 @@ body {
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s;
+    position: relative;
+}
+
+.add-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 8px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 .add-button:hover {
     background: var(--primary-color);
     color: white;
+}
+
+.add-button:hover::before {
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    opacity: 1;
 }
 
 /* 모달 */
@@ -270,6 +367,24 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 13px;
+    z-index: 1;
+}
+
+.modal-content > * {
+    position: relative;
+    z-index: 2;
 }
 
 .close-button {
@@ -331,10 +446,25 @@ body {
     margin-top: 10px;
 }
 
+.image-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 8px;
+    z-index: 1;
+}
+
 .image-preview img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: relative;
+    z-index: 2;
 }
 
 .submit-button {
@@ -348,6 +478,20 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
+    position: relative;
+}
+
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 6px;
+    z-index: 1;
 }
 
 .submit-button:hover {
@@ -375,6 +519,19 @@ body {
     position: relative;
 }
 
+.preview-upload-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 13px;
+    z-index: 1;
+}
+
 .preview-upload-box p {
     color: #ccc;
     font-size: 18px;
@@ -383,7 +540,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    z-index: 2;
 }
 
 .preview-upload-box .preview-img {
@@ -393,7 +550,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 3;
     opacity: 0;
 }
 
@@ -416,11 +573,33 @@ body {
     color: var(--primary-color);
     cursor: pointer;
     transition: all 0.3s;
+    position: relative;
+}
+
+.action-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 6px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 .action-button:hover {
     background: var(--primary-color);
     color: white;
+}
+
+.action-button:hover::before {
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    opacity: 1;
 }
 
 /* 이어 붙이기 이미지 컨테이너 */
@@ -431,12 +610,29 @@ body {
     gap: 0;
     margin: 40px auto;
     width: 250px;
+    position: relative;
+}
+
+.stacked-outfit-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 15px;
+    z-index: 1;
+    opacity: 0.5;
 }
 
 .stacked-image {
     width: 100%;
     height: auto;
     display: block;
+    position: relative;
+    z-index: 2;
 }
 
 /* 선택 모달 */
@@ -452,10 +648,36 @@ body {
     border: 2px solid transparent;
     border-radius: 10px;
     transition: border-color 0.3s;
+    position: relative;
+}
+
+.selection-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 8px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.selection-item:hover::before {
+    opacity: 1;
 }
 
 .selection-item.selected {
     border-color: var(--primary-color);
+}
+
+.selection-item.selected::before {
+    opacity: 1;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
 }
 
 .selection-item img {
@@ -463,6 +685,8 @@ body {
     height: 150px;
     object-fit: cover;
     border-radius: 8px;
+    position: relative;
+    z-index: 2;
 }
 
 /* 애니메이션 */
@@ -496,6 +720,7 @@ body {
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.3s;
+    z-index: 3;
 }
 
 .item-card:hover .delete-button {

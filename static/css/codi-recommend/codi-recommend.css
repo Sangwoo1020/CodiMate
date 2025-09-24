@@ -34,9 +34,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.15) 2px, transparent 2px),
-        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
     background-size: 40px 40px, 60px 60px;
     z-index: 1;
 }
@@ -63,6 +61,24 @@ body {
 .recommend-options {
     padding: 60px 0;
     background: white;
+    position: relative;
+}
+
+.recommend-options::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.08) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: 1;
+}
+
+.recommend-options .container {
+    position: relative;
+    z-index: 2;
 }
 
 .section-title {
@@ -89,6 +105,20 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.option-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
 }
 
 .option-card:hover {
@@ -111,17 +141,15 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        linear-gradient(60deg, rgba(255,255,255,0.1) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.1) 87.5%),
-        linear-gradient(-60deg, rgba(255,255,255,0.1) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.1) 87.5%);
-    background-size: 80px 80px;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
     border-radius: 14px;
     z-index: 1;
 }
 
-.option-card.active .option-icon,
-.option-card.active h3,
-.option-card.active p {
+.option-card .option-icon,
+.option-card h3,
+.option-card p {
     position: relative;
     z-index: 2;
 }
@@ -148,6 +176,24 @@ body {
     padding: 60px 0;
     background: #f8f9fa;
     display: none;
+    position: relative;
+}
+
+.recommend-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: 1;
+}
+
+.recommend-form .container {
+    position: relative;
+    z-index: 2;
 }
 
 .recommend-form.active {
@@ -195,6 +241,19 @@ body {
     transition: all 0.3s ease;
 }
 
+.step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 50px;
+    z-index: 1;
+}
+
 .step.active {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -208,13 +267,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 8px,
-        rgba(255,255,255,0.1) 8px,
-        rgba(255,255,255,0.1) 16px
-    );
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
     border-radius: 50px;
     z-index: 1;
 }
@@ -232,10 +286,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12) 8px, transparent 9px),
-        radial-gradient(circle at 70% 70%, rgba(255,255,255,0.08) 6px, transparent 7px);
-    background-size: 30px 30px, 50px 50px;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
     border-radius: 50px;
     z-index: 1;
 }
@@ -250,12 +302,6 @@ body {
     justify-content: center;
     font-weight: bold;
     margin-bottom: 8px;
-}
-
-.step.active .step-number,
-.step.completed .step-number,
-.step.active .step-text,
-.step.completed .step-text {
     position: relative;
     z-index: 2;
 }
@@ -269,6 +315,8 @@ body {
     font-size: 0.9rem;
     font-weight: 500;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 /* 색상 단계별 컨텐츠 */
@@ -314,6 +362,20 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.color-combination::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 17px;
+    z-index: 1;
 }
 
 .color-combination:hover {
@@ -337,16 +399,15 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.08) 0%, transparent 40%);
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.08) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
     border-radius: 17px;
     z-index: 1;
 }
 
-.color-combination.selected .combination-colors,
-.color-combination.selected .combination-name,
-.color-combination.selected .combination-desc {
+.color-combination .combination-colors,
+.color-combination .combination-name,
+.color-combination .combination-desc {
     position: relative;
     z-index: 2;
 }
@@ -395,10 +456,26 @@ body {
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+}
+
+.selected-combination::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
 }
 
 .selected-combination .combination-colors {
     margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
 }
 
 /* 색상 옵션 선택 */
@@ -418,6 +495,20 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
+    position: relative;
+}
+
+.color-option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 13px;
+    z-index: 1;
 }
 
 .color-option:hover {
@@ -441,17 +532,15 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
-        linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
-    background-size: 20px 20px;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
     border-radius: 13px;
     z-index: 1;
 }
 
-.color-option.selected .color-circle,
-.color-option.selected .color-name,
-.color-option.selected .color-korean {
+.color-option .color-circle,
+.color-option .color-name,
+.color-option .color-korean {
     position: relative;
     z-index: 2;
 }
@@ -481,6 +570,20 @@ body {
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+}
+
+.selected-colors::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
 }
 
 .color-selection {
@@ -489,6 +592,8 @@ body {
     justify-content: center;
     gap: 20px;
     margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
 }
 
 .selected-color-item {
@@ -526,6 +631,20 @@ body {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+}
+
+.final-selection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 18px;
+    z-index: 1;
 }
 
 /* 단계 버튼들 */
@@ -534,6 +653,8 @@ body {
     justify-content: center;
     gap: 15px;
     margin-top: 30px;
+    position: relative;
+    z-index: 2;
 }
 
 .step-btn {
@@ -560,6 +681,20 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border-color: transparent;
+    position: relative;
+}
+
+.recommend-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 8px;
+    z-index: 1;
 }
 
 .recommend-btn:hover {
@@ -582,6 +717,26 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     max-width: 400px;
     margin: 0 auto;
+    position: relative;
+}
+
+.weather-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+.weather-card .weather-icon,
+.weather-card .weather-details {
+    position: relative;
+    z-index: 2;
 }
 
 .weather-icon {
@@ -643,6 +798,20 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.season-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 17px;
+    z-index: 1;
 }
 
 .season-card:hover {
@@ -667,19 +836,16 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.12) 15px, transparent 16px),
-        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 10px, transparent 11px),
-        radial-gradient(circle at 60% 40%, rgba(255,255,255,0.05) 20px, transparent 21px);
-    background-size: 80px 80px, 120px 120px, 160px 160px;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
     border-radius: 17px;
     z-index: 1;
 }
 
-.season-card.selected .season-icon,
-.season-card.selected h5,
-.season-card.selected p,
-.season-card.selected .season-desc-text {
+.season-card .season-icon,
+.season-card h5,
+.season-card p,
+.season-card .season-desc-text {
     position: relative;
     z-index: 2;
 }
@@ -737,6 +903,20 @@ body {
     transition: all 0.3s ease;
     font-size: 0.9rem;
     font-weight: 500;
+    position: relative;
+}
+
+.tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 23px;
+    z-index: 1;
 }
 
 .tag:hover {
@@ -747,6 +927,20 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border-color: transparent;
+    position: relative;
+}
+
+.tag.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 23px;
+    z-index: 1;
 }
 
 .recommend-tag {
@@ -757,6 +951,20 @@ body {
     font-size: 1rem;
     padding: 12px 24px;
     border: none;
+    position: relative;
+}
+
+.recommend-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 25px;
+    z-index: 1;
 }
 
 .recommend-tag:hover {
@@ -779,6 +987,20 @@ body {
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+}
+
+.situation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 13px;
+    z-index: 1;
 }
 
 .situation-card:hover {
@@ -801,20 +1023,15 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 15px,
-        rgba(255,255,255,0.1) 15px,
-        rgba(255,255,255,0.1) 30px
-    );
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
     border-radius: 13px;
     z-index: 1;
 }
 
-.situation-card.selected .situation-icon,
-.situation-card.selected h4,
-.situation-card.selected p {
+.situation-card .situation-icon,
+.situation-card h4,
+.situation-card p {
     position: relative;
     z-index: 2;
 }
@@ -839,6 +1056,24 @@ body {
 .recommendation-results {
     padding: 60px 0;
     background: white;
+    position: relative;
+}
+
+.recommendation-results::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: 1;
+}
+
+.recommendation-results .container {
+    position: relative;
+    z-index: 2;
 }
 
 .recommendation-results .section-title {
@@ -864,6 +1099,20 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     cursor: pointer;
+    position: relative;
+}
+
+.coord-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.02) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
 }
 
 .coord-item:hover {
@@ -883,6 +1132,18 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
+.coord-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: 1;
+}
+
 .coord-badge {
     position: absolute;
     top: 12px;
@@ -898,6 +1159,7 @@ body {
     font-weight: bold;
     font-size: 0.9rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 2;
 }
 
 .weather-badge {
@@ -911,6 +1173,7 @@ body {
     font-size: 0.8rem;
     font-weight: 600;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 2;
 }
 
 .coord-overlay {
@@ -922,6 +1185,7 @@ body {
     background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
+    z-index: 1;
 }
 
 .coord-item:hover .coord-overlay {
@@ -930,6 +1194,8 @@ body {
 
 .coord-info {
     padding: 20px;
+    position: relative;
+    z-index: 2;
 }
 
 .coord-title {
@@ -983,6 +1249,20 @@ body {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+}
+
+.action-btn-small::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 4px;
+    z-index: 1;
 }
 
 .action-btn-small:hover {
@@ -994,6 +1274,19 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
+}
+
+.action-btn-small.primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 4px;
+    z-index: 1;
 }
 
 .action-btn-small.primary:hover {
@@ -1026,6 +1319,26 @@ body {
     border-radius: 16px;
     text-align: center;
     max-width: 300px;
+    position: relative;
+}
+
+.loading-spinner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+.loading-spinner .spinner,
+.loading-spinner p {
+    position: relative;
+    z-index: 2;
 }
 
 .spinner {

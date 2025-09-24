@@ -16,10 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const combineBtn = document.getElementById('combineBtn');
     const resetPreviewBtn = document.getElementById('resetPreviewBtn');
     
-    // 초기화 버튼 이벤트 리스너 추가
+    // 초기화 버튼 이벤트 리스너 수정 - 현재 탭 유지하면서 초기화
     resetPreviewBtn.addEventListener('click', () => {
-        // location.reload()를 사용하여 페이지를 새로고침
-        location.reload();
+        // 현재 활성화된 탭 확인
+        const activeTab = document.querySelector('.tab-button.active');
+        const currentTabId = activeTab ? activeTab.dataset.tab : 'preview-tab';
+        
+        // 미리보기 관련 데이터만 초기화
+        resetPreviewData();
+        
+        // 현재 탭 상태 유지
+        maintainCurrentTab(currentTabId);
+        
+        console.log(`미리보기가 초기화되었습니다. 현재 탭: ${currentTabId}`);
     });
 
     // 새로 추가된 요소들
@@ -162,6 +171,71 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 함수들 ---
 
     /**
+     * 미리보기 관련 데이터만 초기화하는 함수
+     */
+    function resetPreviewData() {
+        // 선택된 미리보기 데이터 초기화
+        selectedForPreview = { top: null, bottom: null };
+        
+        // 미리보기 이미지 초기화
+        if (topPreviewImg) {
+            topPreviewImg.src = '';
+            topPreviewBox.classList.remove('has-image');
+        }
+        
+        if (bottomPreviewImg) {
+            bottomPreviewImg.src = '';
+            bottomPreviewBox.classList.remove('has-image');
+        }
+        
+        // 합치기 버튼 숨기기
+        if (combineBtn) {
+            combineBtn.style.display = 'none';
+        }
+        
+        // 이어 붙인 이미지 컨테이너 숨기기
+        if (stackedOutfitContainer) {
+            stackedOutfitContainer.style.display = 'none';
+        }
+        
+        // 이어 붙인 이미지들 초기화
+        if (stackedTopImage) {
+            stackedTopImage.src = '';
+        }
+        
+        if (stackedBottomImage) {
+            stackedBottomImage.src = '';
+        }
+        
+        console.log('미리보기 데이터가 초기화되었습니다.');
+    }
+
+    /**
+     * 현재 탭 상태를 유지하는 함수
+     * @param {string} tabId - 유지할 탭의 ID
+     */
+    function maintainCurrentTab(tabId) {
+        // 모든 탭 비활성화
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // 지정된 탭 활성화
+        const targetTabButton = document.querySelector(`[data-tab="${tabId}"]`);
+        const targetTabContent = document.getElementById(tabId);
+        
+        if (targetTabButton && targetTabContent) {
+            targetTabButton.classList.add('active');
+            targetTabContent.classList.add('active');
+            
+            // 미리보기 탭이 아닌 경우 해당 탭의 아이템들 다시 렌더링
+            const tabName = tabId.split('-')[0];
+            if (tabName !== 'preview') {
+                renderItems(tabName);
+            }
+        }
+    }
+
+    /**
      * 특정 유형의 아이템들을 렌더링합니다.
      * @param {string} type - 'top' 또는 'bottom'
      */
@@ -194,14 +268,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.querySelectorAll('.delete-button').forEach(button => {
-    button.addEventListener('click', (event) => {
-        const itemId = parseInt(event.currentTarget.dataset.id); 
-        const itemType = event.currentTarget.dataset.type; 
-        if (confirm('정말 삭제하시겠습니까?')) {
-            deleteItem(itemId, itemType);
-        }
-    });
-});
+            button.addEventListener('click', (event) => {
+                const itemId = parseInt(event.currentTarget.dataset.id); 
+                const itemType = event.currentTarget.dataset.type; 
+                if (confirm('정말 삭제하시겠습니까?')) {
+                    deleteItem(itemId, itemType);
+                }
+            });
+        });
     }
 
     /**
