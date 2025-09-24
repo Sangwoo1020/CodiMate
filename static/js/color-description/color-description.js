@@ -213,11 +213,282 @@ const colorMatchingData = {
     }
 };
 
+// 카테고리별 코디 추천 데이터
+const categoryCoordinationData = {
+    red: [
+        {
+            id: 1,
+            title: '우아한 버건디 룩',
+            description: '버건디 니트 + 베이지 와이드팬츠 + 로퍼',
+            image: '/static/image/mainpage/sample1.png',
+            colors: ['#800020', '#d2b48c', '#8b4513'],
+            matchScore: 95,
+            tags: ['elegant', 'autumn']
+        },
+        {
+            id: 2,
+            title: '클래식 레드 스타일',
+            description: '레드 블라우스 + 네이비 슬랙스 + 펌프스',
+            image: '/static/image/mainpage/sample2.png',
+            colors: ['#dc2626', '#1e40af', '#000000'],
+            matchScore: 92,
+            tags: ['business', 'classic']
+        },
+        {
+            id: 3,
+            title: '로맨틱 핑크 코디',
+            description: '핑크 가디건 + 화이트 스커트 + 플랫슈즈',
+            image: '/static/image/mainpage/sample3.png',
+            colors: ['#ffc0cb', '#ffffff', '#d2b48c'],
+            matchScore: 89,
+            tags: ['romantic', 'spring']
+        },
+        {
+            id: 4,
+            title: '모던 와인 룩',
+            description: '와인 재킷 + 블랙 팬츠 + 부츠',
+            image: '/static/image/mainpage/sample4.png',
+            colors: ['#722f37', '#000000', '#36454f'],
+            matchScore: 93,
+            tags: ['modern', 'winter']
+        }
+    ],
+    orange: [
+        {
+            id: 5,
+            title: '활기찬 오렌지 룩',
+            description: '오렌지 니트 + 네이비 진 + 스니커즈',
+            image: '/static/image/mainpage/sample5.png',
+            colors: ['#ea580c', '#1e40af', '#ffffff'],
+            matchScore: 91,
+            tags: ['casual', 'energetic']
+        },
+        {
+            id: 6,
+            title: '따뜻한 코랄 스타일',
+            description: '코랄 블라우스 + 베이지 팬츠 + 로퍼',
+            image: '/static/image/mainpage/sample6.png',
+            colors: ['#ff7f50', '#d2b48c', '#8b4513'],
+            matchScore: 88,
+            tags: ['warm', 'spring']
+        },
+        {
+            id: 7,
+            title: '캐주얼 오렌지 코디',
+            description: '오렌지 후드 + 카키 조거팬츠 + 운동화',
+            image: '/static/image/mainpage/sample7.png',
+            colors: ['#ff8c00', '#556b2f', '#000000'],
+            matchScore: 85,
+            tags: ['casual', 'comfortable']
+        },
+        {
+            id: 8,
+            title: '세련된 테라코타 룩',
+            description: '테라코타 재킷 + 그레이 팬츠 + 부츠',
+            image: '/static/image/mainpage/sample8.png',
+            colors: ['#cc8b65', '#d3d3d3', '#36454f'],
+            matchScore: 90,
+            tags: ['sophisticated', 'autumn']
+        }
+    ],
+    yellow: [
+        {
+            id: 9,
+            title: '밝은 옐로우 룩',
+            description: '옐로우 셔츠 + 블루 진 + 로퍼',
+            image: '/static/image/mainpage/sample1.png',
+            colors: ['#ffd700', '#4682b4', '#8b4513'],
+            matchScore: 87,
+            tags: ['bright', 'spring']
+        },
+        {
+            id: 10,
+            title: '부드러운 버터 룩',
+            description: '버터색 니트 + 네이비 스커트 + 플랫슈즈',
+            image: '/static/image/mainpage/sample2.png',
+            colors: ['#fff8dc', '#1e3a8a', '#d2b48c'],
+            matchScore: 91,
+            tags: ['soft', 'feminine']
+        },
+        {
+            id: 11,
+            title: '활기찬 레몬 스타일',
+            description: '레몬 티셔츠 + 그레이 쇼츠 + 스니커즈',
+            image: '/static/image/mainpage/sample3.png',
+            colors: ['#fffacd', '#d3d3d3', '#ffffff'],
+            matchScore: 84,
+            tags: ['fresh', 'summer']
+        },
+        {
+            id: 12,
+            title: '고급스러운 머스타드 룩',
+            description: '머스타드 코트 + 블랙 팬츠 + 부츠',
+            image: '/static/image/mainpage/sample4.png',
+            colors: ['#ffdb58', '#000000', '#36454f'],
+            matchScore: 92,
+            tags: ['luxury', 'autumn']
+        }
+    ],
+    green: [
+        {
+            id: 13,
+            title: '자연스러운 올리브 룩',
+            description: '올리브 재킷 + 베이지 팬츠 + 로퍼',
+            image: '/static/image/mainpage/sample5.png',
+            colors: ['#556b2f', '#d2b48c', '#8b4513'],
+            matchScore: 94,
+            tags: ['natural', 'casual']
+        },
+        {
+            id: 14,
+            title: '신선한 민트 스타일',
+            description: '민트 블라우스 + 화이트 스커트 + 샌들',
+            image: '/static/image/mainpage/sample6.png',
+            colors: ['#98fb98', '#ffffff', '#d2b48c'],
+            matchScore: 88,
+            tags: ['fresh', 'spring']
+        },
+        {
+            id: 15,
+            title: '클래식 포레스트 룩',
+            description: '포레스트 그린 니트 + 그레이 팬츠 + 부츠',
+            image: '/static/image/mainpage/sample7.png',
+            colors: ['#228b22', '#d3d3d3', '#36454f'],
+            matchScore: 90,
+            tags: ['classic', 'winter']
+        },
+        {
+            id: 16,
+            title: '차분한 세이지 코디',
+            description: '세이지 가디건 + 아이보리 팬츠 + 플랫슈즈',
+            image: '/static/image/mainpage/sample8.png',
+            colors: ['#9caf88', '#fffdd0', '#d2b48c'],
+            matchScore: 93,
+            tags: ['calm', 'elegant']
+        }
+    ],
+    blue: [
+        {
+            id: 17,
+            title: '시원한 스카이 블루 룩',
+            description: '스카이블루 셔츠 + 화이트 팬츠 + 로퍼',
+            image: '/static/image/mainpage/sample1.png',
+            colors: ['#87ceeb', '#ffffff', '#8b4513'],
+            matchScore: 89,
+            tags: ['cool', 'summer']
+        },
+        {
+            id: 18,
+            title: '클래식 네이비 스타일',
+            description: '네이비 블레이저 + 베이지 팬츠 + 로퍼',
+            image: '/static/image/mainpage/sample2.png',
+            colors: ['#1e3a8a', '#d2b48c', '#8b4513'],
+            matchScore: 95,
+            tags: ['classic', 'business']
+        },
+        {
+            id: 19,
+            title: '모던 딥블루 룩',
+            description: '딥블루 니트 + 그레이 스커트 + 부츠',
+            image: '/static/image/mainpage/sample3.png',
+            colors: ['#1e40af', '#d3d3d3', '#36454f'],
+            matchScore: 92,
+            tags: ['modern', 'elegant']
+        },
+        {
+            id: 20,
+            title: '로맨틱 파우더 블루 코디',
+            description: '파우더블루 블라우스 + 화이트 스커트 + 플랫슈즈',
+            image: '/static/image/mainpage/sample4.png',
+            colors: ['#b6d7ff', '#ffffff', '#d2b48c'],
+            matchScore: 87,
+            tags: ['romantic', 'spring']
+        }
+    ],
+    purple: [
+        {
+            id: 21,
+            title: '우아한 퍼플 룩',
+            description: '퍼플 블라우스 + 베이지 팬츠 + 펌프스',
+            image: '/static/image/mainpage/sample5.png',
+            colors: ['#7c3aed', '#d2b48c', '#000000'],
+            matchScore: 91,
+            tags: ['elegant', 'sophisticated']
+        },
+        {
+            id: 22,
+            title: '로맨틱 라벤더 스타일',
+            description: '라벤더 가디건 + 화이트 드레스 + 플랫슈즈',
+            image: '/static/image/mainpage/sample6.png',
+            colors: ['#e6e6fa', '#ffffff', '#d2b48c'],
+            matchScore: 88,
+            tags: ['romantic', 'feminine']
+        },
+        {
+            id: 23,
+            title: '모던 플럼 룩',
+            description: '플럼 재킷 + 그레이 팬츠 + 부츠',
+            image: '/static/image/mainpage/sample7.png',
+            colors: ['#8b008b', '#d3d3d3', '#36454f'],
+            matchScore: 90,
+            tags: ['modern', 'winter']
+        },
+        {
+            id: 24,
+            title: '부드러운 라일락 코디',
+            description: '라일락 니트 + 차콜 스커트 + 로퍼',
+            image: '/static/image/mainpage/sample8.png',
+            colors: ['#c8a2c8', '#36454f', '#8b4513'],
+            matchScore: 93,
+            tags: ['soft', 'elegant']
+        }
+    ],
+    neutral: [
+        {
+            id: 25,
+            title: '클린 화이트 룩',
+            description: '화이트 셔츠 + 네이비 팬츠 + 로퍼',
+            image: '/static/image/mainpage/sample1.png',
+            colors: ['#ffffff', '#1e3a8a', '#8b4513'],
+            matchScore: 96,
+            tags: ['clean', 'classic']
+        },
+        {
+            id: 26,
+            title: '시크 블랙 스타일',
+            description: '블랙 티셔츠 + 그레이 진 + 부츠',
+            image: '/static/image/mainpage/sample2.png',
+            colors: ['#000000', '#d3d3d3', '#36454f'],
+            matchScore: 94,
+            tags: ['chic', 'modern']
+        },
+        {
+            id: 27,
+            title: '소프트 그레이 룩',
+            description: '그레이 니트 + 화이트 스커트 + 스니커즈',
+            image: '/static/image/mainpage/sample3.png',
+            colors: ['#d3d3d3', '#ffffff', '#ffffff'],
+            matchScore: 90,
+            tags: ['soft', 'casual']
+        },
+        {
+            id: 28,
+            title: '세련된 차콜 코디',
+            description: '차콜 재킷 + 아이보리 팬츠 + 로퍼',
+            image: '/static/image/mainpage/sample4.png',
+            colors: ['#36454f', '#fffdd0', '#8b4513'],
+            matchScore: 92,
+            tags: ['sophisticated', 'business']
+        }
+    ]
+};
+
 let currentCategory = 'red';
 
 // 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function() {
     loadColorCombinations(currentCategory);
+    loadCategoryCoordinations(currentCategory);
 });
 
 // 카테고리 선택
@@ -232,6 +503,9 @@ function selectCategory(category) {
     
     // 색상 조합 로드
     loadColorCombinations(category);
+    
+    // 카테고리별 코디 추천 로드
+    loadCategoryCoordinations(category);
 }
 
 // 색상 조합 로드
@@ -288,6 +562,99 @@ function loadColorCombinations(category) {
     addScrollAnimations();
 }
 
+// 카테고리별 코디 추천 로드
+function loadCategoryCoordinations(category) {
+    const coordTitle = document.getElementById('coordCategoryTitle');
+    const coordGrid = document.getElementById('categoryCoordGrid');
+    
+    if (!coordTitle || !coordGrid) return;
+    
+    // 카테고리명 업데이트
+    const categoryNames = {
+        red: '빨강 계열',
+        orange: '주황 계열', 
+        yellow: '노랑 계열',
+        green: '초록 계열',
+        blue: '파랑 계열',
+        purple: '보라 계열',
+        neutral: '무채색'
+    };
+    
+    coordTitle.textContent = categoryNames[category] || '색상';
+    
+    // 코디 데이터 가져오기
+    const coordData = categoryCoordinationData[category] || [];
+    
+    coordGrid.innerHTML = '';
+    
+    if (coordData.length === 0) {
+        coordGrid.innerHTML = `
+            <div class="empty-state">
+                <i>👔</i>
+                <p>해당 색상 계열의 코디 추천을 준비 중입니다.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // 4개만 표시
+    const displayCoords = coordData.slice(0, 4);
+    
+    displayCoords.forEach((coord, index) => {
+        const coordItem = document.createElement('div');
+        coordItem.className = 'coord-item';
+        
+        const colorsHtml = coord.colors.map(color => 
+            `<div class="coord-color-circle" style="background-color: ${color};"></div>`
+        ).join('');
+        
+        coordItem.innerHTML = `
+            <div class="coord-image" style="background-image: url('${coord.image}'); background-size: cover; background-position: center;">
+                <div class="coord-badge">${index + 1}</div>
+                <div class="color-badge">${categoryNames[category]}</div>
+                <div class="coord-overlay"></div>
+            </div>
+            <div class="coord-info">
+                <h3 class="coord-title">${coord.title}</h3>
+                <p class="coord-desc">${coord.description}</p>
+                <div class="coord-colors">
+                    ${colorsHtml}
+                </div>
+                <div class="rating">
+                    <span class="stars">${'★'.repeat(Math.floor(coord.matchScore/20))}${'☆'.repeat(5-Math.floor(coord.matchScore/20))}</span>
+                    <span class="rating-text">매칭도 ${coord.matchScore}%</span>
+                </div>
+                <div class="coord-actions">
+                    <button class="action-btn-small" onclick="saveToFavorites(${coord.id})">즐겨찾기</button>
+                    <button class="action-btn-small primary" onclick="viewCoordDetails(${coord.id})">상세보기</button>
+                </div>
+            </div>
+        `;
+        
+        coordGrid.appendChild(coordItem);
+    });
+    
+    // 애니메이션 효과 적용
+    addCoordScrollAnimations();
+}
+
+// 코디 추천 페이지로 이동
+function goToCodiRecommend() {
+    window.location.href = '/templates/codi-recommend/codi-recommend.html?option=color';
+}
+
+// 즐겨찾기 저장
+function saveToFavorites(id) {
+    alert('즐겨찾기에 저장되었습니다!');
+    // 실제로는 서버에 저장하는 로직 구현
+}
+
+// 코디 상세보기
+function viewCoordDetails(id) {
+    alert(`코디 ${id}번의 상세 정보를 확인합니다.`);
+    // 실제로는 상세 페이지로 이동하는 로직 구현
+}
+
 // 스크롤 애니메이션
 function addScrollAnimations() {
     const observerOptions = {
@@ -312,9 +679,34 @@ function addScrollAnimations() {
     });
 }
 
+// 코디 스크롤 애니메이션
+function addCoordScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('.coord-item').forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(el);
+    });
+}
+
 // 페이지 로드 완료 후 애니메이션 적용
 window.addEventListener('load', () => {
     addScrollAnimations();
+    addCoordScrollAnimations();
 });
 
 // 키보드 네비게이션 지원
@@ -342,10 +734,13 @@ document.addEventListener('keydown', function(e) {
 window.debugColorMatching = function() {
     console.log('=== 색상 매칭 디버그 정보 ===');
     console.log('현재 카테고리:', currentCategory);
-    console.log('현재 데이터:', colorMatchingData[currentCategory]);
+    console.log('색상 매칭 데이터:', colorMatchingData[currentCategory]);
+    console.log('코디 추천 데이터:', categoryCoordinationData[currentCategory]);
     console.log('DOM 요소들:', {
         categoryTitle: document.getElementById('categoryTitle'),
         colorCombinations: document.getElementById('colorCombinations'),
+        coordCategoryTitle: document.getElementById('coordCategoryTitle'),
+        categoryCoordGrid: document.getElementById('categoryCoordGrid'),
         tabs: document.querySelectorAll('.category-tab')
     });
 };
