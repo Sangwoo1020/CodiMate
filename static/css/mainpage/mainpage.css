@@ -81,7 +81,7 @@ body {
     flex-shrink: 0; /* 중요: 슬라이드 크기 고정 */
 }
 
-/* 각 슬라이드별 뚜렷한 배경색 */
+/* 각 슬라이드별 뚜렷한 배경색과 패턴 */
 .slide1 { 
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     position: relative;
@@ -94,7 +94,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    background: 
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.15) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
     z-index: 1;
 }
 
@@ -110,7 +113,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: conic-gradient(from 45deg, rgba(255,255,255,0.1) 0%, transparent 25%, rgba(255,255,255,0.1) 50%);
+    background: 
+        linear-gradient(60deg, rgba(255,255,255,0.1) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.1) 87.5%),
+        linear-gradient(-60deg, rgba(255,255,255,0.1) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.1) 87.5%);
+    background-size: 80px 80px;
     z-index: 1;
 }
 
@@ -148,7 +154,11 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.1) 0%, transparent 40%);
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.12) 20px, transparent 21px),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 15px, transparent 16px),
+        radial-gradient(circle at 60% 40%, rgba(255,255,255,0.05) 25px, transparent 26px);
+    background-size: 100px 100px, 150px 150px, 200px 200px;
     z-index: 1;
 }
 

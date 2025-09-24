@@ -1,0 +1,372 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 페이지 헤더 */
+.page-header {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+    padding: 80px 0 60px;
+    text-align: center;
+    position: relative;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
+    background-size: 60px 60px;
+    z-index: 1;
+}
+
+.page-header .container {
+    position: relative;
+    z-index: 2;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+/* 색상 매칭 섹션 */
+.color-matching-section {
+    padding: 60px 0;
+    background: white;
+}
+
+/* 색상 계열 탭 */
+.color-category-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 50px;
+    padding: 0 20px;
+}
+
+.category-tab {
+    padding: 12px 25px;
+    border: 2px solid #e2e8f0;
+    border-radius: 25px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.category-tab:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+.category-tab.active {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+    border-color: transparent;
+}
+
+.category-color-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+}
+
+/* 색상 조합 테이블 */
+.color-combination-table {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+    max-width: 1400px; /* 테이블 최대 너비 증가 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table-header {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.table-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
+    background-size: 60px 60px;
+    z-index: 1;
+}
+
+.table-header h3,
+.table-header p {
+    position: relative;
+    z-index: 2;
+}
+
+.table-header h3 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.table-header p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+.color-combination-row {
+    display: flex;
+    align-items: center;
+    padding: 30px 25px; /* 패딩 증가 */
+    border-bottom: 1px solid #f1f3f4;
+    transition: background-color 0.3s ease;
+    min-height: 120px; /* 최소 높이 설정 */
+}
+
+.color-combination-row:last-child {
+    border-bottom: none;
+}
+
+.color-combination-row:hover {
+    background-color: #f8f9ff;
+}
+
+.top-color-section {
+    flex: 0 0 250px; /* 상의 섹션 너비 증가 */
+    display: flex;
+    align-items: center;
+    gap: 20px; /* 간격 증가 */
+}
+
+.color-circle {
+    width: 60px; /* 색상 원 크기 증가 */
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+}
+
+.color-name {
+    font-size: 1.3rem; /* 폰트 크기 증가 */
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.divider {
+    flex: 0 0 60px; /* 구분자 영역 너비 증가 */
+    text-align: center;
+    color: #667eea;
+    font-size: 2rem; /* 화살표 크기 증가 */
+    font-weight: bold;
+}
+
+.bottom-colors-section {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* 간격 증가 */
+    align-items: center;
+}
+
+.bottom-color-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 간격 증가 */
+    background: #f8f9ff;
+    padding: 12px 20px; /* 패딩 증가 */
+    border-radius: 25px; /* 둥근 정도 증가 */
+    border: 1px solid #e8eeff;
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 50px; /* 최소 높이 설정 */
+}
+
+.bottom-color-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+}
+
+.bottom-color-circle {
+    width: 35px; /* 하의 색상 원 크기 증가 */
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.bottom-color-name {
+    font-size: 1rem; /* 폰트 크기 증가 */
+    font-weight: 500;
+    color: #4a5568;
+}
+
+/* 매칭 등급 표시 */
+.match-grade {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.match-grade.perfect {
+    background: #e91e63; /* 다홍색 */
+}
+
+.match-grade.good {
+    background: #ffd700; /* 쌧노랑색 */
+    color: #333; /* 노란색 배경에 검은 글씨로 가독성 향상 */
+}
+
+.match-grade.advanced {
+    background: #8b5cf6;
+}
+
+/* 빈 상태 메시지 */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #718096;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #cbd5e0;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .color-combination-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 20px 15px;
+    }
+
+    .top-color-section {
+        flex: none;
+        width: 100%;
+    }
+
+    .divider {
+        flex: none;
+        width: 100%;
+        transform: rotate(90deg);
+        font-size: 1.2rem;
+    }
+
+    .bottom-colors-section {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .color-category-tabs {
+        gap: 10px;
+    }
+
+    .category-tab {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .page-header {
+        padding: 60px 0 40px;
+    }
+
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .color-matching-section {
+        padding: 40px 0;
+    }
+
+    .bottom-color-item {
+        padding: 6px 12px;
+    }
+
+    .bottom-color-name {
+        font-size: 0.8rem;
+    }
+}
+
+/* 로딩 애니메이션 */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #718096;
+}
+
+.loading::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

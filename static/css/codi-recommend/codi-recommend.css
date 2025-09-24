@@ -24,6 +24,26 @@ body {
     color: white;
     padding: 80px 0 60px;
     text-align: center;
+    position: relative;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.15) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: 1;
+}
+
+.page-header .container {
+    position: relative;
+    z-index: 2;
 }
 
 .page-header h1 {
@@ -81,6 +101,29 @@ body {
     border-color: #667eea;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
+    position: relative;
+}
+
+.option-card.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(60deg, rgba(255,255,255,0.1) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.1) 87.5%),
+        linear-gradient(-60deg, rgba(255,255,255,0.1) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.1) 87.5%);
+    background-size: 80px 80px;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+.option-card.active .option-icon,
+.option-card.active h3,
+.option-card.active p {
+    position: relative;
+    z-index: 2;
 }
 
 .option-icon {
@@ -155,11 +198,46 @@ body {
 .step.active {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
+    position: relative;
+}
+
+.step.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 8px,
+        rgba(255,255,255,0.1) 8px,
+        rgba(255,255,255,0.1) 16px
+    );
+    border-radius: 50px;
+    z-index: 1;
 }
 
 .step.completed {
     background: #10b981;
     color: white;
+    position: relative;
+}
+
+.step.completed::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12) 8px, transparent 9px),
+        radial-gradient(circle at 70% 70%, rgba(255,255,255,0.08) 6px, transparent 7px);
+    background-size: 30px 30px, 50px 50px;
+    border-radius: 50px;
+    z-index: 1;
 }
 
 .step-number {
@@ -172,6 +250,14 @@ body {
     justify-content: center;
     font-weight: bold;
     margin-bottom: 8px;
+}
+
+.step.active .step-number,
+.step.completed .step-number,
+.step.active .step-text,
+.step.completed .step-text {
+    position: relative;
+    z-index: 2;
 }
 
 .step.active .step-number,
@@ -241,6 +327,28 @@ body {
     background: linear-gradient(135deg, #f8f9ff 0%, #e8eeff 100%);
     transform: translateY(-5px);
     box-shadow: 0 12px 30px rgba(102, 126, 234, 0.2);
+    position: relative;
+}
+
+.color-combination.selected::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.08) 0%, transparent 40%);
+    border-radius: 17px;
+    z-index: 1;
+}
+
+.color-combination.selected .combination-colors,
+.color-combination.selected .combination-name,
+.color-combination.selected .combination-desc {
+    position: relative;
+    z-index: 2;
 }
 
 .combination-colors {
@@ -323,6 +431,29 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     transform: translateY(-3px);
+    position: relative;
+}
+
+.color-option.selected::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
+    background-size: 20px 20px;
+    border-radius: 13px;
+    z-index: 1;
+}
+
+.color-option.selected .color-circle,
+.color-option.selected .color-name,
+.color-option.selected .color-korean {
+    position: relative;
+    z-index: 2;
 }
 
 .color-option .color-circle {
@@ -436,8 +567,6 @@ body {
     box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
 
-/* 기존 스타일 유지 */
-
 /* 날씨 기반 폼 */
 .weather-info {
     margin-bottom: 40px;
@@ -528,6 +657,31 @@ body {
     color: white;
     transform: translateY(-5px);
     box-shadow: 0 12px 30px rgba(102, 126, 234, 0.3);
+    position: relative;
+}
+
+.season-card.selected::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.12) 15px, transparent 16px),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 10px, transparent 11px),
+        radial-gradient(circle at 60% 40%, rgba(255,255,255,0.05) 20px, transparent 21px);
+    background-size: 80px 80px, 120px 120px, 160px 160px;
+    border-radius: 17px;
+    z-index: 1;
+}
+
+.season-card.selected .season-icon,
+.season-card.selected h5,
+.season-card.selected p,
+.season-card.selected .season-desc-text {
+    position: relative;
+    z-index: 2;
 }
 
 .season-icon {
@@ -637,6 +791,32 @@ body {
     border-color: #667eea;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
+    position: relative;
+}
+
+.situation-card.selected::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 15px,
+        rgba(255,255,255,0.1) 15px,
+        rgba(255,255,255,0.1) 30px
+    );
+    border-radius: 13px;
+    z-index: 1;
+}
+
+.situation-card.selected .situation-icon,
+.situation-card.selected h4,
+.situation-card.selected p {
+    position: relative;
+    z-index: 2;
 }
 
 .situation-icon {
