@@ -8,7 +8,6 @@
 </head>
 <body>
     <!-- 헤더 -->
-    <!-- 헤더 Fragment (DOCTYPE, html, head, body 태그 제거) -->
 <header class="header">
     <a href="/templates/mainpage/mainpage.html" class="logo">CodiMate</a>
     <nav class="nav">
@@ -17,33 +16,11 @@
             <li><a href="/templates/codi-recommend/codi-recommend.html">코디 추천</a></li>
             <li><a href="/templates/closet/closet.html">옷장 관리</a></li>
             <li><a href="/templates/color-description/color-description.html">컬러 매칭 가이드</a></li>
-            <li><a href="/templates/codi-history/codi-history.html" class="highlight">코디 히스토리</a></li>
+            <li><a href="/templates/codi-history/codi-history.html">코디 히스토리</a></li>
             <li><a href="/templates/mypage/dashboard.html">마이페이지</a></li>
         </ul>
-        
     </nav>
-    
-    <div class="header-icons">
-        <div class="search-icon" id="searchIcon">
-            <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-            </svg>
-        </div>
-        <div class="profile-icon" id="profileIcon">
-            <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 5.5V6.5C15 7.3 14.3 8 13.5 8H10.5C9.7 8 9 7.3 9 6.5V5.5L3 7V9H21Z"/>
-            </svg>
-        </div>
-    </div>
 </header>
-
-<!-- 검색창 오버레이 -->
-<div class="search-overlay" id="searchOverlay">
-    <div class="search-container">
-        <input type="text" placeholder="코디나 의류를 검색해보세요..." class="search-input" id="searchInput">
-        <button class="search-close" id="searchClose">×</button>
-    </div>
-</div>
 
     <script src="/static/js/fix/header.js"></script>
 </body>

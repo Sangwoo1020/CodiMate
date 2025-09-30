@@ -10,6 +10,7 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #f8f9fa;
+    padding-top: 80px;
 }
 
 .container {
@@ -86,11 +87,6 @@ body {
     gap: 8px;
 }
 
-.category-tab:hover {
-    border-color: #667eea;
-    transform: translateY(-2px);
-}
-
 .category-tab.active {
     background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
     color: white;
@@ -165,10 +161,6 @@ body {
     border-bottom: none;
 }
 
-.color-combination-row:hover {
-    background-color: #f8f9ff;
-}
-
 .top-color-section {
     flex: 0 0 250px;
     display: flex;
@@ -218,11 +210,6 @@ body {
     transition: all 0.3s ease;
     position: relative;
     min-height: 50px;
-}
-
-.bottom-color-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
 }
 
 .bottom-color-circle {
@@ -315,11 +302,6 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     cursor: pointer;
-}
-
-.coord-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
 .coord-image {
@@ -592,4 +574,279 @@ body {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+/* 색상 배지 숨기기 */
+.color-badge {
+    display: none;
+}
+
+/* 상세보기 모달 스타일 */
+.coord-detail-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+}
+
+.coord-detail-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-content-detail {
+    background: white;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.4s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    border: none;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-close-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: rotate(90deg);
+}
+
+.modal-header-section {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* 3:4 비율 (세로로 긴 사진) */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f8f9fa;
+    border-radius: 20px 20px 0 0;
+}
+
+.modal-header-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+}
+
+.modal-coord-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.modal-coord-category {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    backdrop-filter: blur(10px);
+}
+
+.modal-body-section {
+    padding: 30px;
+}
+
+.modal-info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.modal-info-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.modal-info-label {
+    font-size: 0.8rem;
+    color: #718096;
+    margin-bottom: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.modal-info-value {
+    font-size: 1rem;
+    color: #2d3748;
+    font-weight: 600;
+}
+
+.modal-color-palette {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.modal-color-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-rating-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-stars {
+    color: #ffd700;
+    font-size: 1.2rem;
+}
+
+.modal-rating-score {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fa709a;
+}
+
+.modal-description-section {
+    margin-bottom: 20px;
+}
+
+.modal-description-section h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2d3748;
+}
+
+.modal-description-text {
+    color: #4a5568;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.modal-tag {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 2px solid #f1f3f4;
+}
+
+.modal-action-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-action-btn.favorite {
+    background: white;
+    color: #fa709a;
+    border: 2px solid #fa709a;
+}
+
+.modal-action-btn.favorite:hover {
+    background: #fa709a;
+    color: white;
+}
+
+.modal-action-btn.favorite.added {
+    background: #fa709a;
+    color: white;
+}
+
+.modal-action-btn.share {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .modal-content-detail {
+        max-width: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+    
+    .modal-header-section {
+        height: 400px;
+    }
+    
+    .modal-body-section {
+        padding: 20px;
+    }
+    
+    .modal-info-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
 }
