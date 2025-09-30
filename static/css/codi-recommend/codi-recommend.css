@@ -10,6 +10,7 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #f8f9fa;
+    padding-top: 80px;
 }
 
 .container {
@@ -1424,5 +1425,287 @@ body {
     
     .clothing-item-name {
         font-size: 0.8rem;
+    }
+}
+/* 모달 전체 오버레이 */
+.coord-detail-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.coord-detail-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 모달 내용 컨테이너 (스크린샷 크기 및 모양) */
+.modal-content-screenshot { 
+    background: white;
+    border-radius: 16px; /* 스크린샷과 유사하게 조정 */
+    max-width: 480px; /* 스크린샷과 유사한 너비 */
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.4s ease;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+/* 닫기 버튼 */
+.modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close-btn:hover {
+    transform: rotate(90deg);
+}
+
+/* ⚠️ 이 부분을 수정합니다: SVG 아이콘의 stroke 색상을 검정색으로 변경합니다. ⚠️ */
+.modal-close-btn svg path { 
+    stroke: black; /* X자 아이콘 색상을 검정으로 변경 */
+}
+
+/* 이미지 섹션 */
+.modal-image-section {
+    width: 100%;
+    height: 400px; /* 스크린샷과 유사한 높이 */
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 16px 16px 0 0; /* 상단 모서리만 둥글게 */
+}
+
+.modal-image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: white;
+}
+
+.modal-coord-title-screenshot {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.modal-coord-subtitle-screenshot {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* 정보 섹션 (전체 바디) */
+.modal-info-section {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.info-group:nth-child(4) { /* 코디 번호 줄만 아래 테두리 제거 */
+    border-bottom: none;
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-size: 0.95rem;
+    color: #555; /* 스크린샷과 유사한 색상 */
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-right: 15px;
+}
+
+.info-value {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+    text-align: right;
+    flex-grow: 1;
+}
+
+/* 매칭도 */
+.info-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.info-stars {
+    color: #ffd700;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.info-score {
+    font-size: 1rem;
+    font-weight: 600;
+    color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* 색상 팔레트 */
+.info-colors-palette {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.modal-color-circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 스타일링 팁 분리선 */
+.tip-separator {
+    height: 1px;
+    background-color: #f0f0f0;
+    margin: 10px 0 20px 0;
+}
+
+/* 스타일링 팁 섹션 */
+.styling-tip-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.styling-tip-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.styling-tip-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+.modal-tag {
+    background: #e9eefd; /* 연한 색상 */
+    color: #4a5568;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* 액션 버튼 섹션 */
+.modal-action-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 15px 25px 25px 25px; /* 스크린샷과 유사한 패딩 */
+    flex-shrink: 0;
+}
+
+.action-btn-screenshot {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.action-btn-screenshot.favorite-btn {
+    background: white;
+    color: #555;
+    border: 1px solid #ccc;
+}
+
+.action-btn-screenshot.favorite-btn:hover {
+    background: #f0f0f0;
+}
+
+.action-btn-screenshot.favorite-btn.added {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+    color: white;
+    border-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.action-btn-screenshot.share-btn {
+    background: linear-gradient(135deg, linear-gradient(135deg, #667eea 0%, #764ba2 100%)); 
+    color: white;
+    box-shadow: 0 4px 10px rgba(250, 112, 154, 0.3);
+}
+
+.action-btn-screenshot.share-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(250, 112, 154, 0.4);
+}
+
+/* 기존 모달 클래스 제거 (혹시 모를 충돌 방지) */
+.modal-content-detail, .modal-info-grid {
+    display: none !important;
+}
+
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+    .coord-detail-modal.active {
+        padding: 0; 
+    }
+    .modal-content-screenshot {
+        width: 100%;
+        max-width: none;
+        max-height: 100vh;
+        border-radius: 0; 
+    }
+    .modal-image-section {
+        height: 350px; 
+    }
+    .modal-info-section,
+    .modal-action-buttons {
+        padding: 20px;
+    }
+    .action-btn-screenshot {
+        font-size: 0.95rem;
+        padding: 12px 15px;
     }
 }

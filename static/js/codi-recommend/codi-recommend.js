@@ -897,9 +897,216 @@ function saveToFavorites(id) {
 
 // 상세보기
 function viewDetails(id) {
-    // 실제로는 상세 페이지로 이동
-    alert(`코디 ${id}번의 상세 정보를 확인합니다.`);
+    const coord = ALL_COORDS.find(c => c.id === id);
+    
+    if (coord) {
+        showCoordDetailModal(coord);
+    } else {
+        showNotification('코디 정보를 찾을 수 없습니다. (ID: ' + id + ')');
+    }
+} 
+function showCoordDetailModal(coord) {
+    // ⚠️ 주의: 이 함수는 스크린샷 이미지에 보이는 레이아웃을 반영하도록 재작성됩니다. ⚠️
+    
+    // 1. 기존 모달 제거
+    const existingModal = document.querySelector('.coord-detail-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    // 2. 데이터 가공 (태그, 별점)
+    const tagNames = {
+        'elegant': '우아한', 'autumn': '가을', 'business': '비즈니스',
+        'classic': '클래식', 'romantic': '로맨틱', 'spring': '봄',
+        'modern': '모던', 'winter': '겨울', 'casual': '캐주얼',
+        'energetic': '활기찬', 'warm': '따뜻한', 'comfortable': '편안한',
+        'sophisticated': '세련된', 'bright': '밝은', 'soft': '부드러운',
+        'feminine': '여성스러운', 'fresh': '신선한', 'summer': '여름',
+        'luxury': '고급스러운', 'natural': '자연스러운', 'calm': '차분한',
+        'cool': '시원한', 'chic': '시크한'
+    };
+    
+    const colorsHtml = coord.colors.map(color => 
+        `<div class="modal-color-circle" style="background-color: ${color};"></div>`
+    ).join('');
+    
+    const tagsHtml = coord.tags.map(tag => {
+        return `<span class="modal-tag">${tagNames[tag] || tag}</span>`;
+    }).join('');
+
+    const fullStars = Math.floor(coord.matchScore / 20);
+    const emptyStars = 5 - fullStars;
+    const starsHtml = '★'.repeat(fullStars) + '☆'.repeat(emptyStars);
+
+    // 3. 모달 HTML (스크린샷 레이아웃에 맞춰서 수정)
+    const modalHtml = `
+        <div class="coord-detail-modal active" id="coordDetailModal">
+            <div class="modal-content-screenshot"> 
+                
+                <button class="modal-close-btn" onclick="closeCoordDetailModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                
+                <div class="modal-image-section" style="background-image: url('${coord.image}');">
+                    <div class="modal-image-overlay">
+                        <h2 class="modal-coord-title-screenshot">${coord.title}</h2>
+                        <span class="modal-coord-subtitle-screenshot">코디 추천</span>
+                    </div>
+                </div>
+                
+                <div class="modal-info-section">
+                    
+                    <div class="info-group">
+                        <span class="info-label">코디 구성</span>
+                        <span class="info-value">${coord.description}</span>
+                    </div>
+                    
+                    <div class="info-group">
+                        <span class="info-label">매칭도</span>
+                        <div class="info-rating">
+                            <span class="info-stars">${starsHtml}</span>
+                            <span class="info-score">${coord.matchScore}%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-group">
+                        <span class="info-label">사용된 색상</span>
+                        <div class="info-colors-palette">
+                            ${colorsHtml}
+                        </div>
+                    </div>
+                    
+                    <div class="info-group">
+                        <span class="info-label">코디 번호</span>
+                        <span class="info-value">#${coord.id}</span>
+                    </div>
+
+                    <div class="tip-separator"></div>
+                    
+                    <h3 class="styling-tip-title">스타일링 팁</h3>
+                    <p class="styling-tip-text">
+                        이 코디는 ${coord.tags.map(t => tagNames[t] || t).join(', ')} 스타일을 중심으로 추천됩니다. 
+                        ${coord.description}의 조합은 ${coord.matchScore}%의 높은 매칭도를 자랑합니다.
+                    </p>
+                    <div class="styling-tip-tags">
+                        ${tagsHtml}
+                    </div>
+                </div>
+                
+                <div class="modal-action-buttons">
+                    <button class="action-btn-screenshot favorite-btn" id="favoriteBtn-${coord.id}" onclick="toggleFavorite(${coord.id})">
+                        <span id="favoriteText-${coord.id}">♡ 즐겨찾기</span>
+                    </button>
+                    <button class="action-btn-screenshot share-btn" onclick="shareCoord(${coord.id})">
+                        공유하기
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // 4. 모달 추가 및 이벤트 처리
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', handleModalEsc);
 }
+
+
+// (4) 모달 닫기 함수
+function closeCoordDetailModal() {
+    const modal = document.querySelector('.coord-detail-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.remove();
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+    document.removeEventListener('keydown', handleModalEsc);
+}
+
+// (5) ESC 키 이벤트 처리
+function handleModalEsc(e) {
+    if (e.key === 'Escape') {
+        closeCoordDetailModal();
+    }
+}
+
+// (6) 모달 외부 클릭 시 닫기
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('coord-detail-modal')) {
+        closeCoordDetailModal();
+    }
+});
+
+// (7) 즐겨찾기 토글 (임시)
+function toggleFavorite(id) {
+    const btn = document.getElementById(`favoriteBtn-${id}`);
+    const text = document.getElementById(`favoriteText-${id}`);
+    
+    if (btn.classList.contains('added')) {
+        btn.classList.remove('added');
+        text.textContent = '♡ 즐겨찾기';
+        showNotification('즐겨찾기에서 제거되었습니다');
+    } else {
+        btn.classList.add('added');
+        text.textContent = '♥ 즐겨찾기 완료';
+        showNotification('즐겨찾기에 추가되었습니다!');
+    }
+}
+
+// (8) 공유하기 (임시)
+function shareCoord(id) {
+    showNotification('코디 링크가 클립보드에 복사되었습니다!');
+    // 실제로는 window.location.origin + '/coord-detail.html?id=' + id 등을 클립보드에 복사
+}
+
+// (9) 알림 표시 함수 (Notification)
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'coord-notification';
+    notification.textContent = message;
+    
+    // CSS 인라인 스타일 대신 클래스를 사용하도록 수정
+    notification.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
+        z-index: 100000;
+        animation: slideUpNotif 0.3s ease-out;
+        font-weight: 600;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideDownNotif 0.3s ease-out';
+        setTimeout(() => notification.remove(), 300);
+    }, 2000);
+}
+
+// (10) 애니메이션 스타일 추가 (이미 CSS에 있다면 생략 가능)
+const style = document.createElement('style');
+style.textContent += `
+    @keyframes slideUpNotif {
+        from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes slideDownNotif {
+        from { opacity: 1; transform: translateX(-50%) translateY(0); }
+        to { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    }
+`;
+document.head.appendChild(style);
 
 // 애니메이션 효과
 function addScrollAnimations() {
@@ -955,6 +1162,28 @@ function handleResize() {
         });
     }
 }
+
+// **색상 조합 데이터와 코디 추천 데이터는 그대로 유지합니다.**
+
+// 전체 코디 데이터를 통합하여 ID로 찾기 쉽게 만드는 함수
+function getAllCoords() {
+    let allCoords = [];
+    
+    // sampleRecommendations 추가
+    allCoords.push(...sampleRecommendations);
+    
+    // seasonRecommendations 추가
+    for (const key in seasonRecommendations) {
+        allCoords.push(...seasonRecommendations[key]);
+    }
+    
+    return allCoords;
+}
+
+// 통합된 코디 데이터 (페이지 로드시 사용 가능)
+const ALL_COORDS = getAllCoords();
+
+
 
 window.addEventListener('resize', handleResize);
 window.addEventListener('load', handleResize);

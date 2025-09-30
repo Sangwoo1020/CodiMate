@@ -651,9 +651,238 @@ function saveToFavorites(id) {
 
 // 코디 상세보기
 function viewCoordDetails(id) {
-    alert(`코디 ${id}번의 상세 정보를 확인합니다.`);
-    // 실제로는 상세 페이지로 이동하는 로직 구현
+    // 현재 카테고리에서 해당 코디 찾기
+    const coordData = categoryCoordinationData[currentCategory] || [];
+    const coord = coordData.find(c => c.id === id);
+    
+    // 모달 생성
+    showCoordDetailModal(coord);
 }
+
+function showCoordDetailModal(coord) {
+    // 기존 모달 제거
+    const existingModal = document.querySelector('.coord-detail-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    // 색상 팔레트 HTML
+    const colorsHtml = coord.colors.map(color => 
+        `<div class="modal-color-circle" style="background-color: ${color};"></div>`
+    ).join('');
+    
+    // 태그 HTML
+    const tagsHtml = coord.tags.map(tag => {
+        const tagNames = {
+            'elegant': '우아한',
+            'autumn': '가을',
+            'business': '비즈니스',
+            'classic': '클래식',
+            'romantic': '로맨틱',
+            'spring': '봄',
+            'modern': '모던',
+            'winter': '겨울',
+            'casual': '캐주얼',
+            'energetic': '활기찬',
+            'warm': '따뜻한',
+            'comfortable': '편안한',
+            'sophisticated': '세련된',
+            'bright': '밝은',
+            'soft': '부드러운',
+            'feminine': '여성스러운',
+            'fresh': '신선한',
+            'summer': '여름',
+            'luxury': '고급스러운',
+            'natural': '자연스러운',
+            'calm': '차분한',
+            'cool': '시원한',
+            'chic': '시크한'
+        };
+        return `<span class="modal-tag">${tagNames[tag] || tag}</span>`;
+    }).join('');
+    
+    // 모달 HTML
+    const modalHtml = `
+        <div class="coord-detail-modal active" id="coordDetailModal">
+            <div class="modal-content-detail">
+                <button class="modal-close-btn" onclick="closeCoordDetailModal()">×</button>
+                
+                <div class="modal-header-section" style="background-image: url('${coord.image}');">
+                    <div class="modal-header-overlay">
+                        <h2 class="modal-coord-title">${coord.title}</h2>
+                        <span class="modal-coord-category">코디 추천</span>
+                    </div>
+                </div>
+                
+                <div class="modal-body-section">
+                    <div class="modal-info-grid">
+                        <div class="modal-info-item">
+                            <div class="modal-info-label">코디 구성</div>
+                            <div class="modal-info-value">${coord.description}</div>
+                        </div>
+                        
+                        <div class="modal-info-item">
+                            <div class="modal-info-label">매칭도</div>
+                            <div class="modal-rating-display">
+                                <span class="modal-stars">${'★'.repeat(Math.floor(coord.matchScore/20))}${'☆'.repeat(5-Math.floor(coord.matchScore/20))}</span>
+                                <span class="modal-rating-score">${coord.matchScore}%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-info-item">
+                            <div class="modal-info-label">사용된 색상</div>
+                            <div class="modal-color-palette">
+                                ${colorsHtml}
+                            </div>
+                        </div>
+                        
+                        <div class="modal-info-item">
+                            <div class="modal-info-label">코디 번호</div>
+                            <div class="modal-info-value">#${coord.id}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-description-section">
+                        <h3>스타일링 팁</h3>
+                        <p class="modal-description-text">
+                            이 코디는 ${coord.tags.includes('elegant') ? '우아하고 세련된' : coord.tags.includes('casual') ? '편안하고 활동적인' : '트렌디하고 감각적인'} 스타일을 추구하는 분들께 추천드립니다. 
+                            ${coord.description}의 조합은 ${coord.matchScore}%의 높은 매칭도를 자랑하며, 
+                            ${coord.tags.includes('spring') || coord.tags.includes('summer') ? '따뜻한 계절' : '추운 계절'}에 특히 잘 어울립니다.
+                        </p>
+                    </div>
+                    
+                    <div class="modal-tags">
+                        ${tagsHtml}
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button class="modal-action-btn favorite" id="favoriteBtn-${coord.id}" onclick="toggleFavorite(${coord.id})">
+                            <span id="favoriteText-${coord.id}">♡ 즐겨찾기</span>
+                        </button>
+                        <button class="modal-action-btn share" onclick="shareCoord(${coord.id})">
+                            공유하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // 모달 추가
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    document.body.style.overflow = 'hidden';
+    
+    // ESC 키로 닫기
+    document.addEventListener('keydown', handleModalEsc);
+}
+
+function closeCoordDetailModal() {
+    const modal = document.querySelector('.coord-detail-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.remove();
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+    document.removeEventListener('keydown', handleModalEsc);
+}
+
+function handleModalEsc(e) {
+    if (e.key === 'Escape') {
+        closeCoordDetailModal();
+    }
+}
+
+// 모달 외부 클릭 시 닫기
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('coord-detail-modal')) {
+        closeCoordDetailModal();
+    }
+});
+
+// 즐겨찾기 토글
+function toggleFavorite(id) {
+    const btn = document.getElementById(`favoriteBtn-${id}`);
+    const text = document.getElementById(`favoriteText-${id}`);
+    
+    if (btn.classList.contains('added')) {
+        btn.classList.remove('added');
+        text.textContent = '♡ 즐겨찾기';
+        showNotification('즐겨찾기에서 제거되었습니다');
+    } else {
+        btn.classList.add('added');
+        text.textContent = '♥ 즐겨찾기 완료';
+        showNotification('즐겨찾기에 추가되었습니다!');
+    }
+}
+
+// 즐겨찾기 저장 (기존 함수 수정)
+function saveToFavorites(id) {
+    showNotification('즐겨찾기에 추가되었습니다!');
+    // TODO: 백엔드 구현 시 서버에 저장
+}
+
+// 공유하기
+function shareCoord(id) {
+    showNotification('링크가 클립보드에 복사되었습니다!');
+    // TODO: 실제 공유 기능 구현
+}
+
+// 알림 표시
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'coord-notification';
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(250, 112, 154, 0.3);
+        z-index: 100000;
+        animation: slideUpNotif 0.3s ease-out;
+        font-weight: 600;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideDownNotif 0.3s ease-out';
+        setTimeout(() => notification.remove(), 300);
+    }, 2000);
+}
+
+// 알림 애니메이션
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideUpNotif {
+        from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+    
+    @keyframes slideDownNotif {
+        from {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateX(-50%) translateY(20px);
+        }
+    }
+`;
+document.head.appendChild(style);
 
 // 스크롤 애니메이션
 function addScrollAnimations() {

@@ -9,6 +9,7 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #f8f9fa;
     color: #333;
+    padding-top: 80px;
 }
 
 /* 메인 컨테이너 - Dashboard와 동일 */
