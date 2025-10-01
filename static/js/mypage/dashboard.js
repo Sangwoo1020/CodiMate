@@ -69,15 +69,6 @@ function loadUserProfile() {
     if (savedProfile) {
         userProfile = { ...userProfile, ...JSON.parse(savedProfile) };
     }
-    document.getElementById('userName').textContent = userProfile.name;
-    const personalColorElement = document.getElementById('userPersonalColor');
-    if (userProfile.personalColor) {
-        personalColorElement.textContent = userProfile.personalColor;
-        personalColorElement.style.color = '#667eea';
-    } else {
-        personalColorElement.textContent = '퍼스널 컬러 미설정';
-        personalColorElement.style.color = '#718096';
-    }
 }
 
 // 옷장 통계 로드

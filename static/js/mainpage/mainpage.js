@@ -224,9 +224,9 @@ function showCoordDetailModal(coord) {
                     <button class="action-btn-screenshot favorite-btn" id="favoriteBtn-${coord.id}" onclick="toggleFavorite(${coord.id})">
                         <span id="favoriteText-${coord.id}">♡ 즐겨찾기</span>
                     </button>
-                    <button class="action-btn-screenshot share-btn" onclick="shareCoord(${coord.id})">
-                        공유하기
-                    </button>
+                    <button class="action-btn-screenshot close-btn" onclick="closeCoordDetailModal()">
+                    닫기
+                </button>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@ function manageCloset() {
 }
 
 function viewHistory() {
-    alert('코디 히스토리 페이지는 준비 중입니다!');
+    window.location.href = '/templates/codi-history/codi-history.html';
 }
 
 // 키보드/가시성 이벤트

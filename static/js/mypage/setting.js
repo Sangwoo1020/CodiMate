@@ -79,10 +79,6 @@ function loadUserData() {
     document.getElementById('profileWeight').value = userProfile.weight || '';
     document.getElementById('profileGender').value = userProfile.gender || '';
     document.getElementById('profileAge').value = userProfile.age || '';
-    
-    // 사이드바 정보 업데이트
-    document.getElementById('userName').textContent = userProfile.name;
-    updatePersonalColorSidebar();
 }
 
 // 이벤트 리스너 설정
@@ -159,9 +155,6 @@ function handleProfileSubmit(e) {
     // 프로필 업데이트
     userProfile = { ...userProfile, ...updatedProfile };
     localStorage.setItem('userProfile', JSON.stringify(userProfile));
-    
-    // UI 업데이트
-    document.getElementById('userName').textContent = userProfile.name;
     
     showToast('프로필이 성공적으로 저장되었습니다!', 'success');
 }
@@ -242,7 +235,6 @@ function confirmColorSelection() {
     localStorage.setItem('userProfile', JSON.stringify(userProfile));
     
     updatePersonalColorDisplay();
-    updatePersonalColorSidebar();
     cancelColorTest();
     
     showToast('퍼스널 컬러가 설정되었습니다!', 'success');
