@@ -16,29 +16,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const combineBtn = document.getElementById('combineBtn');
     const resetPreviewBtn = document.getElementById('resetPreviewBtn');
     
-    // 초기화 버튼 이벤트 리스너 수정 - 현재 탭 유지하면서 초기화
-    resetPreviewBtn.addEventListener('click', () => {
-        // 현재 활성화된 탭 확인
-        const activeTab = document.querySelector('.tab-button.active');
-        const currentTabId = activeTab ? activeTab.dataset.tab : 'preview-tab';
-        
-        // 미리보기 관련 데이터만 초기화
-        resetPreviewData();
-        
-        // 현재 탭 상태 유지
-        maintainCurrentTab(currentTabId);
-        
-        console.log(`미리보기가 초기화되었습니다. 현재 탭: ${currentTabId}`);
-    });
-
-    // 새로 추가된 요소들
     const stackedOutfitContainer = document.querySelector('.stacked-outfit-container');
     const stackedTopImage = document.getElementById('stackedTopImage');
     const stackedBottomImage = document.getElementById('stackedBottomImage');
 
+    // 카테고리 정의
+    const categories = {
+        top: ['티셔츠', '셔츠', '블라우스', '니트', '후드티', '맨투맨', '자켓', '코트', '카디건', '조끼', '패딩', '점퍼'],
+        bottom: ['청바지', '슬랙스', '면바지', '반바지', '치마', '레깅스', '와이드팬츠', '조거팬츠', '스커트']
+    };
+
     // 전역 상태 변수
     let currentItemType = '';
     let selectedForPreview = { top: null, bottom: null };
+    let selectedCategory = '';
+    let selectedColorFamily = '';
 
     // 로컬 스토리지에서 데이터 로드
     let tops = JSON.parse(localStorage.getItem('tops')) || [];
@@ -47,9 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 초기 렌더링
     renderItems('top');
     
-    // --- 이벤트 리스너 ---
+    // --- 초기화 버튼 ---
+    resetPreviewBtn.addEventListener('click', () => {
+        const activeTab = document.querySelector('.tab-button.active');
+        const currentTabId = activeTab ? activeTab.dataset.tab : 'preview-tab';
+        resetPreviewData();
+        maintainCurrentTab(currentTabId);
+    });
 
-    // 탭 전환 기능
+    // --- 탭 전환 ---
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             tabButtons.forEach(btn => btn.classList.remove('active'));
@@ -65,11 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 아이템 추가 버튼 클릭 -> 모달 열기
+    // --- 아이템 추가 버튼 ---
     document.getElementById('addTopBtn').addEventListener('click', () => openModal('top'));
     document.getElementById('addBottomBtn').addEventListener('click', () => openModal('bottom'));
 
-    // 모달 닫기
+    // --- 모달 닫기 ---
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
             itemModal.style.display = 'none';
@@ -86,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 만족도 별점 기능
+    // --- 별점 기능 ---
     const stars = document.querySelectorAll('#itemRating .star');
     let ratingValue = 0;
     stars.forEach(star => {
@@ -99,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 이미지 미리보기
+    // --- 이미지 미리보기 ---
     document.getElementById('itemImage').addEventListener('change', (event) => {
         const file = event.target.files[0];
         const preview = document.getElementById('imagePreview');
@@ -114,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 폼 제출
+    // --- 폼 제출 ---
     itemForm.addEventListener('submit', (event) => {
         event.preventDefault();
         
@@ -126,11 +124,23 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        if (!selectedCategory) {
+            alert('카테고리를 선택해주세요!');
+            return;
+        }
+
+        if (!selectedColorFamily) {
+            alert('색상 계열을 선택해주세요!');
+            return;
+        }
+
         const reader = new FileReader();
         reader.onload = (e) => {
             const newItem = {
                 id: Date.now(),
                 name: itemName,
+                category: selectedCategory,
+                colorFamily: selectedColorFamily,
                 rating: ratingValue,
                 image: e.target.result
             };
@@ -150,16 +160,17 @@ document.addEventListener('DOMContentLoaded', () => {
             stars.forEach(s => s.classList.remove('active'));
             document.getElementById('imagePreview').innerHTML = `<p>이미지 미리보기</p>`;
             ratingValue = 0;
+            selectedCategory = '';
+            selectedColorFamily = '';
             alert('아이템이 성공적으로 등록되었습니다!');
         };
         reader.readAsDataURL(itemImageFile);
     });
 
-    // 미리보기 옷 선택 버튼
+    // --- 미리보기 버튼 ---
     document.getElementById('selectTopBtn').addEventListener('click', () => openSelectModal('top'));
     document.getElementById('selectBottomBtn').addEventListener('click', () => openSelectModal('bottom'));
 
-    // '이어 붙이기' 버튼 이벤트 리스너
     combineBtn.addEventListener('click', () => {
         if (selectedForPreview.top && selectedForPreview.bottom) {
             stackImages();
@@ -167,59 +178,36 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('상의와 하의를 모두 선택해주세요!');
         }
     });
-
-    // --- 함수들 ---
-
-    /**
-     * 미리보기 관련 데이터만 초기화하는 함수
-     */
-    function resetPreviewData() {
-        // 선택된 미리보기 데이터 초기화
-        selectedForPreview = { top: null, bottom: null };
-        
-        // 미리보기 이미지 초기화
-        if (topPreviewImg) {
-            topPreviewImg.src = '';
-            topPreviewBox.classList.remove('has-image');
-        }
-        
-        if (bottomPreviewImg) {
-            bottomPreviewImg.src = '';
-            bottomPreviewBox.classList.remove('has-image');
-        }
-        
-        // 합치기 버튼 숨기기
-        if (combineBtn) {
-            combineBtn.style.display = 'none';
-        }
-        
-        // 이어 붙인 이미지 컨테이너 숨기기
-        if (stackedOutfitContainer) {
-            stackedOutfitContainer.style.display = 'none';
-        }
-        
-        // 이어 붙인 이미지들 초기화
-        if (stackedTopImage) {
-            stackedTopImage.src = '';
-        }
-        
-        if (stackedBottomImage) {
-            stackedBottomImage.src = '';
-        }
-        
-        console.log('미리보기 데이터가 초기화되었습니다.');
+function resetPreviewData() {
+    selectedForPreview = { top: null, bottom: null };
+    
+    const topItem = document.getElementById('topOutfitItem');
+    const bottomItem = document.getElementById('bottomOutfitItem');
+    const outfitInfo = document.getElementById('outfitInfo');
+    
+    if (topPreviewImg) {
+        topPreviewImg.src = '';
+        topItem.classList.remove('has-image');
     }
-
+    
+    if (bottomPreviewImg) {
+        bottomPreviewImg.src = '';
+        bottomItem.classList.remove('has-image');
+    }
+    
+    if (outfitInfo) {
+        outfitInfo.style.display = 'none';
+    }
+    
+    console.log('미리보기 데이터가 초기화되었습니다.');
+}
     /**
-     * 현재 탭 상태를 유지하는 함수
-     * @param {string} tabId - 유지할 탭의 ID
+     * 현재 탭 상태 유지
      */
     function maintainCurrentTab(tabId) {
-        // 모든 탭 비활성화
         tabButtons.forEach(btn => btn.classList.remove('active'));
         tabContents.forEach(content => content.classList.remove('active'));
         
-        // 지정된 탭 활성화
         const targetTabButton = document.querySelector(`[data-tab="${tabId}"]`);
         const targetTabContent = document.getElementById(tabId);
         
@@ -227,7 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
             targetTabButton.classList.add('active');
             targetTabContent.classList.add('active');
             
-            // 미리보기 탭이 아닌 경우 해당 탭의 아이템들 다시 렌더링
             const tabName = tabId.split('-')[0];
             if (tabName !== 'preview') {
                 renderItems(tabName);
@@ -236,13 +223,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * 특정 유형의 아이템들을 렌더링합니다.
-     * @param {string} type - 'top' 또는 'bottom'
+     * 아이템 렌더링
      */
     function renderItems(type) {
         const grid = type === 'top' ? topGrid : bottomGrid;
         const items = type === 'top' ? tops : bottoms;
         grid.innerHTML = '';
+        
         if (items.length === 0) {
             grid.innerHTML = '<p class="no-item-msg">등록된 아이템이 없습니다.<br> 새로운 옷을 등록해보세요!</p>';
             return;
@@ -252,10 +239,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'item-card';
             card.dataset.id = item.id;
+            
+            // 색상 계열 한글 변환
+            const colorNameMap = {
+                'red': '빨강', 'orange': '주황', 'yellow': '노랑', 'green': '초록',
+                'blue': '파랑', 'purple': '보라', 'pink': '분홍', 'brown': '갈색',
+                'white': '흰색', 'black': '검정', 'gray': '회색', 'beige': '베이지'
+            };
+            
+            const colorName = item.colorFamily ? colorNameMap[item.colorFamily] || item.colorFamily : '';
+            const categoryText = item.category || '';
+            
             card.innerHTML = `
                 <img src="${item.image}" alt="${item.name}" class="item-image">
                 <div class="item-info">
                     <div class="item-name">${item.name}</div>
+                    ${categoryText ? `<div class="item-category">${categoryText}</div>` : ''}
+                    ${colorName ? `<div class="item-color">${colorName}</div>` : ''}
                     <div class="item-rating">
                         ${'★'.repeat(item.rating)}${'☆'.repeat(5 - item.rating)}
                     </div>
@@ -279,9 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * 아이템을 삭제합니다.
-     * @param {number} id - 삭제할 아이템의 ID
-     * @param {string} type - 'top' 또는 'bottom'
+     * 아이템 삭제
      */
     function deleteItem(id, type) {
         let items = type === 'top' ? tops : bottoms;
@@ -300,18 +298,67 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * 아이템 등록 모달을 엽니다.
-     * @param {string} type - 'top' 또는 'bottom'
+     * 등록 모달 열기
      */
     function openModal(type) {
         currentItemType = type;
+        selectedCategory = '';
+        selectedColorFamily = '';
+        
         document.getElementById('modalTitle').textContent = (type === 'top' ? '상의' : '하의') + ' 등록하기';
+        
+        // 카테고리 체크박스 생성
+        const categoryContainer = document.getElementById('categoryCheckboxes');
+        categoryContainer.innerHTML = '';
+        
+        const categoryList = type === 'top' ? categories.top : categories.bottom;
+        categoryList.forEach(cat => {
+            const checkboxItem = document.createElement('div');
+            checkboxItem.className = 'category-checkbox-item';
+            checkboxItem.innerHTML = `
+                <input type="checkbox" id="cat-${cat}" value="${cat}">
+                <label for="cat-${cat}">${cat}</label>
+            `;
+            categoryContainer.appendChild(checkboxItem);
+            
+            // 체크박스 이벤트
+            const checkbox = checkboxItem.querySelector('input');
+            checkbox.addEventListener('change', (e) => {
+                // 단일 선택만 가능하도록
+                document.querySelectorAll('.category-checkbox-item input').forEach(cb => {
+                    if (cb !== e.target) cb.checked = false;
+                });
+                
+                // 선택된 카테고리 업데이트
+                selectedCategory = e.target.checked ? e.target.value : '';
+                
+                // 스타일 업데이트
+                document.querySelectorAll('.category-checkbox-item').forEach(item => {
+                    item.classList.remove('checked');
+                });
+                if (e.target.checked) {
+                    checkboxItem.classList.add('checked');
+                }
+            });
+        });
+        
+        // 색상 계열 선택 이벤트
+        document.querySelectorAll('.color-family-option').forEach(option => {
+            option.classList.remove('selected');
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.color-family-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                selectedColorFamily = this.dataset.color;
+            });
+        });
+        
         itemModal.style.display = 'flex';
     }
 
     /**
-     * 미리보기용 옷 선택 모달을 엽니다.
-     * @param {string} type - 'top' 또는 'bottom'
+     * 선택 모달 열기
      */
     function openSelectModal(type) {
         currentItemType = type;
@@ -338,50 +385,73 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (items.length === 0) {
-            selectGrid.innerHTML = '<p>등록된 아이템 X</p>';
+            selectGrid.innerHTML = '<p>등록된 아이템이 없습니다</p>';
         }
 
         selectModal.style.display = 'flex';
     }
     
-    /**
-     * 미리보기 이미지를 업데이트합니다.
-     */
     function updatePreview() {
-        if (selectedForPreview.top) {
-            topPreviewImg.src = selectedForPreview.top.image;
-            topPreviewBox.classList.add('has-image');
-        } else {
-            topPreviewImg.src = '';
-            topPreviewBox.classList.remove('has-image');
-        }
+    const topItem = document.getElementById('topOutfitItem');
+    const bottomItem = document.getElementById('bottomOutfitItem');
+    const outfitInfo = document.getElementById('outfitInfo');
+    
+    // 색상 맵핑
+    const colorNameMap = {
+        'red': '빨강', 'orange': '주황', 'yellow': '노랑', 'green': '초록',
+        'blue': '파랑', 'purple': '보라', 'pink': '분홍', 'brown': '갈색',
+        'white': '흰색', 'black': '검정', 'gray': '회색', 'beige': '베이지'
+    };
+    
+    // 상의 업데이트
+    if (selectedForPreview.top) {
+        topPreviewImg.src = selectedForPreview.top.image;
+        topItem.classList.add('has-image');
         
-        if (selectedForPreview.bottom) {
-            bottomPreviewImg.src = selectedForPreview.bottom.image;
-            bottomPreviewBox.classList.add('has-image');
-        } else {
-            bottomPreviewImg.src = '';
-            bottomPreviewBox.classList.remove('has-image');
-        }
-
-        // 합치기 버튼 표시/숨김 로직 추가
-        if (selectedForPreview.top && selectedForPreview.bottom) {
-            combineBtn.style.display = 'inline-block';
-        } else {
-            combineBtn.style.display = 'none';
-            stackedOutfitContainer.style.display = 'none';
-        }
+        document.getElementById('topName').textContent = selectedForPreview.top.name;
+        document.getElementById('topCategory').textContent = selectedForPreview.top.category || '-';
+        document.getElementById('topColor').textContent = colorNameMap[selectedForPreview.top.colorFamily] || '-';
+    } else {
+        topPreviewImg.src = '';
+        topItem.classList.remove('has-image');
+        
+        document.getElementById('topName').textContent = '-';
+        document.getElementById('topCategory').textContent = '-';
+        document.getElementById('topColor').textContent = '-';
     }
+    
+    // 하의 업데이트
+    if (selectedForPreview.bottom) {
+        bottomPreviewImg.src = selectedForPreview.bottom.image;
+        bottomItem.classList.add('has-image');
+        
+        document.getElementById('bottomName').textContent = selectedForPreview.bottom.name;
+        document.getElementById('bottomCategory').textContent = selectedForPreview.bottom.category || '-';
+        document.getElementById('bottomColor').textContent = colorNameMap[selectedForPreview.bottom.colorFamily] || '-';
+    } else {
+        bottomPreviewImg.src = '';
+        bottomItem.classList.remove('has-image');
+        
+        document.getElementById('bottomName').textContent = '-';
+        document.getElementById('bottomCategory').textContent = '-';
+        document.getElementById('bottomColor').textContent = '-';
+    }
+    
+    // 정보 표시 여부
+    if (selectedForPreview.top || selectedForPreview.bottom) {
+        outfitInfo.style.display = 'block';
+    } else {
+        outfitInfo.style.display = 'none';
+    }
+}
+
 
     /**
-     * 상의와 하의 이미지를 위아래로 이어 붙여서 보여줍니다.
+     * 이미지 이어 붙이기
      */
     function stackImages() {
-        // 미리보기 박스에 있는 이미지 소스를 가져와서 이어 붙일 이미지 요소에 넣어줍니다.
         stackedTopImage.src = selectedForPreview.top.image;
         stackedBottomImage.src = selectedForPreview.bottom.image;
-        
-        // 이어 붙인 이미지를 보여주는 컨테이너를 보이게 합니다.
         stackedOutfitContainer.style.display = 'flex';
     }
 });

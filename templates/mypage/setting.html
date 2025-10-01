@@ -79,14 +79,6 @@
                             <input type="text" id="profileName" name="name" placeholder="이름을 입력하세요" required>
                             <span class="form-help">실명 또는 닉네임을 입력하세요</span>
                         </div>
-                        <div class="form-group">
-                            <label for="profileEmail">
-                                <i class="fas fa-envelope"></i>
-                                이메일
-                            </label>
-                            <input type="email" id="profileEmail" name="email" placeholder="이메일을 입력하세요">
-                            <span class="form-help">코디 추천 알림을 받을 이메일</span>
-                        </div>
                     </div>
 
                     <div class="form-row">
@@ -146,10 +138,16 @@
 
             <!-- 퍼스널 컬러 탭 -->
             <section id="personal-color-tab" class="settings-section">
-                <div class="section-header">
-                    <h2>퍼스널 컬러</h2>
-                    <p>나에게 어울리는 색상 타입을 선택하세요</p>
-                </div>
+            <div class="section-header">
+                <h2>퍼스널 컬러</h2>
+                <p>나에게 어울리는 색상 타입을 선택하세요</p>
+                
+                <!-- ✅ 퍼스널컬러 외부 사이트 버튼 -->
+                <a href="https://mycolor.kr/#google_vignette" target="_blank" class="btn-link"
+                style="margin-left:auto; font-size:0.9rem; color:#667eea; text-decoration:underline; cursor:pointer;">
+                    퍼스널 컬러 테스트 바로가기
+                </a>
+            </div>
 
                 <div class="personal-color-test">
                     <div class="current-color" id="currentPersonalColor">
