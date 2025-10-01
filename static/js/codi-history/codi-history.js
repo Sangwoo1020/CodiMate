@@ -37,18 +37,26 @@ function initializeCodiHistory() {
     console.log('코디 히스토리 페이지 초기화');
 }
 
-// 이벤트 리스너 설정
 function setupEventListeners() {
     // 코디 등록 버튼
-    document.getElementById('addCodiBtn').addEventListener('click', () => {
-        openCodiModal('add');
-    });
+    const addCodiBtn = document.getElementById('addCodiBtn');
+    if (addCodiBtn) {
+        addCodiBtn.addEventListener('click', () => openCodiModal('add'));
+    }
 
     // 모달 닫기 버튼들
-    document.getElementById('closeModal').addEventListener('click', closeCodiModal);
-    document.getElementById('closeClothingModal').addEventListener('click', closeClothingModal);
-    document.getElementById('closeDetailModal').addEventListener('click', closeDetailModal);
-    document.getElementById('cancelBtn').addEventListener('click', closeCodiModal);
+    const closeModal = document.getElementById('closeModal');
+    if (closeModal) closeModal.addEventListener('click', closeCodiModal);
+
+    // 올바른 코드
+    const closeClothingModalBtn = document.getElementById('closeClothingModal');
+    if (closeClothingModalBtn) closeClothingModalBtn.addEventListener('click', closeClothingModal);
+
+    const closeDetailModalBtn = document.getElementById('closeDetailModal');
+    if (closeDetailModalBtn) closeDetailModalBtn.addEventListener('click', closeDetailModal);
+
+    const cancelBtn = document.getElementById('cancelBtn');
+    if (cancelBtn) cancelBtn.addEventListener('click', closeCodiModal);
 
     // 모달 외부 클릭시 닫기
     window.addEventListener('click', (event) => {
@@ -62,7 +70,8 @@ function setupEventListeners() {
     });
 
     // 폼 제출
-    document.getElementById('codiForm').addEventListener('submit', handleFormSubmit);
+    const codiForm = document.getElementById('codiForm');
+    if (codiForm) codiForm.addEventListener('submit', handleFormSubmit);
 
     // 별점 클릭
     document.querySelectorAll('.star').forEach(star => {
@@ -78,10 +87,13 @@ function setupEventListeners() {
     });
 
     // 별점 영역에서 마우스 떠날 때
-    document.getElementById('ratingInput').addEventListener('mouseleave', () => {
-        const currentRating = parseInt(document.getElementById('satisfactionValue').value);
-        highlightStars(currentRating);
-    });
+    const ratingInput = document.getElementById('ratingInput');
+    if (ratingInput) {
+        ratingInput.addEventListener('mouseleave', () => {
+            const currentRating = parseInt(document.getElementById('satisfactionValue').value);
+            highlightStars(currentRating);
+        });
+    }
 
     // 의류 선택 버튼
     document.querySelectorAll('.select-clothing-btn').forEach(btn => {
@@ -92,23 +104,39 @@ function setupEventListeners() {
     });
 
     // 필터 변경 이벤트
-    document.getElementById('periodFilter').addEventListener('change', applyFilters);
-    document.getElementById('themeFilter').addEventListener('change', applyFilters);
-    document.getElementById('ratingFilter').addEventListener('change', applyFilters);
+    const periodFilter = document.getElementById('periodFilter');
+    if (periodFilter) periodFilter.addEventListener('change', applyFilters);
+
+    const themeFilter = document.getElementById('themeFilter');
+    if (themeFilter) themeFilter.addEventListener('change', applyFilters);
+
+    const ratingFilter = document.getElementById('ratingFilter');
+    if (ratingFilter) ratingFilter.addEventListener('change', applyFilters);
     
     // 검색 기능
-    document.getElementById('searchBtn').addEventListener('click', applyFilters);
-    document.getElementById('searchInput').addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            applyFilters();
-        }
-    });
+    const searchBtn = document.getElementById('searchBtn');
+    if (searchBtn) searchBtn.addEventListener('click', applyFilters);
 
-    // 더보기 버튼
-    document.getElementById('loadMoreBtn').addEventListener('click', loadMoreHistory);
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                applyFilters();
+            }
+        });
+    }
 
-    // 카드 액션 버튼들 (이벤트 위임 사용)
-    document.getElementById('historyGrid').addEventListener('click', handleCardAction);
+    // 더보기 버튼 (존재하지 않으므로 체크)
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', loadMoreHistory);
+    }
+
+    // 카드 액션 버튼들
+    const historyGrid = document.getElementById('historyGrid');
+    if (historyGrid) {
+        historyGrid.addEventListener('click', handleCardAction);
+    }
 }
 
 // 코디 히스토리 데이터 로드
@@ -385,8 +413,7 @@ function updateSelectedClothingUI(type, clothing) {
     const container = document.getElementById(type === 'top' ? 'selectedTop' : 'selectedBottom');
     
     container.innerHTML = `
-        <img src="${clothing.image}" alt="${clothing.name}">
-        <div class="clothing-name">${clothing.name}</div>
+        <img src="${clothing.image}" alt="">
     `;
     container.parentElement.classList.add('has-item');
 }

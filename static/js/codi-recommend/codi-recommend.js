@@ -367,14 +367,13 @@ function selectTopColor(color) {
     }, 500);
 }
 
-// 하의 색상 옵션 로드
 function loadBottomColorOptions() {
     const container = document.getElementById('bottomColorOptions');
     const selectedColorsDiv = document.getElementById('selectedColors');
     
     if (!selectedTopColor || !container || !selectedColorsDiv) return;
-    
-    // 선택된 상의 색상 표시
+
+    // 상의 색상 표시
     selectedColorsDiv.innerHTML = `
         <div class="color-selection">
             <div class="selected-color-item">
@@ -390,41 +389,43 @@ function loadBottomColorOptions() {
             </div>
         </div>
     `;
-    
-    // 하의 색상 옵션 표시 (선택된 조합에서 상의가 아닌 다른 색상들)
+
     container.innerHTML = '';
+
+    // 하의 후보 색상들을 담을 배열 (중복 방지 위해 Set 사용)
+    const bottomColors = new Map();
+
+    // 조합에 있는 색상 중 상의 제외
     selectedCombination.colors.forEach(color => {
         if (color.hex !== selectedTopColor.hex) {
-            const colorOption = document.createElement('div');
-            colorOption.className = 'color-option';
-            colorOption.onclick = () => selectBottomColor(color);
-            
-            colorOption.innerHTML = `
-                <div class="color-circle large" style="background-color: ${color.hex};"></div>
-                <div class="color-name">${color.name}</div>
-                <div class="color-korean">${color.korean}</div>
-            `;
-            
-            container.appendChild(colorOption);
+            bottomColors.set(color.hex, color);
         }
     });
-    
-    // 추가 매칭 가능한 색상들도 표시 (실제 매칭 알고리즘 적용)
+
+    // 추가 매칭 색상 불러오기
     const additionalColors = getMatchingColors(selectedTopColor);
     additionalColors.forEach(color => {
+        if (color.hex !== selectedTopColor.hex && !bottomColors.has(color.hex)) {
+            bottomColors.set(color.hex, color);
+        }
+    });
+
+    // 최종 후보 렌더링
+    bottomColors.forEach(color => {
         const colorOption = document.createElement('div');
         colorOption.className = 'color-option';
         colorOption.onclick = () => selectBottomColor(color);
-        
+
         colorOption.innerHTML = `
             <div class="color-circle large" style="background-color: ${color.hex};"></div>
             <div class="color-name">${color.name}</div>
             <div class="color-korean">${color.korean}</div>
         `;
-        
+
         container.appendChild(colorOption);
     });
 }
+
 
 // 상의 색상에 어울리는 추가 색상들 반환
 function getMatchingColors(topColor) {

@@ -8,7 +8,6 @@ let pendingAction = null;
 // 사용자 프로필 데이터
 let userProfile = {
     name: '김상우',
-    email: '',
     height: '',
     weight: '',
     gender: '',
@@ -76,7 +75,6 @@ function loadUserData() {
     
     // 프로필 폼에 데이터 채우기
     document.getElementById('profileName').value = userProfile.name || '';
-    document.getElementById('profileEmail').value = userProfile.email || '';
     document.getElementById('profileHeight').value = userProfile.height || '';
     document.getElementById('profileWeight').value = userProfile.weight || '';
     document.getElementById('profileGender').value = userProfile.gender || '';
@@ -145,7 +143,6 @@ function handleProfileSubmit(e) {
     const formData = new FormData(e.target);
     const updatedProfile = {
         name: formData.get('name'),
-        email: formData.get('email'),
         height: formData.get('height'),
         weight: formData.get('weight'),
         gender: formData.get('gender'),

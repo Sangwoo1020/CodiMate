@@ -79,28 +79,7 @@
                         <p>즐겨찾기</p>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-calendar-day"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3 id="recentOutfits">12</h3>
-                        <p>이달의 코디</p>
-                    </div>
-                </div>
             </div>
-
-            <!-- 최근 착용 코디 -->
-            <div class="dashboard-section">
-                <div class="section-header">
-                    <h3>최근 착용한 코디</h3>
-                    <button class="view-all-btn" onclick="viewAllOutfits()">전체보기</button>
-                </div>
-                <div class="recent-outfits" id="recentOutfitsGrid">
-                    <!-- 동적으로 생성됨 -->
-                </div>
-            </div>
-
             <!-- 내 옷장 요약 -->
             <div class="dashboard-section">
                 <div class="section-header">
@@ -145,44 +124,20 @@
                 </div>
             </div>
 
-            <!-- 내 좋아하는 색상 -->
             <div class="dashboard-section">
-                <div class="section-header">
-                    <h3>내 좋아하는 색상</h3>
-                    <button class="edit-colors-btn" onclick="editFavoriteColors()">편집</button>
-                </div>
-                <div class="favorite-colors">
-                    <div class="color-analysis">
-                        <div class="color-item">
-                            <div class="color-circle" style="background-color: #1e3a8a;"></div>
-                            <div class="color-info">
-                                <span class="color-name">네이비</span>
-                                <span class="color-count">5개 보유</span>
-                            </div>
-                        </div>
-                        <div class="color-item">
-                            <div class="color-circle" style="background-color: #ffffff; border: 2px solid #e2e8f0;"></div>
-                            <div class="color-info">
-                                <span class="color-name">화이트</span>
-                                <span class="color-count">4개 보유</span>
-                            </div>
-                        </div>
-                        <div class="color-item">
-                            <div class="color-circle" style="background-color: #374151;"></div>
-                            <div class="color-info">
-                                <span class="color-name">차콜</span>
-                                <span class="color-count">2개 보유</span>
-                            </div>
-                        </div>
-                        <div class="color-item">
-                            <div class="color-circle" style="background-color: #d2b48c;"></div>
-                            <div class="color-info">
-                                <span class="color-name">베이지</span>
-                                <span class="color-count">3개 보유</span>
-                            </div>
-                        </div>
+            <!-- 내 좋아하는 색상 계열 -->
+            <div class="dashboard-section">
+            <div class="section-header">
+                <h3>내 좋아하는 색상 계열</h3>
+                <button class="edit-colors-btn" onclick="editFavoriteColorGroup()">편집</button>
+            </div>
+            <div class="favorite-colors">
+                <div class="color-analysis" id="favoriteColorGroupContainer">
+                    <div class="no-color-message">
+                        <p>선택한 색상 계열이 없습니다</p>
                     </div>
                 </div>
+            </div>
             </div>
 
             <!-- 퍼스널 컬러 -->
