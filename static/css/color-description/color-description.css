@@ -758,7 +758,7 @@ body {
 }
 
 .modal-tag {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    background: #fa709a;
     color: white;
     padding: 8px 16px;
     border-radius: 20px;
@@ -801,7 +801,7 @@ body {
 }
 
 .modal-action-btn.share {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    background: black;
     color: white;
 }
 
