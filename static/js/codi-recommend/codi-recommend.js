@@ -1001,8 +1001,8 @@ function showCoordDetailModal(coord) {
                     <button class="action-btn-screenshot favorite-btn" id="favoriteBtn-${coord.id}" onclick="toggleFavorite(${coord.id})">
                         <span id="favoriteText-${coord.id}">♡ 즐겨찾기</span>
                     </button>
-                    <button class="action-btn-screenshot share-btn" onclick="shareCoord(${coord.id})">
-                        공유하기
+                    <button class="action-btn-screenshot close-btn" onclick="closeCoordDetailModal()">
+                        닫기
                     </button>
                 </div>
             </div>
