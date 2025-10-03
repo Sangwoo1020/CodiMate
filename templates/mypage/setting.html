@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodiMate - 설정</title>
+    <link rel="stylesheet" href="/static/css/fix/header.css">
+    <link rel="stylesheet" href="/static/css/mypage/setting.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 헤더 플레이스홀더 -->
+    <div id="header-placeholder" class="loading"></div>
+
+    <div class="mypage-container">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="profile-section">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h3 id="userName">김상우</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="/templates/mypage/dashboard.html" class="nav-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>대시보드</span>
+                </a>
+                <a href="/templates/mypage/wishlist.html" class="nav-item">
+                    <i class="fas fa-heart"></i>
+                    <span>즐겨찾기</span>
+                </a>
+                <a href="/templates/mypage/setting.html" class="nav-item active">
+                    <i class="fas fa-cog"></i>
+                    <span>설정</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>설정</h1>
+                <p>개인 정보와 선호도를 관리하세요</p>
+            </div>
+
+            <!-- 설정 탭 네비게이션 -->
+            <div class="settings-nav">
+                <button class="settings-tab active" data-tab="profile" onclick="switchTab('profile')">
+                    <i class="fas fa-user"></i>
+                    <span>프로필 정보</span>
+                </button>
+                <button class="settings-tab" data-tab="personal-color" onclick="switchTab('personal-color')">
+                    <i class="fas fa-palette"></i>
+                    <span>퍼스널 컬러</span>
+                </button>
+            </div>
+
+            <!-- 프로필 정보 탭 -->
+            <section id="profile-tab" class="settings-section active">
+                <div class="section-header">
+                    <h2>프로필 정보</h2>
+                    <p>기본 정보를 관리하세요</p>
+                </div>
+
+                <form id="profileForm" class="settings-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profileName">
+                                <i class="fas fa-user"></i>
+                                이름
+                            </label>
+                            <input type="text" id="profileName" name="name" placeholder="이름을 입력하세요" required>
+                            <span class="form-help">실명 또는 닉네임을 입력하세요</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profileHeight">
+                                <i class="fas fa-arrows-alt-v"></i>
+                                키 (cm)
+                            </label>
+                            <input type="number" id="profileHeight" name="height" min="100" max="250" placeholder="170">
+                            <span class="form-help">정확한 체형 분석을 위해 입력하세요</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileWeight">
+                                <i class="fas fa-weight"></i>
+                                체중 (kg)
+                            </label>
+                            <input type="number" id="profileWeight" name="weight" min="30" max="200" placeholder="65">
+                            <span class="form-help">사이즈 추천을 위해 입력하세요</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profileGender">
+                                <i class="fas fa-venus-mars"></i>
+                                성별
+                            </label>
+                            <select id="profileGender" name="gender">
+                                <option value="">선택하세요</option>
+                                <option value="male">남성</option>
+                                <option value="female">여성</option>
+                                <option value="other">기타</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileAge">
+                                <i class="fas fa-birthday-cake"></i>
+                                나이
+                            </label>
+                            <input type="number" id="profileAge" name="age" min="10" max="100" placeholder="25">
+                            <span class="form-help">연령대별 스타일 추천을 위해</span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="resetProfile()">
+                            <i class="fas fa-undo"></i>
+                            초기화
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i>
+                            저장하기
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- 퍼스널 컬러 탭 -->
+            <section id="personal-color-tab" class="settings-section">
+            <div class="section-header">
+                <h2>퍼스널 컬러</h2>
+                <p>나에게 어울리는 색상 타입을 선택하세요</p>
+                
+                <!-- ✅ 퍼스널컬러 외부 사이트 버튼 -->
+                <a href="https://mycolor.kr/#google_vignette" target="_blank" class="btn-link"
+                style="margin-left:auto; font-size:18px; color:#667eea; text-decoration:underline; cursor:pointer;">
+                    퍼스널 컬러 테스트 바로가기
+                </a>
+            </div>
+
+                <div class="personal-color-test">
+                    <div class="current-color" id="currentPersonalColor">
+                        <div class="current-color-display">
+                            <div class="color-preview" id="colorPreview">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="color-info">
+                                <h3 id="currentColorName">퍼스널 컬러를 선택해주세요</h3>
+                                <p id="currentColorDesc">자신에게 맞는 컬러를 찾아보세요</p>
+                            </div>
+                        </div>
+                        <button class="change-color-btn" onclick="startColorTest()">
+                            <i class="fas fa-edit"></i>
+                            변경하기
+                        </button>
+                    </div>
+
+                    <!-- 컬러 선택 영역 -->
+                    <div class="color-options" id="colorOptions" style="display: none;">
+                        <div class="color-grid">
+                            <div class="color-type" data-type="spring-warm" onclick="selectPersonalColor('spring-warm')">
+                                <div class="color-type-preview">
+                                    <div class="color-circles">
+                                        <div class="color-circle" style="background: linear-gradient(135deg, #FFB347, #FF6B6B);"></div>
+                                        <div class="color-circle" style="background: linear-gradient(135deg, #98FB98, #90EE90);"></div>
+                                        <div class="color-circle" style="background: linear-gradient(135deg, #FFE4B5, #F0E68C);"></div>
+                                    </div>
+                                </div>
+                                <div class="color-type-info">
+                                    <h4>봄웜톤</h4>
+                                    <p>밝고 따뜻한 색상</p>
+                                    <span class="color-desc">생동감 있고 화사한 느낌을 주는 따뜻한 톤</span>
+                                </div>
+                            </div>
+
+                            <div class="color-type" data-type="summer-cool" onclick="selectPersonalColor('summer-cool')">
+                                <div class="color-type-preview">
+                                    <div class="color-circles">
+                                        <div class="color-circle" style="background: linear-gradient(135deg, #B0C4DE, #87CEEB);"></div>
+                                        <div class="color-circle" style="background: linear-gradient(135deg, #DDA0DD, #D8BFD8);"></div>
+                                        <div class="color-circle" style="background: linear-gradient(135deg, #F0F8FF, #E6E6FA);"></div>
+                                    </div>
+                                </div>
+                                <div class="color-type-info">
+                                    <h4>여름쿨톤</h4>
+                                    <p>부드럽고 차가운 색상</p>
+                                    <span class="color-desc">우아하고 세련된 느낌의 차가운 톤</span>
+                                </div>
+                            </div>
+
+                            <div class="color-type" data-type="autumn-warm" onclick="selectPersonalColor('autumn-warm')">
+                                <div class="color-type-preview">
+                                    <div class="color-circles">
+                                        <div class="color-circle" style="background: linear-gradient(135deg, #D2691E, #CD853F);"></div>
+                                        <div class="color-circle" style="background: linear-gradient(135deg, #8B4513, #A0522D);"></div>
+                                        <div class="color-circle" style="background: linear-gradient(135deg, #DAA520, #B8860B);"></div>
+                                    </div>
+                                </div>
+                                <div class="color-type-info">
+                                    <h4>가을웜톤</h4>
+                                    <p>깊고 따뜻한 색상</p>
+                                    <span class="color-desc">차분하고 고급스러운 느낌의 깊은 따뜻한 톤</span>
+                                </div>
+                            </div>
+
+                            <div class="color-type" data-type="winter-cool" onclick="selectPersonalColor('winter-cool')">
+                                <div class="color-type-preview">
+                                    <div class="color-circles">
+                                        <div class="color-circle" style="background: linear-gradient(135deg, #4169E1, #0000FF);"></div>
+                                        <div class="color-circle" style="background: linear-gradient(135deg, #800080, #8B008B);"></div>
+                                        <div class="color-circle" style="background: linear-gradient(135deg, #000000, #2F4F4F);"></div>
+                                    </div>
+                                </div>
+                                <div class="color-type-info">
+                                    <h4>겨울쿨톤</h4>
+                                    <p>선명하고 차가운 색상</p>
+                                    <span class="color-desc">강렬하고 대비가 뚜렷한 차가운 톤</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="color-actions">
+                            <button class="btn-secondary" onclick="cancelColorTest()">
+                                <i class="fas fa-times"></i>
+                                취소
+                            </button>
+                            <button class="btn-primary" onclick="confirmColorSelection()" disabled>
+                                <i class="fas fa-check"></i>
+                                선택 완료
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 컬러 가이드 -->
+                    <div class="color-guide">
+                        <h3>퍼스널 컬러란?</h3>
+                        <div class="guide-content">
+                            <div class="guide-item">
+                                <div class="guide-icon">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <div class="guide-text">
+                                    <h4>피부톤 분석</h4>
+                                    <p>개인의 피부, 눈동자, 머리카락 색상을 분석하여 가장 어울리는 색상군을 찾는 이론입니다</p>
+                                </div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="guide-icon">
+                                    <i class="fas fa-magic"></i>
+                                </div>
+                                <div class="guide-text">
+                                    <h4>스타일링 효과</h4>
+                                    <p>자신에게 맞는 퍼스널 컬러를 활용하면 얼굴이 밝아지고 더욱 매력적인 인상을 줄 수 있습니다</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 확인 모달 -->
+    <div id="confirmModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="confirmTitle">확인</h3>
+                <button class="close-btn" onclick="closeConfirmModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="confirm-icon" id="confirmIcon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <p id="confirmMessage">정말로 실행하시겠습니까?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeConfirmModal()">취소</button>
+                <button class="btn-primary" id="confirmBtn" onclick="executeConfirmAction()">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 파일 업로드용 숨김 input -->
+    <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="handleFileRestore(event)">
+
+    <script src="/static/js/fix/header.js"></script>
+    <script src="/static/js/mypage/setting.js"></script>
+</body>
+</html>

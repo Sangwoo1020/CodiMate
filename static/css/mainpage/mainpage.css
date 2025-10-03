@@ -8,6 +8,7 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #fff;
+    padding-top: 80px;
 }
 
 /* 헤더 */
@@ -80,29 +81,246 @@ body {
     text-align: center;
     flex-shrink: 0; /* 중요: 슬라이드 크기 고정 */
 }
-
-/* 각 슬라이드별 뚜렷한 배경색 */
+/* AI 색상 매칭 슬라이드 - 로봇 테마 */
 .slide1 { 
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     position: relative;
+    overflow: hidden;
 }
 
+/* 팔레트 아이콘 배경 장식 (왼쪽) */
 .slide1::before {
+    content: '🎨';
+    position: absolute;
+    left: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 280px;
+    opacity: 0.12;
+    animation: paletteFloat 6s ease-in-out infinite;
+    z-index: 1;
+    filter: drop-shadow(0 0 30px rgba(255,255,255,0.3));
+}
+
+/* 로봇 아이콘 배경 장식 (오른쪽) */
+.slide1 .robot-icon {
+    content: '🤖';
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 280px;
+    opacity: 0.15;
+    animation: robotFloat 6s ease-in-out infinite;
+    z-index: 1;
+    filter: drop-shadow(0 0 30px rgba(255,255,255,0.3));
+}
+
+/* 팔레트 떠다니는 애니메이션 */
+@keyframes paletteFloat {
+    0%, 100% {
+        transform: translateY(-50%) rotate(10deg);
+    }
+    50% {
+        transform: translateY(-55%) rotate(-10deg);
+    }
+}
+
+/* 회로 기판 패턴 */
+.slide1::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    background-image: 
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05) 2px, transparent 2px),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 2px, transparent 2px);
+    background-size: 50px 50px, 50px 50px, 100px 100px, 100px 100px;
+    animation: circuitMove 20s linear infinite;
+    z-index: 0;
+}
+
+/* 로봇 떠다니는 애니메이션 */
+@keyframes robotFloat {
+    0%, 100% {
+        transform: translateY(-50%) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-55%) rotate(5deg);
+    }
+}
+
+/* 회로 기판 움직임 */
+@keyframes circuitMove {
+    0% {
+        background-position: 0 0, 0 0, 0 0, 0 0;
+    }
+    100% {
+        background-position: 50px 50px, 50px 50px, 100px 100px, 100px 100px;
+    }
+}
+
+/* AI 테마 색상 점들 */
+.slide1 .color-dots {
+    position: absolute;
+    left: 5%;
+    bottom: 10%;
+    display: flex;
+    gap: 15px;
     z-index: 1;
 }
 
-.slide2 { 
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    position: relative;
+.slide1 .color-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    animation: colorPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
 }
 
+.slide1 .color-dot:nth-child(1) {
+    background: #FF6B6B;
+    animation-delay: 0s;
+}
+
+.slide1 .color-dot:nth-child(2) {
+    background: #4ECDC4;
+    animation-delay: 0.3s;
+}
+
+.slide1 .color-dot:nth-child(3) {
+    background: #FFE66D;
+    animation-delay: 0.6s;
+}
+
+.slide1 .color-dot:nth-child(4) {
+    background: #95E1D3;
+    animation-delay: 0.9s;
+}
+
+@keyframes colorPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* AI 버튼 스타일 */
+.slide1 .cta-button {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 15px 35px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.slide1 .cta-button::before {
+    position: absolute;
+    left: 15px;
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.slide1 .cta-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.slide1 .cta-button:hover {
+    background: white;
+    color: #667eea;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.slide1 .cta-button:hover::before {
+    transform: scale(1.2) rotate(15deg);
+}
+
+.slide1 .cta-button:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* AI 스파크 효과 */
+.slide1 .ai-spark {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: sparkle 3s ease-in-out infinite;
+}
+
+.slide1 .ai-spark:nth-child(1) {
+    top: 20%;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+.slide1 .ai-spark:nth-child(2) {
+    top: 40%;
+    left: 25%;
+    animation-delay: 1s;
+}
+
+.slide1 .ai-spark:nth-child(3) {
+    top: 60%;
+    left: 20%;
+    animation-delay: 2s;
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 배너 컨텐츠 z-index 조정 */
+.slide1 .banner-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    padding: 0 20px;
+}
+/* 날씨 기반 추천 슬라이드 - 개선된 디자인 */
+.slide2 { 
+    background: linear-gradient(135deg, #56CCF2 0%, #2F80ED 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 구름 애니메이션 효과 */
 .slide2::before {
     content: '';
     position: absolute;
@@ -110,46 +328,568 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: conic-gradient(from 45deg, rgba(255,255,255,0.1) 0%, transparent 25%, rgba(255,255,255,0.1) 50%);
+    background: 
+        radial-gradient(ellipse at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 20%, rgba(255,255,255,0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 60%, rgba(255,255,255,0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 70%, rgba(255,255,255,0.15) 0%, transparent 50%);
+    animation: cloudFloat 20s ease-in-out infinite;
     z-index: 1;
 }
 
+/* 태양/구름 장식 요소 */
+.slide2::after {
+    content: '☀️';
+    position: absolute;
+    top: 100px;
+    right: 200px;
+    font-size: 80px;
+    opacity: 0.3;
+    animation: sunPulse 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+/* 구름 떠다니는 애니메이션 */
+@keyframes cloudFloat {
+    0%, 100% {
+        transform: translateX(0) translateY(0);
+    }
+    50% {
+        transform: translateX(20px) translateY(-10px);
+    }
+}
+
+/* 태양 펄스 애니메이션 */
+@keyframes sunPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.5;
+    }
+}
+
+/* 날씨 테마 버튼 스타일 개선 */
+.slide2 .cta-button {
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid white;
+    color: white;
+    padding: 15px 35px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.slide2 .cta-button::before {
+    position: absolute;
+    left: 15px;
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.slide2 .cta-button:hover {
+    background: white;
+    color: #2F80ED;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(47, 128, 237, 0.3);
+}
+
+.slide2 .cta-button:hover::before {
+    transform: scale(1.2) rotate(15deg);
+}
+
+/* 날씨 아이콘 장식 추가 */
+.slide2 .banner-content::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: -180px;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 40%, transparent 70%);
+    border-radius: 50%;
+    animation: weatherIconFloat 4s ease-in-out infinite;
+}
+
+@keyframes weatherIconFloat {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-15px);
+    }
+}
+
+/* 빗방울 효과 (옵션) */
+.slide2 .rain-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.slide2 .raindrop {
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.6));
+    animation: rainFall 1.5s linear infinite;
+}
+
+@keyframes rainFall {
+    0% {
+        top: -20px;
+        opacity: 1;
+    }
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+/* 나만의 옷장 슬라이드 - 브라운 테마 */
 .slide3 { 
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #8B6F47 0%, #C4A77D 100%);
     position: relative;
+    overflow: hidden;
 }
 
+/* 옷장 아이콘 배경 (왼쪽) */
 .slide3::before {
+    content: '🧥';
+    position: absolute;
+    left: 8%;
+    top: 35%;
+    transform: translateY(-50%);
+    font-size: 280px;
+    opacity: 0.15;
+    animation: closetFloat 6s ease-in-out infinite;
+    z-index: 1;
+    filter: drop-shadow(0 0 30px rgba(255,255,255,0.2));
+}
+
+/* 옷걸이 아이콘 배경 (오른쪽) */
+.slide3 .hanger-icon {
+    position: absolute;
+    right: 10%;
+    top: 65%;
+    transform: translateY(-50%);
+    font-size: 250px;
+    opacity: 0.12;
+    animation: hangerSwing 4s ease-in-out infinite;
+    z-index: 1;
+    filter: drop-shadow(0 0 30px rgba(255,255,255,0.2));
+}
+
+/* 나뭇결 패턴 효과 */
+.slide3::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 20px,
-        rgba(255,255,255,0.1) 20px,
-        rgba(255,255,255,0.1) 40px
-    );
-    z-index: 1;
+    background-image: 
+        repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,0.02) 0px,
+            rgba(255,255,255,0.02) 2px,
+            transparent 2px,
+            transparent 8px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,0.01) 0px,
+            rgba(255,255,255,0.01) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+    z-index: 0;
 }
 
-.slide4 { 
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+/* 옷장 떠다니는 애니메이션 */
+@keyframes closetFloat {
+    0%, 100% {
+        transform: translateY(-50%) rotate(-3deg);
+    }
+    50% {
+        transform: translateY(-55%) rotate(3deg);
+    }
+}
+
+/* 옷걸이 흔들리는 애니메이션 */
+@keyframes hangerSwing {
+    0%, 100% {
+        transform: translateY(-50%) rotate(5deg);
+    }
+    50% {
+        transform: translateY(-50%) rotate(-5deg);
+    }
+}
+
+/* 옷 아이템 장식들 */
+.slide3 .clothing-items {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 25px;
+    z-index: 2;
+}
+
+.slide3 .clothing-item {
+    font-size: 35px;
+    opacity: 0;
+    animation: itemAppear 3s ease-in-out infinite;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+}
+
+.slide3 .clothing-item:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.slide3 .clothing-item:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.slide3 .clothing-item:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.slide3 .clothing-item:nth-child(4) {
+    animation-delay: 1.5s;
+}
+
+@keyframes itemAppear {
+    0%, 100% {
+        opacity: 0.4;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(-8px);
+    }
+}
+
+/* 옷장 버튼 스타일 */
+.slide3 .cta-button {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 15px 35px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     position: relative;
+    overflow: hidden;
 }
 
+.slide3 .cta-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.slide3 .cta-button:hover {
+    background: white;
+    color: #8B6F47;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139, 111, 71, 0.4);
+}
+
+.slide3 .cta-button:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* 배너 컨텐츠 z-index 조정 */
+.slide3 .banner-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    padding: 0 20px;
+}
+
+/* 빛나는 효과 */
+.slide3 .sparkle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255,255,255,0.8);
+    animation: sparkleEffect 4s ease-in-out infinite;
+}
+
+.slide3 .sparkle:nth-child(1) {
+    top: 25%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.slide3 .sparkle:nth-child(2) {
+    top: 45%;
+    left: 15%;
+    animation-delay: 1.5s;
+}
+
+.slide3 .sparkle:nth-child(3) {
+    top: 65%;
+    left: 25%;
+    animation-delay: 3s;
+}
+
+@keyframes sparkleEffect {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+/* 코디 히스토리 슬라이드 - 기록/추억 테마 */
+.slide4 { 
+    background: linear-gradient(135deg, #FF6B9D 0%, #C06C84 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 달력 아이콘 배경 (왼쪽) */
 .slide4::before {
+    content: '📅';
+    position: absolute;
+    left: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 280px;
+    opacity: 0.15;
+    animation: calendarFlip 6s ease-in-out infinite;
+    z-index: 1;
+    filter: drop-shadow(0 0 30px rgba(255,255,255,0.2));
+}
+
+/* 카메라 아이콘 배경 (오른쪽) */
+.slide4 .camera-icon {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 250px;
+    opacity: 0.13;
+    animation: cameraShutter 5s ease-in-out infinite;
+    z-index: 1;
+    filter: drop-shadow(0 0 30px rgba(255,255,255,0.2));
+}
+
+/* 달력 넘기는 애니메이션 */
+@keyframes calendarFlip {
+    0%, 100% {
+        transform: translateY(-50%) rotateY(0deg);
+    }
+    50% {
+        transform: translateY(-55%) rotateY(10deg);
+    }
+}
+
+/* 카메라 셔터 애니메이션 */
+@keyframes cameraShutter {
+    0%, 100% {
+        transform: translateY(-50%) scale(1);
+        opacity: 0.13;
+    }
+    10% {
+        transform: translateY(-50%) scale(0.95);
+        opacity: 0.2;
+    }
+    20% {
+        transform: translateY(-50%) scale(1);
+        opacity: 0.13;
+    }
+}
+
+/* 필름 스트립 패턴 */
+.slide4::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.1) 0%, transparent 40%);
-    z-index: 1;
+    background-image: 
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 100px,
+            rgba(255,255,255,0.03) 100px,
+            rgba(255,255,255,0.03) 105px
+        );
+    z-index: 0;
+}
+
+/* 별 평점 장식들 */
+.slide4 .star-ratings {
+    position: absolute;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 2;
+}
+
+.slide4 .rating-star {
+    font-size: 30px;
+    opacity: 0;
+    animation: starTwinkle 3s ease-in-out infinite;
+    filter: drop-shadow(0 2px 8px rgba(255,215,0,0.5));
+}
+
+.slide4 .rating-star:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.slide4 .rating-star:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.slide4 .rating-star:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.slide4 .rating-star:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+.slide4 .rating-star:nth-child(5) {
+    animation-delay: 1.2s;
+}
+
+@keyframes starTwinkle {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.15);
+    }
+}
+
+/* 코디 히스토리 버튼 스타일 */
+.slide4 .cta-button {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 15px 35px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.slide4 .cta-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.slide4 .cta-button:hover {
+    background: white;
+    color: #7B68EE;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(123, 104, 238, 0.4);
+}
+
+.slide4 .cta-button:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* 배너 컨텐츠 z-index 조정 */
+.slide4 .banner-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    padding: 0 20px;
+}
+
+/* 사진 프레임 효과 */
+.slide4 .photo-frame {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    animation: frameFloat 8s ease-in-out infinite;
+}
+
+.slide4 .photo-frame:nth-child(1) {
+    top: 15%;
+    left: 18%;
+    animation-delay: 0s;
+}
+
+.slide4 .photo-frame:nth-child(2) {
+    top: 70%;
+    left: 22%;
+    animation-delay: 2s;
+}
+
+.slide4 .photo-frame:nth-child(3) {
+    top: 35%;
+    right: 18%;
+    animation-delay: 4s;
+}
+
+@keyframes frameFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+        opacity: 0.6;
+    }
 }
 
 .slide5 { 
@@ -431,4 +1171,281 @@ body {
     
     .prev { left: 20px; }
     .next { right: 20px; }
+}
+/* 모달 전체 오버레이 */
+.coord-detail-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+    overflow-y: auto;
+}
+
+.coord-detail-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 모달 내용 컨테이너 (스크린샷 크기 및 모양) */
+.modal-content-screenshot { 
+    background: white;
+    border-radius: 16px;
+    max-width: 480px; 
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.4s ease;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+/* 닫기 버튼 */
+.modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close-btn:hover {
+    transform: rotate(90deg);
+}
+
+.modal-close-btn svg path { 
+    stroke: black; /* X자 아이콘 색상 */
+}
+
+/* 이미지 섹션 */
+.modal-image-section {
+    width: 100%;
+    height: 400px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 16px 16px 0 0; 
+}
+
+.modal-image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: white;
+}
+
+.modal-coord-title-screenshot {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.modal-coord-subtitle-screenshot {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* 정보 섹션 */
+.modal-info-section {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.info-group:nth-child(4) { 
+    border-bottom: none;
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-size: 0.95rem;
+    color: #555;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-right: 15px;
+}
+
+.info-value {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+    text-align: right;
+    flex-grow: 1;
+}
+
+/* 매칭도 */
+.info-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.info-stars {
+    color: #ffd700;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.info-score {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fa709a; 
+}
+
+/* 색상 팔레트 */
+.info-colors-palette {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.modal-color-circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 스타일링 팁 분리선 */
+.tip-separator {
+    height: 1px;
+    background-color: #f0f0f0;
+    margin: 10px 0 20px 0;
+}
+
+/* 스타일링 팁 섹션 */
+.styling-tip-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.styling-tip-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.styling-tip-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+.modal-tag {
+    background: #e9eefd;
+    color: #4a5568;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* 액션 버튼 섹션 */
+.modal-action-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 15px 25px 25px 25px; 
+    flex-shrink: 0;
+}
+
+.action-btn-screenshot {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-btn-screenshot.favorite-btn {
+    background: white;
+    color: #555;
+    border: 1px solid #ccc;
+}
+
+.action-btn-screenshot.favorite-btn:hover {
+    background: #f0f0f0;
+}
+
+.action-btn-screenshot.favorite-btn.added {
+    background: #fa709a; 
+    color: white;
+    border-color: #fa709a;
+}
+
+.action-btn-screenshot.share-btn {
+    background: linear-gradient(135deg, black); 
+    color: white;
+    box-shadow: 0 4px 10px rgba(250, 112, 154, 0.3);
+}
+
+.action-btn-screenshot.share-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(250, 112, 154, 0.4);
+}
+
+/* 애니메이션 */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+    .coord-detail-modal.active {
+        padding: 0; 
+    }
+    .modal-content-screenshot {
+        width: 100%;
+        max-width: none;
+        max-height: 100vh;
+        border-radius: 0; 
+    }
+    .modal-image-section {
+        height: 350px; 
+    }
+    .modal-info-section,
+    .modal-action-buttons {
+        padding: 20px;
+    }
+    .action-btn-screenshot {
+        font-size: 0.95rem;
+        padding: 12px 15px;
+    }
 }

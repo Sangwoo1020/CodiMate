@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodiMate - 코디 히스토리</title>
+    <link rel="stylesheet" href="/static/css/fix/header.css">
+    <link rel="stylesheet" href="/static/css/codi-history/codi-history.css">
+    <link rel="stylesheet" href="/static/css/fix/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 헤더 플레이스홀더 -->
+    <div id="header-placeholder" class="loading"></div>
+
+    <!-- 메인 컨테이너 -->
+    <div class="history-container">
+        <!-- 페이지 헤더 -->
+        <div class="page-header">
+            <div class="header-content">
+                <h1>코디 히스토리</h1>
+                <p>나의 코디 기록을 확인하고 새로운 코디를 등록해보세요</p>
+                <button class="add-codi-btn" id="addCodiBtn">
+                    <i class="fas fa-plus"></i>
+                    새 코디 등록하기
+                </button>
+            </div>
+        </div>
+
+        <!-- 필터 및 검색 -->
+        <div class="filter-section">
+            <div class="filter-group">
+                <label>기간 선택:</label>
+                <select id="periodFilter">
+                    <option value="all">전체</option>
+                    <option value="week">최근 1주일</option>
+                    <option value="month">최근 1개월</option>
+                    <option value="3month">최근 3개월</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>테마:</label>
+                <select id="themeFilter">
+                    <option value="all">전체</option>
+                    <option value="business">비즈니스</option>
+                    <option value="casual">캐주얼</option>
+                    <option value="date">데이트</option>
+                    <option value="formal">포멀</option>
+                    <option value="exercise">운동</option>
+                    <option value="party">파티</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>만족도:</label>
+                <select id="ratingFilter">
+                    <option value="all">전체</option>
+                    <option value="5">★★★★★ (5점)</option>
+                    <option value="4">★★★★☆ (4점)</option>
+                    <option value="3">★★★☆☆ (3점)</option>
+                    <option value="2">★★☆☆☆ (2점)</option>
+                    <option value="1">★☆☆☆☆ (1점)</option>
+                </select>
+            </div>
+            <div class="search-group">
+                <input type="text" id="searchInput" placeholder="코디명이나 메모로 검색...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+        <!-- 통계 요약 -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-tshirt"></i></div>
+                <div class="stat-info">
+                    <div class="stat-number" id="totalCodis">24</div>
+                    <div class="stat-label">총 코디 수</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-star"></i></div>
+                <div class="stat-info">
+                    <div class="stat-number" id="avgRating">4.2</div>
+                    <div class="stat-label">평균 만족도</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                <div class="stat-info">
+                    <div class="stat-number" id="favoriteCodis">8</div>
+                    <div class="stat-label">즐겨찾기</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-calendar"></i></div>
+                <div class="stat-info">
+                    <div class="stat-number" id="thisMonthCodis">12</div>
+                    <div class="stat-label">이번 달</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 코디 히스토리 목록 -->
+        <div class="history-grid" id="historyGrid">
+            <!-- 샘플 데이터 -->
+            <div class="history-card" data-theme="business" data-rating="5" data-date="2025-09-20">
+                <div class="card-header">
+                    <div class="date-info">
+                        <div class="date">2025.09.20</div>
+                        <div class="weather-info">
+                            <i class="fas fa-sun"></i>
+                            <span>22°C</span>
+                        </div>
+                    </div>
+                    <div class="theme-badge business">비즈니스</div>
+                    <button class="favorite-btn" data-favorite="true">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="codi-preview">
+                    <div class="outfit-combination">
+                        <div class="clothing-item top">
+                            <img src="/static/image/mainpage/sample1.png" alt="상의">
+                            <span>화이트 셔츠</span>
+                        </div>
+                        <div class="plus-icon">+</div>
+                        <div class="clothing-item bottom">
+                            <img src="/static/image/mainpage/sample2.png" alt="하의">
+                            <span>네이비 슬랙스</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="codi-name">클래식 비즈니스 룩</h3>
+                    <div class="rating">
+                        <div class="stars">★★★★★</div>
+                        <span class="rating-text">매우 만족</span>
+                    </div>
+                    <p class="memo">중요한 프레젠테이션이 있어서 깔끔하고 신뢰감 있는 룩으로 선택했습니다. 회사 동료들에게 좋은 반응을 받았어요!</p>
+                </div>
+                <div class="card-actions">
+                    <button class="action-btn detail-btn" data-id="1">
+                        <i class="fas fa-eye"></i> 상세보기
+                    </button>
+                    <button class="action-btn edit-btn" data-id="1">
+                        <i class="fas fa-edit"></i> 수정
+                    </button>
+                    <button class="action-btn delete-btn" data-id="1">
+                        <i class="fas fa-trash"></i> 삭제
+                    </button>
+                </div>
+            </div>
+
+            <div class="history-card" data-theme="casual" data-rating="4" data-date="2025-09-19">
+                <div class="card-header">
+                    <div class="date-info">
+                        <div class="date">2025.09.19</div>
+                        <div class="weather-info">
+                            <i class="fas fa-cloud"></i>
+                            <span>18°C</span>
+                        </div>
+                    </div>
+                    <div class="theme-badge casual">캐주얼</div>
+                    <button class="favorite-btn" data-favorite="false">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <div class="codi-preview">
+                    <div class="outfit-combination">
+                        <div class="clothing-item top">
+                            <img src="/static/image/mainpage/sample3.png" alt="상의">
+                            <span>데님 재킷</span>
+                        </div>
+                        <div class="plus-icon">+</div>
+                        <div class="clothing-item bottom">
+                            <img src="/static/image/mainpage/sample4.png" alt="하의">
+                            <span>블랙 청바지</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="codi-name">편안한 주말 룩</h3>
+                    <div class="rating">
+                        <div class="stars">★★★★☆</div>
+                        <span class="rating-text">만족</span>
+                    </div>
+                    <p class="memo">친구들과 카페 가는 날 편안하면서도 스타일리시한 룩을 원해서 선택했어요.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="action-btn detail-btn" data-id="2">
+                        <i class="fas fa-eye"></i> 상세보기
+                    </button>
+                    <button class="action-btn edit-btn" data-id="2">
+                        <i class="fas fa-edit"></i> 수정
+                    </button>
+                    <button class="action-btn delete-btn" data-id="2">
+                        <i class="fas fa-trash"></i> 삭제
+                    </button>
+                </div>
+            </div>
+
+            <div class="history-card" data-theme="date" data-rating="5" data-date="2025-09-18">
+                <div class="card-header">
+                    <div class="date-info">
+                        <div class="date">2025.09.18</div>
+                        <div class="weather-info">
+                            <i class="fas fa-sun"></i>
+                            <span>25°C</span>
+                        </div>
+                    </div>
+                    <div class="theme-badge date">데이트</div>
+                    <button class="favorite-btn" data-favorite="true">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="codi-preview">
+                    <div class="outfit-combination">
+                        <div class="clothing-item top">
+                            <img src="/static/image/mainpage/sample5.png" alt="상의">
+                            <span>플라워 블라우스</span>
+                        </div>
+                        <div class="plus-icon">+</div>
+                        <div class="clothing-item bottom">
+                            <img src="/static/image/mainpage/sample6.png" alt="하의">
+                            <span>베이지 스커트</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="codi-name">로맨틱 데이트 룩</h3>
+                    <div class="rating">
+                        <div class="stars">★★★★★</div>
+                        <span class="rating-text">매우 만족</span>
+                    </div>
+                    <p class="memo">첫 데이트라서 여성스럽고 로맨틱한 느낌으로 골랐어요. 상대방이 정말 예쁘다고 해주셨어요!</p>
+                </div>
+                <div class="card-actions">
+                    <button class="action-btn detail-btn" data-id="3">
+                        <i class="fas fa-eye"></i> 상세보기
+                    </button>
+                    <button class="action-btn edit-btn" data-id="3">
+                        <i class="fas fa-edit"></i> 수정
+                    </button>
+                    <button class="action-btn delete-btn" data-id="3">
+                        <i class="fas fa-trash"></i> 삭제
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 코디 등록/수정 모달 -->
+    <div class="modal" id="codiModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">새 코디 등록하기</h2>
+                <button class="close-btn" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="codiForm" class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="codiName">코디명 *</label>
+                        <input type="text" id="codiName" name="codiName" required placeholder="코디에 어울리는 이름을 지어주세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="wearDate">착용 날짜 *</label>
+                        <input type="date" id="wearDate" name="wearDate" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="themeSelect">테마 *</label>
+                        <select id="themeSelect" name="theme" required>
+                            <option value="">테마를 선택하세요</option>
+                            <option value="business">비즈니스</option>
+                            <option value="casual">캐주얼</option>
+                            <option value="date">데이트</option>
+                            <option value="formal">포멀</option>
+                            <option value="exercise">운동</option>
+                            <option value="party">파티</option>
+                            <option value="travel">여행</option>
+                            <option value="school">학교</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="weatherInfo">날씨 정보</label>
+                        <div class="weather-input-group">
+                            <input type="number" id="temperature" name="temperature" placeholder="온도(°C)" min="-30" max="50">
+                            <select id="weatherCondition" name="weatherCondition">
+                                <option value="sunny">☀️ 맑음</option>
+                                <option value="cloudy">☁️ 흐림</option>
+                                <option value="rainy">🌧️ 비</option>
+                                <option value="snowy">❄️ 눈</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clothing-selection">
+                    <h3>의류 선택</h3>
+                    <div class="clothing-row">
+                        <div class="clothing-group">
+                            <label>상의 *</label>
+                            <div class="clothing-selector" id="topSelector">
+                                <div class="selected-clothing" id="selectedTop">
+                                    <div class="placeholder">
+                                        <i class="fas fa-plus"></i>
+                                        <span>상의 선택</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="select-clothing-btn" data-type="top">
+                                    선택하기
+                                </button>
+                            </div>
+                        </div>
+                        <div class="clothing-group">
+                            <label>하의 *</label>
+                            <div class="clothing-selector" id="bottomSelector">
+                                <div class="selected-clothing" id="selectedBottom">
+                                    <div class="placeholder">
+                                        <i class="fas fa-plus"></i>
+                                        <span>하의 선택</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="select-clothing-btn" data-type="bottom">
+                                    선택하기
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="satisfaction">만족도 *</label>
+                    <div class="rating-input" id="ratingInput">
+                        <div class="star-rating">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <div class="rating-text">만족도를 선택해주세요</div>
+                    </div>
+                    <input type="hidden" id="satisfactionValue" name="satisfaction" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="memo">메모</label>
+                    <textarea id="memo" name="memo" rows="4" placeholder="이 코디에 대한 후기나 특별한 기억을 적어주세요 (선택사항)"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelBtn">취소</button>
+                    <button type="submit" class="submit-btn" id="submitBtn">등록하기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 옷 선택 모달 -->
+    <div class="modal" id="clothingSelectModal">
+        <div class="modal-content small">
+            <div class="modal-header">
+                <h3 id="clothingModalTitle">상의 선택</h3>
+                <button class="close-btn" id="closeClothingModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="clothing-grid" id="clothingGrid">
+                    <!-- 옷장에서 가져온 의류 목록이 여기에 표시됩니다 -->
+                </div>
+                <div class="no-clothing" id="noClothingMessage" style="display: none;">
+                    <p>등록된 의류가 없습니다.</p>
+                    <button class="add-clothing-btn" onclick="goToCloset()">
+                        옷장에서 의류 등록하기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상세보기 모달 -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>코디 상세 정보</h2>
+                <button class="close-btn" id="closeDetailModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="detailContent">
+                <!-- 상세 정보가 동적으로 로드됩니다 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 플레이스홀더 -->
+    <div id="footer-placeholder"></div>
+
+    <!-- 스크립트 -->
+    <script src="/static/js/fix/header.js"></script>
+    <script src="/static/js/codi-history/codi-history.js"></script>
+    <script src="/static/js/fix/footer.js"></script>
+</body>
+</html>

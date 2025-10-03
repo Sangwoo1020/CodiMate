@@ -1,0 +1,1711 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    padding-top: 80px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 페이지 헤더 */
+.page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 80px 0 60px;
+    text-align: center;
+    position: relative;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: 1;
+}
+
+.page-header .container {
+    position: relative;
+    z-index: 2;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+/* 추천 옵션 선택 */
+.recommend-options {
+    padding: 60px 0;
+    background: white;
+    position: relative;
+}
+
+.recommend-options::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.08) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: 1;
+}
+
+.recommend-options .container {
+    position: relative;
+    z-index: 2;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #2d3748;
+}
+
+.option-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.option-card {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 40px 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.option-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: #667eea;
+}
+
+.option-card.active {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    position: relative;
+}
+
+.option-card.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+.option-card .option-icon,
+.option-card h3,
+.option-card p {
+    position: relative;
+    z-index: 2;
+}
+
+.option-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.option-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.option-card p {
+    font-size: 1rem;
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
+/* 추천 폼 스타일 */
+.recommend-form {
+    padding: 60px 0;
+    background: #f8f9fa;
+    display: none;
+    position: relative;
+}
+
+.recommend-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: 1;
+}
+
+.recommend-form .container {
+    position: relative;
+    z-index: 2;
+}
+
+.recommend-form.active {
+    display: block;
+}
+
+.recommend-form h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #2d3748;
+}
+
+/* 진행 단계 표시 */
+.progress-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.progress-steps::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e2e8f0;
+    z-index: 1;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 50px;
+    min-width: 120px;
+    transition: all 0.3s ease;
+}
+
+.step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 50px;
+    z-index: 1;
+}
+
+.step.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    position: relative;
+}
+
+.step.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 50px;
+    z-index: 1;
+}
+
+.step.completed {
+    background: #10b981;
+    color: white;
+    position: relative;
+}
+
+.step.completed::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 50px;
+    z-index: 1;
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 2;
+}
+
+.step.active .step-number,
+.step.completed .step-number {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.step-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* 색상 단계별 컨텐츠 */
+.color-step {
+    display: none;
+    text-align: center;
+}
+
+.color-step.active {
+    display: block;
+}
+
+.color-step h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #2d3748;
+}
+
+.step-desc {
+    font-size: 1.1rem;
+    color: #718096;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 색상 조합 표시 */
+.color-combinations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.color-combination {
+    background: white;
+    border: 3px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.color-combination::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 17px;
+    z-index: 1;
+}
+
+.color-combination:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    border-color: #667eea;
+}
+
+.color-combination.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8eeff 100%);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.2);
+    position: relative;
+}
+
+.color-combination.selected::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.08) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 17px;
+    z-index: 1;
+}
+
+.color-combination .combination-colors,
+.color-combination .combination-name,
+.color-combination .combination-desc {
+    position: relative;
+    z-index: 2;
+}
+
+.combination-colors {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.color-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.color-circle.large {
+    width: 60px;
+    height: 60px;
+}
+
+.combination-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 8px;
+}
+
+.combination-desc {
+    font-size: 0.9rem;
+    color: #718096;
+    line-height: 1.4;
+}
+
+/* 선택된 조합 표시 */
+.selected-combination {
+    background: white;
+    border: 2px solid #667eea;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 30px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.selected-combination::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+.selected-combination .combination-colors {
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+/* 색상 옵션 선택 */
+.color-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+.color-option {
+    background: white;
+    border: 3px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+}
+
+.color-option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 13px;
+    z-index: 1;
+}
+
+.color-option:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: #667eea;
+}
+
+.color-option.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: translateY(-3px);
+    position: relative;
+}
+
+.color-option.selected::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 13px;
+    z-index: 1;
+}
+
+.color-option .color-circle,
+.color-option .color-name,
+.color-option .color-korean {
+    position: relative;
+    z-index: 2;
+}
+
+.color-option .color-circle {
+    margin: 0 auto 15px;
+}
+
+.color-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.color-korean {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* 선택된 색상들 표시 */
+.selected-colors {
+    background: white;
+    border: 2px solid #667eea;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.selected-colors::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+.color-selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.selected-color-item {
+    text-align: center;
+}
+
+.selected-color-item .color-circle {
+    margin: 0 auto 8px;
+}
+
+.selected-color-item .color-label {
+    font-size: 0.9rem;
+    color: #718096;
+    margin-bottom: 4px;
+}
+
+.selected-color-item .color-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.arrow-icon {
+    font-size: 1.5rem;
+    color: #667eea;
+}
+
+/* 최종 선택 표시 */
+.final-selection {
+    background: white;
+    border: 2px solid #667eea;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.final-selection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 18px;
+    z-index: 1;
+}
+
+/* 단계 버튼들 */
+.step-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.step-btn {
+    padding: 12px 30px;
+    border: 2px solid #667eea;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.prev-btn {
+    background: white;
+    color: #667eea;
+}
+
+.prev-btn:hover {
+    background: #667eea;
+    color: white;
+}
+
+.recommend-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+    position: relative;
+}
+
+.recommend-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.recommend-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* 날씨 기반 폼 */
+.weather-info {
+    margin-bottom: 40px;
+}
+
+.weather-card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.weather-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+.weather-card .weather-icon,
+.weather-card .weather-details {
+    position: relative;
+    z-index: 2;
+}
+
+.weather-icon {
+    font-size: 4rem;
+}
+
+.weather-details h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2d3748;
+}
+
+.temperature {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 5px;
+}
+
+.weather-desc {
+    color: #718096;
+    font-size: 0.95rem;
+}
+
+/* 계절 선택 스타일 */
+.season-selection {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.season-selection h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+.season-desc {
+    font-size: 1rem;
+    color: #718096;
+    margin-bottom: 30px;
+}
+
+.season-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.season-card {
+    background: white;
+    border: 3px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.season-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 17px;
+    z-index: 1;
+}
+
+.season-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    border-color: #667eea;
+}
+
+.season-card.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.3);
+    position: relative;
+}
+
+.season-card.selected::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 17px;
+    z-index: 1;
+}
+
+.season-card .season-icon,
+.season-card h5,
+.season-card p,
+.season-card .season-desc-text {
+    position: relative;
+    z-index: 2;
+}
+
+.season-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.season-card h5 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2d3748;
+}
+
+.season-card.selected h5 {
+    color: white;
+}
+
+.season-card p {
+    font-size: 0.9rem;
+    color: #667eea;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.season-card.selected p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.season-desc-text {
+    font-size: 0.85rem;
+    color: #718096;
+    line-height: 1.4;
+}
+
+.season-card.selected .season-desc-text {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 기존 선호사항 태그 스타일 */
+.preference-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tag {
+    padding: 10px 20px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    position: relative;
+}
+
+.tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 23px;
+    z-index: 1;
+}
+
+.tag:hover {
+    border-color: #667eea;
+}
+
+.tag.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+    position: relative;
+}
+
+.tag.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 23px;
+    z-index: 1;
+}
+
+.recommend-tag {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px 24px;
+    border: none;
+    position: relative;
+}
+
+.recommend-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 25px;
+    z-index: 1;
+}
+
+.recommend-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* 상황별 추천 폼 */
+.situation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.situation-card {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.situation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 13px;
+    z-index: 1;
+}
+
+.situation-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: #667eea;
+}
+
+.situation-card.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    position: relative;
+}
+
+.situation-card.selected::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 13px;
+    z-index: 1;
+}
+
+.situation-card .situation-icon,
+.situation-card h4,
+.situation-card p {
+    position: relative;
+    z-index: 2;
+}
+
+.situation-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.situation-card h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.situation-card p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* 추천 결과 섹션 */
+.recommendation-results {
+    padding: 60px 0;
+    background: white;
+    position: relative;
+}
+
+.recommendation-results::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: 1;
+}
+
+.recommendation-results .container {
+    position: relative;
+    z-index: 2;
+}
+
+.recommendation-results .section-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #2d3748;
+}
+
+/* 추천 결과 - 메인페이지 coord-grid 스타일 적용 */
+.coord-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.coord-item {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.coord-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.02) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+.coord-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.coord-image {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.coord-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: 1;
+}
+
+.coord-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.weather-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.coord-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.coord-item:hover .coord-overlay {
+    opacity: 1;
+}
+
+.coord-info {
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.coord-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2d3748;
+    line-height: 1.3;
+}
+
+.coord-desc {
+    color: #718096;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.stars {
+    color: #ffd700;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.rating-text {
+    font-size: 0.85rem;
+    color: #718096;
+    font-weight: 500;
+}
+
+.coord-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn-small {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.action-btn-small::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.action-btn-small:hover {
+    background: #667eea;
+    color: white;
+}
+
+.action-btn-small.primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+}
+
+.action-btn-small.primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.action-btn-small.primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* 만약 기존 result-card 요소가 남아있다면 숨김 */
+.result-card {
+    display: none;
+}
+
+/* 로딩 오버레이 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 300px;
+    position: relative;
+}
+
+.loading-spinner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+.loading-spinner .spinner,
+.loading-spinner p {
+    position: relative;
+    z-index: 2;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+    color: #2d3748;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .form-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .option-cards,
+    .situation-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .weather-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .preference-tags {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .page-header {
+        padding: 60px 0 40px;
+    }
+    
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .recommend-form {
+        padding: 40px 0;
+    }
+    
+    .clothing-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 12px;
+    }
+    
+    .clothing-item {
+        padding: 12px;
+    }
+    
+    .clothing-item-icon {
+        font-size: 1.5rem;
+    }
+    
+    .clothing-item-name {
+        font-size: 0.8rem;
+    }
+}
+/* 모달 전체 오버레이 */
+.coord-detail-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.coord-detail-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 모달 내용 컨테이너 (스크린샷 크기 및 모양) */
+.modal-content-screenshot { 
+    background: white;
+    border-radius: 16px; /* 스크린샷과 유사하게 조정 */
+    max-width: 480px; /* 스크린샷과 유사한 너비 */
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.4s ease;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+/* 닫기 버튼 */
+.modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close-btn:hover {
+    transform: rotate(90deg);
+}
+
+/* ⚠️ 이 부분을 수정합니다: SVG 아이콘의 stroke 색상을 검정색으로 변경합니다. ⚠️ */
+.modal-close-btn svg path { 
+    stroke: black; /* X자 아이콘 색상을 검정으로 변경 */
+}
+
+/* 이미지 섹션 */
+.modal-image-section {
+    width: 100%;
+    height: 400px; /* 스크린샷과 유사한 높이 */
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 16px 16px 0 0; /* 상단 모서리만 둥글게 */
+}
+
+.modal-image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: white;
+}
+
+.modal-coord-title-screenshot {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.modal-coord-subtitle-screenshot {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* 정보 섹션 (전체 바디) */
+.modal-info-section {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.info-group:nth-child(4) { /* 코디 번호 줄만 아래 테두리 제거 */
+    border-bottom: none;
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-size: 0.95rem;
+    color: #555; /* 스크린샷과 유사한 색상 */
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-right: 15px;
+}
+
+.info-value {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+    text-align: right;
+    flex-grow: 1;
+}
+
+/* 매칭도 */
+.info-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.info-stars {
+    color: #ffd700;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.info-score {
+    font-size: 1rem;
+    font-weight: 600;
+    color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* 색상 팔레트 */
+.info-colors-palette {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.modal-color-circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 스타일링 팁 분리선 */
+.tip-separator {
+    height: 1px;
+    background-color: #f0f0f0;
+    margin: 10px 0 20px 0;
+}
+
+/* 스타일링 팁 섹션 */
+.styling-tip-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.styling-tip-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.styling-tip-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+.modal-tag {
+    background: #e9eefd; /* 연한 색상 */
+    color: #4a5568;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* 액션 버튼 섹션 */
+.modal-action-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 15px 25px 25px 25px; /* 스크린샷과 유사한 패딩 */
+    flex-shrink: 0;
+}
+
+.action-btn-screenshot {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.action-btn-screenshot.favorite-btn {
+    background: white;
+    color: #555;
+    border: 1px solid #ccc;
+}
+
+.action-btn-screenshot.favorite-btn:hover {
+    background: #f0f0f0;
+}
+
+.action-btn-screenshot.favorite-btn.added {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+    color: white;
+    border-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.action-btn-screenshot.share-btn {
+    background: linear-gradient(135deg, linear-gradient(135deg, #667eea 0%, #764ba2 100%)); 
+    color: white;
+    box-shadow: 0 4px 10px rgba(250, 112, 154, 0.3);
+}
+
+.action-btn-screenshot.share-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(250, 112, 154, 0.4);
+}
+
+/* 기존 모달 클래스 제거 (혹시 모를 충돌 방지) */
+.modal-content-detail, .modal-info-grid {
+    display: none !important;
+}
+
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+    .coord-detail-modal.active {
+        padding: 0; 
+    }
+    .modal-content-screenshot {
+        width: 100%;
+        max-width: none;
+        max-height: 100vh;
+        border-radius: 0; 
+    }
+    .modal-image-section {
+        height: 350px; 
+    }
+    .modal-info-section,
+    .modal-action-buttons {
+        padding: 20px;
+    }
+    .action-btn-screenshot {
+        font-size: 0.95rem;
+        padding: 12px 15px;
+    }
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodiMate - 즐겨찾기</title>
+    <link rel="stylesheet" href="/static/css/fix/header.css">
+    <link rel="stylesheet" href="/static/css/mypage/wishlist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 헤더 플레이스홀더 -->
+    <div id="header-placeholder" class="loading"></div>
+
+    <div class="mypage-container">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="profile-section">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h3 id="userName">김상우</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="/templates/mypage/dashboard.html" class="nav-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>대시보드</span>
+                </a>
+                <a href="/templates/mypage/wishlist.html" class="nav-item active">
+                    <i class="fas fa-heart"></i>
+                    <span>즐겨찾기</span>
+                </a>
+                <a href="/templates/mypage/setting.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>설정</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>즐겨찾기</h1>
+                <p>마음에 든 코디들을 모아보세요</p>
+            </div>
+
+            <!-- 필터 및 정렬 -->
+            <div class="wishlist-controls">
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <label>카테고리</label>
+                        <select id="categoryFilter" onchange="filterWishlist()">
+                            <option value="all">전체</option>
+                            <option value="casual">캐주얼</option>
+                            <option value="business">비즈니스</option>
+                            <option value="date">데이트</option>
+                            <option value="formal">포멀</option>
+                            <option value="party">파티</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>정렬</label>
+                        <select id="sortFilter" onchange="sortWishlist()">
+                            <option value="newest">최신순</option>
+                            <option value="oldest">오래된순</option>
+                            <option value="rating">만족도순</option>
+                            <option value="name">이름순</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="view-controls">
+                    <button class="view-btn active" data-view="grid" onclick="changeView('grid')">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" data-view="list" onclick="changeView('list')">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 통계 정보 -->
+            <div class="wishlist-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalWishlist">0</span>
+                    <span class="stat-label">총 즐겨찾기</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="avgRating">0</span>
+                    <span class="stat-label">평균 만족도</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="mostCategory">-</span>
+                    <span class="stat-label">선호 카테고리</span>
+                </div>
+            </div>
+
+            <!-- 즐겨찾기 목록 -->
+            <div class="wishlist-container">
+                <div id="wishlistGrid" class="wishlist-grid view-grid">
+                    <!-- 즐겨찾기 아이템들이 동적으로 추가됩니다 -->
+                </div>
+                
+                <!-- 빈 상태 메시지 -->
+                <div id="emptyWishlist" class="empty-state" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>아직 즐겨찾기한 코디가 없어요</h3>
+                    <p>마음에 드는 코디를 하트 버튼을 눌러 즐겨찾기로 저장해보세요!</p>
+                    <button class="discover-btn" onclick="goToRecommendation()">
+                        <i class="fas fa-compass"></i>
+                        코디 추천 받기
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 코디 상세 모달 -->
+    <div id="outfitModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">코디 상세 정보</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="outfit-preview">
+                    <div class="outfit-items">
+                        <div class="outfit-item" id="modalTopItem">
+                            <span id="modalTopName">상의</span>
+                        </div>
+                        <div class="outfit-item" id="modalBottomItem">
+                            <span id="modalBottomName">하의</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="outfit-details">
+                    <div class="detail-row">
+                        <span class="detail-label">코디명:</span>
+                        <span class="detail-value" id="modalOutfitName">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">카테고리:</span>
+                        <span class="detail-value" id="modalCategory">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">추가일:</span>
+                        <span class="detail-value" id="modalDate">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">만족도:</span>
+                        <div class="detail-value">
+                            <span id="modalRating" class="stars"></span>
+                            <span id="modalRatingText"></span>
+                        </div>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">메모:</span>
+                        <span class="detail-value" id="modalMemo">-</span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="action-btn secondary" onclick="editOutfit()">
+                        <i class="fas fa-edit"></i>
+                        편집
+                    </button>
+                    <button class="action-btn danger" onclick="removeFromWishlist()">
+                        <i class="fas fa-heart-broken"></i>
+                        즐겨찾기 해제
+                    </button>
+                    <button class="action-btn primary" onclick="useOutfit()">
+                        <i class="fas fa-check"></i>
+                        이 코디 사용
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/fix/header.js"></script>
+    <script src="/static/js/mypage/wishlist.js"></script>
+</body>
+</html>

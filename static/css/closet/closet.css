@@ -1,0 +1,1193 @@
+/* CSS 초기화 */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1.5;
+    padding-top: 80px;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* 기본 스타일 및 변수 설정 */
+:root {
+    --primary-color: #ff4757;
+    --secondary-color: #555;
+    --bg-color: #f8f9fa;
+    --card-bg: #fff;
+    --border-color: #e9ecef;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--secondary-color);
+    margin: 0;
+    line-height: 1.5;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.05) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 페이지 헤더 */
+.page-header {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+    color: white;
+    padding: 80px 0 60px;
+    text-align: center;
+    position: relative;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: 1;
+}
+
+.page-header .container {
+    position: relative;
+    z-index: 2;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+/* 옷장 컨테이너 */
+.closet-container {
+    max-width: 1200px;
+    margin: 60px auto 80px;
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    position: relative;
+    margin-bottom : 60px;
+}
+
+.closet-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.03) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 13px;
+    z-index: 1;
+}
+
+.closet-container > * {
+    position: relative;
+    z-index: 2;
+}
+
+.closet-container h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* 탭 메뉴 */
+.tab-menu {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.tab-button {
+    background: transparent;
+    border: none;
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s, border-bottom 0.3s;
+    position: relative;
+}
+
+.tab-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 8px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tab-button:hover {
+    color: var(--primary-color);
+}
+
+.tab-button:hover::before {
+    opacity: 1;
+}
+
+.tab-button.active {
+    color: var(--primary-color);
+    border-bottom: 4px solid var(--primary-color);
+}
+
+.tab-button.active::before {
+    opacity: 1;
+}
+
+/* 탭 콘텐츠 */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* 아이템 그리드 */
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+    padding-top: 20px;
+}
+
+/* 아이템 카드 */
+.item-card {
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.item-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+
+.item-info {
+    padding: 15px;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.item-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.item-category {
+    font-size: 12px;
+    color: #666;
+    background: rgba(255, 71, 87, 0.1);
+    padding: 3px 8px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.item-color {
+    font-size: 12px;
+    color: #888;
+    background: #f5f5f5;
+    padding: 3px 8px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.item-rating {
+    margin-top: 5px;
+}
+
+.item-rating .star {
+    color: #ffd700;
+}
+
+.delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 3;
+}
+
+.item-card:hover .delete-button {
+    opacity: 1;
+}
+
+.no-item-msg {
+    text-align: center;
+    color: #999;
+    font-size: 16px;
+    padding: 40px;
+    grid-column: 1 / -1;
+}
+
+/* 등록 버튼 */
+.add-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--primary-color);
+    background: white;
+    border: 2px dashed var(--primary-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.add-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 8px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.add-button:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.add-button:hover::before {
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    opacity: 1;
+}
+
+/* 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s forwards;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    position: relative;
+    animation: slideInUp 0.4s ease-out forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.03) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 13px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.modal-content > * {
+    position: relative;
+    z-index: 2;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+/* 폼 스타일 */
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+    font-size: 15px;
+    color: #333;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* 카테고리 체크박스 */
+.category-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.category-checkbox-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: white;
+}
+
+.category-checkbox-item:hover {
+    border-color: var(--primary-color);
+    background: rgba(255, 71, 87, 0.05);
+}
+
+.category-checkbox-item.checked {
+    border-color: var(--primary-color);
+    background: rgba(255, 71, 87, 0.1);
+}
+
+.category-checkbox-item input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+}
+
+.category-checkbox-item label {
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+    font-weight: normal;
+}
+
+/* 색상 계열 선택 */
+.color-family-selector {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.color-family-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.color-family-option:hover {
+    background: rgba(0, 0, 0, 0.03);
+    transform: translateY(-2px);
+}
+
+.color-family-option.selected {
+    border-color: var(--primary-color);
+    background: rgba(255, 71, 87, 0.05);
+}
+
+.color-family-circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s;
+}
+
+.color-family-option.selected .color-family-circle {
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+    transform: scale(1.1);
+}
+
+.color-family-option span {
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+}
+
+.color-family-option.selected span {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* 별점 */
+.rating .star {
+    font-size: 28px;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.rating .star.active {
+    color: #ffd700;
+}
+
+/* 이미지 미리보기 */
+.image-preview {
+    width: 100%;
+    height: 200px;
+    border: 2px dashed var(--border-color);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    overflow: hidden;
+    position: relative;
+    margin-top: 10px;
+}
+
+.image-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+}
+
+/* 제출 버튼 */
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: relative;
+}
+
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 6px;
+    z-index: 1;
+}
+
+.submit-button:hover {
+    background-color: #e5394a;
+}
+
+/* 미리보기 섹션 */
+.preview-upload-section {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.preview-upload-box {
+    width: 250px;
+    height: 350px;
+    border: 2px dashed var(--border-color);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.preview-upload-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 13px;
+    z-index: 1;
+}
+
+.preview-upload-box p {
+    color: #ccc;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.preview-upload-box .preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.preview-upload-box.has-image .preview-img {
+    opacity: 1;
+}
+
+.preview-action {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    padding: 12px 25px;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    background: white;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.action-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 6px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.action-button:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.action-button:hover::before {
+    background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    opacity: 1;
+}
+
+/* 선택 모달 */
+.item-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding-top: 15px;
+    width: 100%;
+}
+
+.selection-item {
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    transition: border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.selection-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.02) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.01) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    border-radius: 8px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.selection-item:hover::before {
+    opacity: 1;
+}
+
+.selection-item.selected {
+    border-color: var(--primary-color);
+}
+
+.selection-item.selected::before {
+    opacity: 1;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.05) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+}
+
+.selection-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    position: relative;
+    z-index: 2;
+    display: block;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .closet-container {
+        padding: 20px;
+        margin-top: 20px;
+    }
+    
+    .preview-upload-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .preview-action {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .action-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .color-family-selector {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    .category-checkboxes {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .color-family-circle {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .color-family-option span {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header {
+        padding: 60px 0 40px;
+    }
+    
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .item-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .preview-upload-box {
+        width: 200px;
+        height: 280px;
+    }
+
+    .color-family-selector {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .category-checkboxes {
+        grid-template-columns: 1fr;
+    }
+
+    .item-selection-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 미리보기 섹션 - 새로운 디자인 */
+.preview-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.outfit-preview-area {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.outfit-preview-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 25% 25%, rgba(255, 71, 87, 0.03) 2px, transparent 2px), 
+                radial-gradient(circle at 75% 75%, rgba(196, 69, 105, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    z-index: 1;
+}
+
+.outfit-preview-area > * {
+    position: relative;
+    z-index: 2;
+}
+
+.outfit-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    min-height: 600px;
+    justify-content: center;
+}
+
+.outfit-item {
+    width: 100%;
+    max-width: 350px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.outfit-item.top-item {
+    height: 300px;
+    margin-bottom: -60px;
+    z-index: 2;
+}
+
+.outfit-item.bottom-item {
+    height: 320px;
+    z-index: 1;
+}
+
+.outfit-item img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: none;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    transition: all 0.3s ease;
+}
+
+.outfit-item.has-image img {
+    display: block;
+}
+
+.outfit-item.has-image:hover img {
+    transform: scale(1.02);
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.2));
+}
+
+.outfit-placeholder {
+    position: absolute;
+    color: #bbb;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    pointer-events: none;
+}
+
+.outfit-item.has-image .outfit-placeholder {
+    display: none;
+}
+
+/* 코디 정보 표시 */
+.outfit-info {
+    margin-top: 25px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+}
+
+.info-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-item strong {
+    color: var(--primary-color);
+    min-width: 50px;
+}
+
+.info-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(255, 71, 87, 0.1);
+    color: #666;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.info-tag.color-tag {
+    background: #f5f5f5;
+    color: #888;
+}
+
+/* 컨트롤 버튼 */
+.preview-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.control-btn i {
+    font-size: 16px;
+}
+
+.control-btn.primary {
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff4757 100%);
+    color: white;
+}
+
+.control-btn.primary:hover {
+    background: linear-gradient(135deg, #ff5a8d 0%, #e5394a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 71, 87, 0.3);
+}
+
+.control-btn.secondary {
+    background: white;
+    color: #666;
+    border: 2px solid #e0e0e0;
+}
+
+.control-btn.secondary:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* 반응형 - 미리보기 */
+@media (max-width: 768px) {
+    .outfit-preview-area {
+        padding: 25px;
+    }
+
+    .outfit-display {
+        padding: 20px;
+        min-height: 500px;
+    }
+
+    .outfit-item.top-item {
+        height: 250px;
+    }
+
+    .outfit-item.bottom-item {
+        height: 270px;
+    }
+
+    .preview-controls {
+        gap: 10px;
+    }
+
+    .control-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .outfit-preview-area {
+        padding: 20px;
+    }
+
+    .outfit-display {
+        padding: 15px;
+        min-height: 450px;
+    }
+
+    .outfit-item {
+        max-width: 280px;
+    }
+
+    .outfit-item.top-item {
+        height: 220px;
+    }
+
+    .outfit-item.bottom-item {
+        height: 240px;
+    }
+
+    .control-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+        flex: 1;
+        min-width: 120px;
+        justify-content: center;
+    }
+}

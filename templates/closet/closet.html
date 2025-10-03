@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodiMate - 나의 옷장</title>
+    <link rel="stylesheet" href="/static/css/fix/header.css">
+    <link rel="stylesheet" href="/static/css/closet/closet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/fix/footer.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <!-- 페이지 헤더 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>나의 옷장</h1>
+            <p>당신만의 스타일을 체계적으로 관리하고 완벽한 코디를 만들어보세요</p>
+        </div>
+    </section>
+
+    <!-- 옷장 컨테이너 시작 -->
+    <div class="closet-container">
+        <div class="tab-menu">
+            <button class="tab-button active" data-tab="top-tab">상의</button>
+            <button class="tab-button" data-tab="bottom-tab">하의</button>
+            <button class="tab-button" data-tab="preview-tab">미리보기</button>
+        </div>
+
+        <div id="top-tab" class="tab-content active">
+            <button id="addTopBtn" class="add-button">상의 등록하기</button>
+            <div class="item-grid" id="topGrid"></div>
+        </div>
+
+        <div id="bottom-tab" class="tab-content">
+            <button id="addBottomBtn" class="add-button">하의 등록하기</button>
+            <div class="item-grid" id="bottomGrid"></div>
+        </div>
+
+        <div id="preview-tab" class="tab-content">
+            <div class="preview-container">
+                <div class="outfit-preview-area">
+                    <!-- 코디 미리보기 메인 -->
+                    <div class="outfit-display">
+                        <div class="outfit-item top-item" id="topOutfitItem">
+                            <img id="topPreviewImg" src="" alt="상의">
+                            <div class="outfit-placeholder">상의를 선택하세요</div>
+                        </div>
+                        <div class="outfit-item bottom-item" id="bottomOutfitItem">
+                            <img id="bottomPreviewImg" src="" alt="하의">
+                            <div class="outfit-placeholder">하의를 선택하세요</div>
+                        </div>
+                    </div>
+
+                    <!-- 정보 표시 영역 -->
+                    <div class="outfit-info" id="outfitInfo" style="display: none;">
+                        <div class="info-item">
+                            <strong>상의:</strong> <span id="topName">-</span>
+                            <span class="info-tag" id="topCategory">-</span>
+                            <span class="info-tag color-tag" id="topColor">-</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>하의:</strong> <span id="bottomName">-</span>
+                            <span class="info-tag" id="bottomCategory">-</span>
+                            <span class="info-tag color-tag" id="bottomColor">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 컨트롤 버튼들 -->
+                <div class="preview-controls">
+                    <button id="selectTopBtn" class="control-btn primary">
+                        <i class="fas fa-shirt"></i> 상의 선택
+                    </button>
+                    <button id="selectBottomBtn" class="control-btn primary">
+                        <i class="fas fa-vest"></i> 하의 선택
+                    </button>
+                    <button id="resetPreviewBtn" class="control-btn secondary">
+                        <i class="fas fa-rotate-right"></i> 초기화
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ✅ closet-container 닫음 -->
+
+    <!-- 아이템 등록 모달 -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modalTitle">상의 등록하기</h2>
+            <form id="itemForm">
+                <div class="form-group">
+                    <label for="itemName">이름</label>
+                    <input type="text" id="itemName" required placeholder="예: 데님 반팔 셔츠">
+                </div>
+
+                <!-- 카테고리 선택 -->
+                <div class="form-group">
+                    <label>카테고리</label>
+                    <div class="category-checkboxes" id="categoryCheckboxes">
+                        <!-- 동적으로 생성됨 -->
+                    </div>
+                </div>
+
+                <!-- 색상 계열 선택 -->
+                <div class="form-group">
+                    <label>색상 계열</label>
+                    <div class="color-family-selector" id="colorFamilySelector">
+                        <!-- 색상 옵션들 -->
+                        <div class="color-family-option" data-color="red">
+                            <div class="color-family-circle" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);"></div>
+                            <span>빨강</span>
+                        </div>
+                        <div class="color-family-option" data-color="orange">
+                            <div class="color-family-circle" style="background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);"></div>
+                            <span>주황</span>
+                        </div>
+                        <div class="color-family-option" data-color="yellow">
+                            <div class="color-family-circle" style="background: linear-gradient(135deg, #ffd93d 0%, #ffb800 100%);"></div>
+                            <span>노랑</span>
+                        </div>
+                        <div class="color-family-option" data-color="green">
+                            <div class="color-family-circle" style="background: linear-gradient(135deg, #6bcf7f 0%, #4caf50 100%);"></div>
+                            <span>초록</span>
+                        </div>
+                        <div class="color-family-option" data-color="blue">
+                            <div class="color-family-circle" style="background: linear-gradient(135deg, #4d9de0 0%, #3777b8 100%);"></div>
+                            <span>파랑</span>
+                        </div>
+                        <div class="color-family-option" data-color="purple">
+                            <div class="color-family-circle" style="background: linear-gradient(135deg, #9b72cb 0%, #7b52ab 100%);"></div>
+                            <span>보라</span>
+                        </div>
+                        <div class="color-family-option" data-color="pink">
+                            <div class="color-family-circle" style="background: linear-gradient(135deg, #ffb3d9 0%, #ff85c1 100%);"></div>
+                            <span>분홍</span>
+                        </div>
+                        <div class="color-family-option" data-color="brown">
+                            <div class="color-family-circle" style="background: linear-gradient(135deg, #a0826d 0%, #8b6f47 100%);"></div>
+                            <span>갈색</span>
+                        </div>
+                        <div class="color-family-option" data-color="white">
+                            <div class="color-family-circle" style="background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%); border: 2px solid #e0e0e0;"></div>
+                            <span>흰색</span>
+                        </div>
+                        <div class="color-family-option" data-color="black">
+                            <div class="color-family-circle" style="background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);"></div>
+                            <span>검정</span>
+                        </div>
+                        <div class="color-family-option" data-color="gray">
+                            <div class="color-family-circle" style="background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);"></div>
+                            <span>회색</span>
+                        </div>
+                        <div class="color-family-option" data-color="beige">
+                            <div class="color-family-circle" style="background: linear-gradient(135deg, #d2b48c 0%, #c4a777 100%);"></div>
+                            <span>베이지</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="itemRating">만족도</label>
+                    <div class="rating" id="itemRating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="itemImage">사진</label>
+                    <input type="file" id="itemImage" accept="image/*" required>
+                    <div class="image-preview" id="imagePreview">
+                        <p>이미지 미리보기</p>
+                    </div>
+                </div>
+                <button type="submit" class="submit-button">등록하기</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 선택 모달 -->
+    <div id="selectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="selectModalTitle">상의 선택</h2>
+            <div class="item-selection-grid" id="selectionGrid"></div>
+        </div>
+    </div>
+    
+    <script src="/static/js/fix/header.js"></script>
+    <script src="/static/js/closet/closet.js"></script>
+    <script src="/static/js/fix/footer.js"></script>
+
+    <div id="footer-placeholder"></div>
+</body>
+</html>

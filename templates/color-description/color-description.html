@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodiMate - 색상 매칭</title>
+    <link rel="stylesheet" href="/static/css/fix/header.css">
+    <link rel="stylesheet" href="/static/css/color-description/color-description.css">
+    <link rel="stylesheet" href="/static/css/fix/footer.css">
+</head>
+<body>
+    <!-- 헤더 플레이스홀더 -->
+    <div id="header-placeholder" class="loading"></div>
+
+    <!-- 페이지 헤더 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>컬러 매칭 가이드</h1>
+            <p>완벽한 색상 조합으로 당신만의 스타일을 완성하세요</p>
+        </div>
+    </section>
+
+    <!-- 색상 매칭 섹션 -->
+    <section class="color-matching-section">
+        <div class="container">
+            <!-- 색상 계열 탭 -->
+            <div class="color-category-tabs">
+                <div class="category-tab active" data-category="red" onclick="selectCategory('red')">
+                    <div class="category-color-dot" style="background: #dc2626;"></div>
+                    빨강 계열
+                </div>
+                <div class="category-tab" data-category="orange" onclick="selectCategory('orange')">
+                    <div class="category-color-dot" style="background: #ea580c;"></div>
+                    주황 계열
+                </div>
+                <div class="category-tab" data-category="yellow" onclick="selectCategory('yellow')">
+                    <div class="category-color-dot" style="background: #ca8a04;"></div>
+                    노랑 계열
+                </div>
+                <div class="category-tab" data-category="green" onclick="selectCategory('green')">
+                    <div class="category-color-dot" style="background: #16a34a;"></div>
+                    초록 계열
+                </div>
+                <div class="category-tab" data-category="blue" onclick="selectCategory('blue')">
+                    <div class="category-color-dot" style="background: #2563eb;"></div>
+                    파랑 계열
+                </div>
+                <div class="category-tab" data-category="purple" onclick="selectCategory('purple')">
+                    <div class="category-color-dot" style="background: #7c3aed;"></div>
+                    보라 계열
+                </div>
+                <div class="category-tab" data-category="neutral" onclick="selectCategory('neutral')">
+                    <div class="category-color-dot" style="background: #6b7280;"></div>
+                    무채색
+                </div>
+            </div>
+
+            <!-- 색상 조합 테이블 -->
+            <div class="color-combination-table" id="colorTable">
+                <div class="table-header">
+                    <h3 id="categoryTitle">빨강 계열 색상 매칭</h3>
+                    <p>상의 색상과 잘 어울리는 하의 색상 조합을 확인하세요</p>
+                </div>
+                <div id="colorCombinations">
+                    <!-- 색상 조합들이 동적으로 로드됩니다 -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 카테고리별 코디 추천 섹션 -->
+    <section class="category-coordination-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span id="coordCategoryTitle">빨강 계열</span> 코디 추천
+            </h2>
+            <p class="section-subtitle">선택한 색상 계열을 활용한 완벽한 코디를 만나보세요</p>
+            
+            <div class="coord-grid" id="categoryCoordGrid">
+                <!-- 카테고리별 코디 추천이 동적으로 로드됩니다 -->
+            </div>
+            
+            <div class="more-coords">
+                <button class="more-coords-btn" onclick="goToCodiRecommend()">
+                    더 많은 코디 추천받기
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 플레이스홀더 -->
+    <div id="footer-placeholder"></div>
+
+    <script src="/static/js/fix/header.js"></script>
+    <script src="/static/js/color-description/color-description.js"></script>
+    <script src="/static/js/fix/footer.js"></script>
+</body>
+</html>
