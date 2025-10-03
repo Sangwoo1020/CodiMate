@@ -759,7 +759,7 @@ function showCoordDetailModal(coord) {
                         <button class="modal-action-btn favorite" id="favoriteBtn-${coord.id}" onclick="toggleFavorite(${coord.id})">
                             <span id="favoriteText-${coord.id}">♡ 즐겨찾기</span>
                         </button>
-                        <button class="modal-action-btn share" onclick="closeCoordDetailModal()">
+                    <button class="modal-action-btn share" onclick="closeCoordDetailModal()">
                         닫기
                     </button>
                     </div>
